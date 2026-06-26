@@ -21,7 +21,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 1,
   userScalable: false, // Ensures app-like experience inside WebView
-  themeColor: "#0F172A",
+  themeColor: "#0B6E4F",
 };
 
 export default function RootLayout({
@@ -34,7 +34,7 @@ export default function RootLayout({
       lang="en"
       className={`${plusJakartaSans.variable} h-full antialiased scroll-smooth`}
     >
-      <body className="min-h-full flex flex-col bg-[#F8F9FA] dark:bg-[#0B0F19] text-[#0F172A] dark:text-[#F8F9FA] font-sans selection:bg-[#7C3AED]/10 selection:text-[#7C3AED]">
+      <body className="min-h-full flex flex-col bg-[#F7F9F8] dark:bg-[#0B0F19] text-[#16202A] dark:text-[#F8F9FA] font-sans selection:bg-[#0B6E4F]/10 selection:text-[#0B6E4F]">
         {children}
       </body>
     </html>

@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import Features from '@/components/Features';
-import PublicGrid from '@/components/PublicGrid';
+import Listings from '@/components/Listings';
 import { Property, mockProperties } from '@/components/propertiesData';
 
 import Pricing from '@/components/Pricing';
@@ -15,6 +15,7 @@ import OwnerDashboard from '@/components/OwnerDashboard';
 import TenantLifecycleController from '@/components/TenantLifecycleController';
 import OwnerLifecycleController from '@/components/OwnerLifecycleController';
 import PageTransitionShell from '@/components/PageTransitionShell';
+import BackgroundLayer from '@/components/BackgroundLayer';
 import { Mail, Phone, MapPin, User, Home as HomeIcon, Building2 } from 'lucide-react';
 import { FaGithub, FaLinkedin, FaInstagram, FaXTwitter } from "react-icons/fa6";
 
@@ -135,13 +136,13 @@ export default function Home() {
 
   if (showPortalSelector) {
     return (
-      <PageTransitionShell className="min-h-screen flex items-center justify-center bg-[#F8FAFC] dark:bg-[#0B0F19] p-4">
+      <PageTransitionShell className="min-h-screen flex items-center justify-center bg-[#F7F9F8] dark:bg-[#0B0F19] p-4">
         <motion.div 
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           className="w-full max-w-md bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-8 shadow-2xl text-center"
         >
-          <div className="w-16 h-16 bg-brand-purple/10 text-brand-purple rounded-full flex items-center justify-center mx-auto mb-6">
+          <div className="w-16 h-16 bg-[#DDF7EE] text-[#1D9E75] rounded-full flex items-center justify-center mx-auto mb-6">
             <User className="w-8 h-8" />
           </div>
           <h2 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight mb-2">Select Your Portal</h2>
@@ -152,9 +153,9 @@ export default function Home() {
           <div className="space-y-4">
             <button 
               onClick={() => handlePortalSelect('tenant')}
-              className="w-full p-4 rounded-xl border-2 border-slate-200 dark:border-slate-800 hover:border-brand-purple hover:bg-brand-purple/5 transition-all text-left flex items-center gap-4 group"
+              className="w-full p-4 rounded-xl border-2 border-slate-200 dark:border-slate-800 hover:border-[#0B6E4F] hover:bg-[#DDF7EE]/30 transition-all text-left flex items-center gap-4 group"
             >
-              <div className="p-3 bg-violet-100 text-violet-600 rounded-xl group-hover:bg-brand-purple group-hover:text-white transition-colors">
+              <div className="p-3 bg-[#DDF7EE] text-[#1D9E75] rounded-xl group-hover:bg-[#0B6E4F] group-hover:text-white transition-colors">
                 <HomeIcon className="w-6 h-6" />
               </div>
               <div>
@@ -165,9 +166,9 @@ export default function Home() {
 
             <button 
               onClick={() => handlePortalSelect('owner')}
-              className="w-full p-4 rounded-xl border-2 border-slate-200 dark:border-slate-800 hover:border-emerald-500 hover:bg-emerald-500/5 transition-all text-left flex items-center gap-4 group"
+              className="w-full p-4 rounded-xl border-2 border-slate-200 dark:border-slate-800 hover:border-[#2B4162] hover:bg-[#E8EEF8]/30 transition-all text-left flex items-center gap-4 group"
             >
-              <div className="p-3 bg-emerald-100 text-emerald-600 rounded-xl group-hover:bg-emerald-500 group-hover:text-white transition-colors">
+              <div className="p-3 bg-[#E8EEF8] text-[#2B4162] rounded-xl group-hover:bg-[#2B4162] group-hover:text-white transition-colors">
                 <Building2 className="w-6 h-6" />
               </div>
               <div>
@@ -205,7 +206,7 @@ export default function Home() {
             try {
               const token = localStorage.getItem('rentedge_token');
               if (token) {
-                await fetch('https://api.homtu.in/api/users/switch-to-owner', {
+                await fetch('`${API_URL}/api/users/switch-to-owner', {
                   method: 'POST',
                   headers: { 'Authorization': `Bearer ${token}` }
                 });
@@ -223,7 +224,8 @@ export default function Home() {
   }
 
   return (
-    <PageTransitionShell className="min-h-screen flex flex-col bg-[#F8F9FA] dark:bg-[#0B0F19] dark:text-slate-100 pb-16 md:pb-0 relative">
+    <PageTransitionShell className="min-h-screen flex flex-col bg-transparent dark:text-slate-100 pb-16 md:pb-0 relative">
+      <BackgroundLayer />
       
       {/* Dynamic Session Toast Banner */}
       <AnimatePresence>
@@ -232,9 +234,9 @@ export default function Home() {
             initial={{ opacity: 0, y: -50, x: '-50%' }}
             animate={{ opacity: 1, y: 0, x: '-50%' }}
             exit={{ opacity: 0, y: -50, x: '-50%' }}
-            className="fixed top-24 left-1/2 -translate-x-1/2 z-50 bg-slate-900 border border-white/10 text-white px-5 py-3 rounded-2xl shadow-2xl flex items-center gap-2.5 text-xs font-bold"
+            className="fixed top-24 left-1/2 -translate-x-1/2 z-50 bg-[#2B4162] border border-white/10 text-white px-5 py-3 rounded-2xl shadow-2xl flex items-center gap-2.5 text-xs font-bold"
           >
-            <span className="w-2 h-2 rounded-full bg-brand-mint animate-pulse" />
+            <span className="w-2 h-2 rounded-full bg-[#0F8A63] animate-pulse" />
             <span>{toastMessage}</span>
           </motion.div>
         )}
@@ -252,7 +254,7 @@ export default function Home() {
 
       {/* Dynamic Dashboard / Discovery Grid */}
       {isAuthenticated ? (
-        <section className="w-full bg-[#F8F9FA] py-12 px-4 md:px-8 border-t border-slate-100" id="discover">
+        <section className="w-full bg-[#F7F9F8] py-12 px-4 md:px-8 border-t border-[rgba(15,23,42,0.06)]" id="discover">
           <div className="max-w-7xl mx-auto">
             {userRole === 'owner' || userRole === 'hostel' ? (
               <OwnerDashboard onLogout={handleSignOut} />
@@ -263,7 +265,7 @@ export default function Home() {
                   try {
                     const token = localStorage.getItem('rentedge_token');
                     if (token) {
-                      await fetch('https://api.homtu.in/api/users/switch-to-owner', {
+                      await fetch('`${API_URL}/api/users/switch-to-owner', {
                         method: 'POST',
                         headers: { 'Authorization': `Bearer ${token}` }
                       });
@@ -280,12 +282,9 @@ export default function Home() {
         </section>
       ) : (
         <div id="discover">
-          <PublicGrid 
-            searchFilters={searchFilters} 
-            isAuthenticated={isAuthenticated}
-            onAuthRequired={handleAuthRequired}
-            activeProperty={activeProperty}
-            setActiveProperty={setActiveProperty}
+          <Listings 
+            previewMode={true} 
+            onAuthRequired={() => handleAuthRequired()} 
           />
         </div>
       )}
@@ -305,7 +304,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-8 mb-8 md:mb-12 text-left">
           <div className="flex flex-col gap-4">
             <span className="text-lg font-bold text-white tracking-tight">
-              Rent<span className="text-brand-purple">Edge</span>
+              Rent<span className="text-[#1D9E75]">Edge</span>
             </span>
             <p className="text-xs text-slate-500 leading-relaxed font-normal">
               India's first fintech-powered operating system for the rental economy. Zero Brokerage. Pure credit building.
@@ -338,15 +337,15 @@ export default function Home() {
             <span className="text-xs font-bold text-white uppercase tracking-wider">Contact Us</span>
             <div className="flex flex-col gap-2.5">
               <a href="mailto:support@rentedge.in" className="flex items-center gap-2 text-xs text-slate-500 hover:text-white transition-colors">
-                <Mail className="w-4 h-4 text-brand-purple" />
+                <Mail className="w-4 h-4 text-[#1D9E75]" />
                 support@rentedge.in
               </a>
               <a href="tel:+918049201827" className="flex items-center gap-2 text-xs text-slate-500 hover:text-white transition-colors">
-                <Phone className="w-4 h-4 text-brand-purple" />
+                <Phone className="w-4 h-4 text-[#1D9E75]" />
                 +91 80 4920 1827
               </a>
               <div className="flex items-start gap-2 text-xs text-slate-500">
-                <MapPin className="w-4 h-4 text-brand-purple mt-0.5 shrink-0" />
+                <MapPin className="w-4 h-4 text-[#1D9E75] mt-0.5 shrink-0" />
                 <span>Indiranagar, Bengaluru, KA, India</span>
               </div>
             </div>
