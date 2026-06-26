@@ -1,0 +1,417 @@
+@import "tailwindcss";
+
+/* Align Tailwind dark: variant with the class-based toggle (html.dark) */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ─────────────────────────────────────────────
+   THEME COLOR TOKENS
+───────────────────────────────────────────── */
+:root {
+  --background: #F8F9FA;
+  --foreground: #0F172A;
+  --surface: #FFFFFF;
+  --surface-2: #F1F5F9;
+  --border: #E2E8F0;
+  --text-muted: #64748B;
+}
+
+html.dark {
+  --background: #07090E;
+  --foreground: #F8F9FA;
+  --surface: #101420;
+  --surface-2: #161B2B;
+  --border: rgba(255, 255, 255, 0.06);
+  --text-muted: #8493A8;
+}
+
+@theme {
+  --color-brand-primary: #0F172A;
+  --color-brand-purple: #7C3AED;
+  --color-brand-mint: #10B981;
+  --font-sans: var(--font-plus-jakarta), system-ui, sans-serif;
+}
+
+/* ─────────────────────────────────────────────
+   GLOBAL PREMIUM THEME TRANSITION
+   One rule covers every element. No need to add
+   transition classes to individual components.
+───────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  transition-property: background-color, border-color, color, fill, stroke, box-shadow, opacity;
+  transition-duration: 450ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ─────────────────────────────────────────────
+   EXCLUSIONS — must not inherit the global
+   theme transition (they have their own systems)
+───────────────────────────────────────────── */
+.animate-ping,
+.animate-pulse,
+.animate-spin,
+.animate-float,
+.animate-float-delayed,
+input[type='range'],
+input[type='checkbox'],
+input[type='radio'],
+::-webkit-scrollbar,
+::-webkit-scrollbar-thumb {
+  transition: none !important;
+}
+
+/* ─────────────────────────────────────────────
+   SUPPRESS TRANSITIONS ON INITIAL PAGE LOAD
+   Prevents flash-of-wrong-theme on first paint.
+   The Navbar JS removes this class after mount.
+───────────────────────────────────────────── */
+html.no-transition *,
+html.no-transition *::before,
+html.no-transition *::after {
+  transition: none !important;
+}
+
+/* ─────────────────────────────────────────────
+   BASE BODY
+───────────────────────────────────────────── */
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-plus-jakarta), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+html.dark body {
+  background-color: #0F172A;
+  color: #F8F9FA;
+}
+
+/* ─────────────────────────────────────────────
+   GLASSMORPHISM
+───────────────────────────────────────────── */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+html.dark .glass-panel {
+  background: rgba(15, 23, 42, 0.75);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.glass-panel-dark {
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ─────────────────────────────────────────────
+   DARK MODE UTILITY OVERRIDES
+───────────────────────────────────────────── */
+
+/* Mobile header — explicit dark mode */
+html.dark header {
+  background-color: rgba(7, 9, 14, 0.9) !important;
+  backdrop-filter: blur(12px) !important;
+  border-color: var(--border) !important;
+}
+
+/* bg-white: override pure white with premium surface */
+html.dark .bg-white:not([class*='bg-white/']) {
+  background-color: var(--surface) !important;
+  color: var(--foreground) !important;
+}
+
+html.dark .text-slate-900 {
+  color: #FFFFFF !important;
+}
+
+html.dark .text-slate-800 {
+  color: #F1F5F9 !important;
+}
+
+html.dark .text-slate-700 {
+  color: #E2E8F0 !important;
+}
+
+html.dark .text-slate-650,
+html.dark .text-slate-600 {
+  color: #CBD5E1 !important;
+}
+
+html.dark .text-slate-500,
+html.dark .text-slate-450 {
+  color: #94A3B8 !important;
+}
+
+html.dark .bg-\[\#F8F9FA\],
+html.dark .bg-\[\#F4F5F7\],
+html.dark .bg-\[\#F8FAFC\],
+html.dark .bg-slate-50 {
+  background-color: var(--background) !important;
+}
+
+html.dark .border-slate-200,
+html.dark .border-slate-100 {
+  border-color: var(--border) !important;
+}
+
+html.dark .hover\:bg-slate-50:hover {
+  background-color: var(--surface-2) !important;
+}
+
+html.dark .bg-slate-100 {
+  background-color: var(--surface-2) !important;
+}
+
+/* ─── Premium Sidebars Glassmorphism ─── */
+html.dark aside {
+  background-color: rgba(16, 20, 32, 0.6) !important;
+  backdrop-filter: blur(20px) !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+/* ─── Elevated Floating Property Cards ─── */
+html.dark .group.bg-white.rounded-2xl,
+html.dark .group.bg-white.rounded-3xl,
+html.dark .bg-white.rounded-3xl {
+  position: relative;
+  background: linear-gradient(180deg, var(--surface) 0%, rgba(16, 20, 32, 0.8) 100%) !important;
+  border-color: rgba(255, 255, 255, 0.05) !important;
+  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.7) !important;
+}
+
+/* Premium card hover state */
+html.dark .group.bg-white.rounded-2xl:hover,
+html.dark .group.bg-white.rounded-3xl:hover,
+html.dark .bg-white.rounded-3xl:hover {
+  border-color: rgba(124, 58, 237, 0.3) !important;
+  box-shadow: 0 20px 50px -12px rgba(124, 58, 237, 0.2), 0 0 1px 1px rgba(124, 58, 237, 0.1) !important;
+}
+
+/* Top light glow for cards */
+html.dark .group.bg-white.rounded-2xl::before,
+html.dark .group.bg-white.rounded-3xl::before,
+html.dark .bg-white.rounded-3xl::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.08) 0%, rgba(124, 58, 237, 0.2) 50%, rgba(255, 255, 255, 0.08) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ─── Search / Filter Panel Frosted Glass ─── */
+html.dark div[class*="bg-[#F4F5F7]"].sticky,
+html.dark .sticky[class*="bg-[#F4F5F7]"] {
+  background-color: rgba(7, 9, 14, 0.75) !important;
+  backdrop-filter: blur(16px) !important;
+}
+
+html.dark div[class*="bg-white/85"] {
+  background-color: rgba(16, 20, 32, 0.65) !important;
+  border-color: rgba(255, 255, 255, 0.05) !important;
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.8) !important;
+  backdrop-filter: blur(20px) !important;
+}
+
+/* Divided fields in search terminal cockpit */
+html.dark .divide-slate-200\/80 > * {
+  border-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+/* Search fields inside dropdown cockpit */
+html.dark input.bg-slate-900 {
+  background-color: #0B0E17 !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  color: #FFFFFF !important;
+}
+
+/* Dropdown list popups */
+html.dark .absolute.bg-white {
+  background-color: #121624 !important;
+  border-color: rgba(255, 255, 255, 0.07) !important;
+  box-shadow: 0 15px 45px -10px rgba(0, 0, 0, 0.9) !important;
+}
+
+html.dark .absolute.bg-white button:hover {
+  background-color: var(--surface-2) !important;
+  color: #FFFFFF !important;
+}
+
+/* ─── Ambient Glow in Body Background ─── */
+html.dark body::before {
+  content: "";
+  position: fixed;
+  top: -10%;
+  left: -10%;
+  width: 120vw;
+  height: 120vh;
+  background: radial-gradient(circle at 80% 20%, rgba(124, 58, 237, 0.035) 0%, transparent 50%),
+              radial-gradient(circle at 20% 80%, rgba(16, 185, 129, 0.015) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Badge glass overrides */
+html.dark .bg-emerald-50 {
+  background-color: rgba(16, 185, 129, 0.15) !important;
+  border-color: rgba(16, 185, 129, 0.25) !important;
+  color: #34D399 !important;
+}
+html.dark .border-emerald-100 {
+  border-color: rgba(16, 185, 129, 0.2) !important;
+}
+html.dark .bg-violet-50 {
+  background-color: rgba(124, 58, 237, 0.15) !important;
+  border-color: rgba(124, 58, 237, 0.25) !important;
+  color: #A78BFA !important;
+}
+html.dark .bg-purple-50 {
+  background-color: rgba(124, 58, 237, 0.15) !important;
+  border-color: rgba(124, 58, 237, 0.25) !important;
+  color: #A78BFA !important;
+}
+html.dark .bg-purple-100 {
+  background-color: rgba(124, 58, 237, 0.25) !important;
+  color: #A78BFA !important;
+}
+html.dark .border-purple-100,
+html.dark .border-purple-200 {
+  border-color: rgba(124, 58, 237, 0.2) !important;
+}
+html.dark .text-brand-purple {
+  color: #A78BFA !important;
+}
+html.dark .bg-emerald-500\/20 {
+  background-color: rgba(16, 185, 129, 0.15) !important;
+}
+html.dark .bg-violet-500\/20 {
+  background-color: rgba(124, 58, 237, 0.15) !important;
+}
+html.dark .bg-amber-50 {
+  background-color: rgba(245, 158, 11, 0.15) !important;
+  border-color: rgba(245, 158, 11, 0.25) !important;
+  color: #FBBF24 !important;
+}
+
+/* Headings */
+html.dark h1.text-brand-primary,
+html.dark h2.text-brand-primary,
+html.dark h3.text-brand-primary {
+  color: #FFFFFF !important;
+}
+
+/* ─────────────────────────────────────────────
+   GRID PATTERN
+───────────────────────────────────────────── */
+.bg-grid-pattern {
+  background-size: 50px 50px;
+  background-image:
+    linear-gradient(to right, rgba(124, 58, 237, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(124, 58, 237, 0.05) 1px, transparent 1px);
+  mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
+  -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
+}
+
+html.dark .bg-grid-pattern {
+  background-image:
+    linear-gradient(to right, rgba(124, 58, 237, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(124, 58, 237, 0.03) 1px, transparent 1px);
+}
+
+/* ─────────────────────────────────────────────
+   FLOATING ANIMATIONS
+───────────────────────────────────────────── */
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-12px) rotate(1deg); }
+}
+@keyframes float-delayed {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(12px) rotate(-1deg); }
+}
+.animate-float { animation: float 6s ease-in-out infinite; }
+.animate-float-delayed { animation: float-delayed 7s ease-in-out infinite; }
+
+/* ─────────────────────────────────────────────
+   SCROLLBAR HIDE UTILITY
+───────────────────────────────────────────── */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ─────────────────────────────────────────────
+   SAFE AREA BOTTOM PADDING FOR MOBILE DEVICE VIEWPORTS
+   ───────────────────────────────────────────── */
+.pb-safe {
+  padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px)) !important;
+}
+
+/* ─────────────────────────────────────────────
+   GLOBAL SEMANTIC DARK MODE FALLBACKS
+   ───────────────────────────────────────────── */
+html.dark .bg-white {
+  background-color: var(--surface);
+}
+html.dark .bg-slate-50 {
+  background-color: var(--surface-2);
+}
+html.dark .bg-slate-100 {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+html.dark .border-slate-100,
+html.dark .border-slate-200,
+html.dark .border-slate-200\/50,
+html.dark .border-slate-200\/60,
+html.dark .border-slate-200\/70,
+html.dark .border-slate-200\/80 {
+  border-color: var(--border) !important;
+}
+html.dark .text-slate-900,
+html.dark .text-slate-800,
+html.dark .text-slate-700 {
+  color: var(--foreground);
+}
+html.dark .text-slate-600,
+html.dark .text-slate-500 {
+  color: var(--text-muted);
+}
+html.dark .bg-indigo-50 {
+  background-color: rgba(99, 102, 241, 0.15) !important;
+  border-color: rgba(99, 102, 241, 0.25) !important;
+  color: #818CF8 !important;
+}
+html.dark .text-indigo-600,
+html.dark .text-indigo-650,
+html.dark .text-indigo-700 {
+  color: #818CF8 !important;
+}
+html.dark .border-indigo-100 {
+  border-color: rgba(99, 102, 241, 0.2) !important;
+}
+html.dark .bg-red-50 {
+  background-color: rgba(239, 68, 68, 0.15) !important;
+  border-color: rgba(239, 68, 68, 0.25) !important;
+  color: #F87171 !important;
+}
+html.dark .text-red-600,
+html.dark .text-red-700 {
+  color: #F87171 !important;
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
