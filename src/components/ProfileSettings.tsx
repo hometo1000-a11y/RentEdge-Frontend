@@ -67,7 +67,7 @@ export default function ProfileSettings() {
       const token = localStorage.getItem('rentedge_token');
       if (!token) return;
 
-      const res = await fetch('http://localhost:5000/api/users/me', {
+      const res = await fetch('https://api.homtu.in/api/users/me', {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       
@@ -92,7 +92,7 @@ export default function ProfileSettings() {
 
   const syncBackend = async (updates: any) => {
     const token = localStorage.getItem('rentedge_token');
-    const res = await fetch('http://localhost:5000/api/users/me', {
+    const res = await fetch('https://api.homtu.in/api/users/me', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -126,7 +126,7 @@ export default function ProfileSettings() {
       if (!auth.currentUser) throw new Error('Firebase session missing. Please log in again.');
       
       const token = localStorage.getItem('rentedge_token');
-      const checkRes = await fetch('http://localhost:5000/api/users/check-email-change', {
+      const checkRes = await fetch('https://api.homtu.in/api/users/check-email-change', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -185,7 +185,7 @@ export default function ProfileSettings() {
       if (!auth.currentUser) throw new Error('Firebase session missing. Please log in again.');
 
       const token = localStorage.getItem('rentedge_token');
-      const checkRes = await fetch('http://localhost:5000/api/users/check-phone-change', {
+      const checkRes = await fetch('https://api.homtu.in/api/users/check-phone-change', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

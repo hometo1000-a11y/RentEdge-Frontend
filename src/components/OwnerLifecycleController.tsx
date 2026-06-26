@@ -36,7 +36,7 @@ export default function OwnerLifecycleController({ onLogout, onSwitchToTenant }:
         return;
       }
       
-      const res = await fetch('http://localhost:5000/api/users/payment-info', {
+      const res = await fetch('https://api.homtu.in/api/users/payment-info', {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       
@@ -65,7 +65,7 @@ export default function OwnerLifecycleController({ onLogout, onSwitchToTenant }:
     setSetupLoading(true);
     try {
       const token = localStorage.getItem('rentedge_token');
-      const res = await fetch('http://localhost:5000/api/users/payment-info', {
+      const res = await fetch('https://api.homtu.in/api/users/payment-info', {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',

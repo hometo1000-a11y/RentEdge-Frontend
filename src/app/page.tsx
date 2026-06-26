@@ -205,7 +205,7 @@ export default function Home() {
             try {
               const token = localStorage.getItem('rentedge_token');
               if (token) {
-                await fetch('http://localhost:5000/api/users/switch-to-owner', {
+                await fetch('https://api.homtu.in/api/users/switch-to-owner', {
                   method: 'POST',
                   headers: { 'Authorization': `Bearer ${token}` }
                 });
@@ -263,7 +263,7 @@ export default function Home() {
                   try {
                     const token = localStorage.getItem('rentedge_token');
                     if (token) {
-                      await fetch('http://localhost:5000/api/users/switch-to-owner', {
+                      await fetch('https://api.homtu.in/api/users/switch-to-owner', {
                         method: 'POST',
                         headers: { 'Authorization': `Bearer ${token}` }
                       });

@@ -87,7 +87,7 @@ export default function OwnerMyProfile({ onViewChange }: { onViewChange?: (view:
       if (!token) return;
 
       const [res, props, paymentRes] = await Promise.all([
-        fetch('http://localhost:5000/api/users/me', { headers: { 'Authorization': `Bearer ${token}` } }),
+        fetch('https://api.homtu.in/api/users/me', { headers: { 'Authorization': `Bearer ${token}` } }),
         api.getProperties().catch(() => []),
         api.getPaymentInfo().catch(() => ({ exists: false, data: null }))
       ]);
@@ -143,7 +143,7 @@ export default function OwnerMyProfile({ onViewChange }: { onViewChange?: (view:
 
   const syncBackend = async (updates: any) => {
     const token = localStorage.getItem('rentedge_token');
-    const res = await fetch('http://localhost:5000/api/users/me', {
+    const res = await fetch('https://api.homtu.in/api/users/me', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -177,7 +177,7 @@ export default function OwnerMyProfile({ onViewChange }: { onViewChange?: (view:
       if (!auth.currentUser) throw new Error('Firebase session missing. Please log in again.');
       
       const token = localStorage.getItem('rentedge_token');
-      const checkRes = await fetch('http://localhost:5000/api/users/check-email-change', {
+      const checkRes = await fetch('https://api.homtu.in/api/users/check-email-change', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -236,7 +236,7 @@ export default function OwnerMyProfile({ onViewChange }: { onViewChange?: (view:
       if (!auth.currentUser) throw new Error('Firebase session missing. Please log in again.');
 
       const token = localStorage.getItem('rentedge_token');
-      const checkRes = await fetch('http://localhost:5000/api/users/check-phone-change', {
+      const checkRes = await fetch('https://api.homtu.in/api/users/check-phone-change', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
