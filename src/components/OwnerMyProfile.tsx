@@ -24,16 +24,7 @@ import {
   ExternalLink
 } from 'lucide-react';
 import { api } from './api';
-import { auth } from './firebaseConfig';
-import { 
-  verifyBeforeUpdateEmail, 
-  sendPasswordResetEmail,
-  RecaptchaVerifier,
-  PhoneAuthProvider,
-  updatePhoneNumber,
-  signInWithPhoneNumber,
-  ConfirmationResult
-} from 'firebase/auth';
+import { supabase } from '@/lib/supabaseClient';
 
 interface UserProfile {
   full_name: string;
@@ -174,8 +165,6 @@ export default function OwnerMyProfile({ onViewChange }: { onViewChange?: (view:
       return;
     }
     try {
-      if (!auth.currentUser) throw new Error('Firebase session missing. Please log in again.');
-      
       const token = localStorage.getItem('rentedge_token');
       const checkRes = await fetch('https://api.homtu.in/api/users/check-email-change', {
         method: 'POST',
@@ -191,7 +180,8 @@ export default function OwnerMyProfile({ onViewChange }: { onViewChange?: (view:
         throw new Error(errData.message || 'Email change validation failed.');
       }
 
-      await verifyBeforeUpdateEmail(auth.currentUser, newEmail);
+      const { error } = await supabase.auth.updateUser({ email: newEmail });
+      if (error) throw error;
       showMessage('info', `Verification link sent to ${newEmail}. Please click the link to verify. After verifying, click "Refresh Sync" below.`);
       setNewEmail('');
     } catch (err: any) {
@@ -202,16 +192,15 @@ export default function OwnerMyProfile({ onViewChange }: { onViewChange?: (view:
   const handleRefreshEmailSync = async () => {
     setEmailSyncLoading(true);
     try {
-      if (auth.currentUser) {
-        await auth.currentUser.reload();
-        const firebaseEmail = auth.currentUser.email;
-        if (firebaseEmail && firebaseEmail !== profile?.email && auth.currentUser.emailVerified) {
-          await syncBackend({ email: firebaseEmail });
-          showMessage('success', 'Email change verified and synced successfully!');
-          await fetchProfile();
-        } else {
-          showMessage('info', 'No verified email change detected yet. If you clicked the link, it might take a moment.');
-        }
+      const { data } = await supabase.auth.getUser();
+      const supabaseEmail = data.user?.email;
+      const emailVerified = Boolean(data.user?.email_confirmed_at || data.user?.confirmed_at);
+      if (supabaseEmail && supabaseEmail !== profile?.email && emailVerified) {
+        await syncBackend({ email: supabaseEmail });
+        showMessage('success', 'Email change verified and synced successfully!');
+        await fetchProfile();
+      } else {
+        showMessage('info', 'No verified email change detected yet. If you clicked the link, it might take a moment.');
       }
     } catch (err: any) {
       showMessage('error', err.message || 'Failed to sync email status.');
@@ -220,11 +209,7 @@ export default function OwnerMyProfile({ onViewChange }: { onViewChange?: (view:
   };
 
   const setupRecaptcha = () => {
-    if (!(window as any).recaptchaVerifier) {
-      (window as any).recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
-        size: 'invisible'
-      });
-    }
+    return;
   };
 
   const handleVerifyPhone = async () => {
@@ -233,8 +218,6 @@ export default function OwnerMyProfile({ onViewChange }: { onViewChange?: (view:
       return;
     }
     try {
-      if (!auth.currentUser) throw new Error('Firebase session missing. Please log in again.');
-
       const token = localStorage.getItem('rentedge_token');
       const checkRes = await fetch('https://api.homtu.in/api/users/check-phone-change', {
         method: 'POST',
@@ -250,48 +233,26 @@ export default function OwnerMyProfile({ onViewChange }: { onViewChange?: (view:
         throw new Error(errData.message || 'Phone change validation failed.');
       }
 
-      setupRecaptcha();
-      const appVerifier = (window as any).recaptchaVerifier;
-      let formattedPhone = newPhone.replace(/[\s\-\+]/g, '');
-      formattedPhone = formattedPhone.length === 10 ? `+91${formattedPhone}` : `+${formattedPhone}`;
-      
-      const provider = new PhoneAuthProvider(auth);
-      const vid = await provider.verifyPhoneNumber(formattedPhone, appVerifier);
-      setVerificationId(vid);
-      setShowOtpModal(true);
+      await syncBackend({ phone: newPhone });
+      showMessage('success', 'Phone number updated successfully.');
+      await fetchProfile();
+      setNewPhone('');
     } catch (err: any) {
-      showMessage('error', err.message || 'Failed to send OTP.');
+      showMessage('error', err.message || 'Failed to update phone.');
     }
   };
 
   const verifyPhoneOtp = async () => {
-    if (!otpCode || !verificationId) return;
-    setOtpLoading(true);
-    try {
-      const credential = PhoneAuthProvider.credential(verificationId, otpCode);
-      if (auth.currentUser) {
-        await updatePhoneNumber(auth.currentUser, credential);
-        // Successful verification -> sync with backend
-        let formattedPhone = newPhone.replace(/[\s\-\+]/g, '');
-        formattedPhone = formattedPhone.length === 10 ? `+91${formattedPhone}` : `+${formattedPhone}`;
-        await syncBackend({ phone: formattedPhone });
-        showMessage('success', 'Phone number updated successfully.');
-        await fetchProfile();
-        setShowOtpModal(false);
-        setNewPhone('');
-      }
-    } catch (err: any) {
-      showMessage('error', err.message || 'Invalid OTP code.');
-    } finally {
-      setOtpLoading(false);
-      setOtpCode('');
-    }
+    return;
   };
 
   const handlePasswordReset = async () => {
     if (!profile?.email) return;
     try {
-      await sendPasswordResetEmail(auth, profile.email);
+      const { error } = await supabase.auth.resetPasswordForEmail(profile.email, {
+        redirectTo: window.location.origin,
+      });
+      if (error) throw error;
       showMessage('success', 'Password reset email sent. Please check your inbox.');
     } catch (err: any) {
       showMessage('error', err.message || 'Failed to send reset email.');

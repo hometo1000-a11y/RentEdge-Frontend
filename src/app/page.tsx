@@ -16,6 +16,8 @@ import TenantLifecycleController from '@/components/TenantLifecycleController';
 import OwnerLifecycleController from '@/components/OwnerLifecycleController';
 import PageTransitionShell from '@/components/PageTransitionShell';
 import BackgroundLayer from '@/components/BackgroundLayer';
+import { api } from '@/components/api';
+import { supabase } from '@/lib/supabaseClient';
 import { Mail, Phone, MapPin, User, Home as HomeIcon, Building2 } from 'lucide-react';
 import { FaGithub, FaLinkedin, FaInstagram, FaXTwitter } from "react-icons/fa6";
 
@@ -28,15 +30,16 @@ export default function Home() {
   const [activeProperty, setActiveProperty] = useState<Property | null>(null);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
+  const ensureBackendSession = async (session: any) => {
+    const existingToken = localStorage.getItem('rentedge_token');
+    if (existingToken) return { token: existingToken };
+    if (!session?.access_token) throw new Error('Missing Supabase access token');
+    const response = await api.login({ supabaseAccessToken: session.access_token });
+    return response;
+  };
+
   // Restore session & check for deep links
   useEffect(() => {
-    const savedAuth = localStorage.getItem('rentedge_authenticated');
-    const savedRole = localStorage.getItem('rentedge_user_role');
-    if (savedAuth === 'true' && savedRole) {
-      setIsAuthenticated(true);
-      setUserRole(savedRole as 'tenant' | 'owner' | 'hostel');
-    }
-
     if (typeof window !== 'undefined') {
       const params = new URLSearchParams(window.location.search);
       const authRequired = params.get('auth');
@@ -53,6 +56,56 @@ export default function Home() {
         window.history.replaceState({}, document.title, window.location.pathname);
       }
     }
+
+    const syncSession = async () => {
+      const { data } = await supabase.auth.getSession();
+      const session = data.session;
+      if (session?.user) {
+        const response = await ensureBackendSession(session);
+        const role = (session.user.user_metadata?.role || localStorage.getItem('rentedge_user_role') || 'tenant') as 'tenant' | 'owner' | 'hostel';
+        setIsAuthenticated(true);
+        setUserRole(role);
+        localStorage.setItem('rentedge_authenticated', 'true');
+        localStorage.setItem('rentedge_user_role', role);
+        localStorage.setItem('rentedge_user_email', session.user.email || '');
+        localStorage.setItem('rentedge_user_fullname', session.user.user_metadata?.full_name || session.user.user_metadata?.fullName || '');
+        if (response?.user?.email) {
+          localStorage.setItem('rentedge_user_email', response.user.email);
+        }
+      }
+    };
+
+    syncSession().catch(() => {
+      setIsAuthenticated(false);
+      localStorage.removeItem('rentedge_authenticated');
+      localStorage.removeItem('rentedge_token');
+    });
+
+    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (session?.user) {
+        ensureBackendSession(session)
+          .then((response) => {
+            const role = (response?.user?.role || session.user.user_metadata?.role || localStorage.getItem('rentedge_user_role') || 'tenant') as 'tenant' | 'owner' | 'hostel';
+            setIsAuthenticated(true);
+            setUserRole(role);
+            localStorage.setItem('rentedge_authenticated', 'true');
+            localStorage.setItem('rentedge_user_role', role);
+            localStorage.setItem('rentedge_user_email', response?.user?.email || session.user.email || '');
+            localStorage.setItem('rentedge_user_fullname', response?.user?.fullName || session.user.user_metadata?.full_name || session.user.user_metadata?.fullName || '');
+          })
+          .catch(() => {
+            setIsAuthenticated(false);
+            localStorage.removeItem('rentedge_authenticated');
+            localStorage.removeItem('rentedge_token');
+          });
+      } else {
+        setIsAuthenticated(false);
+      }
+    });
+
+    return () => {
+      listener.subscription.unsubscribe();
+    };
   }, []);
 
   const handleHeroSearch = (filters: { location: string; type: string; budget: string }) => {
@@ -115,7 +168,11 @@ export default function Home() {
     handlePendingProperty();
   };
 
-  const handleSignOut = () => {
+  const handleSignOut = async () => {
+    try {
+      await api.logout();
+    } catch (e) {}
+    await supabase.auth.signOut();
     setIsAuthenticated(false);
     setActiveProperty(null);
     setPendingProperty(null);
@@ -126,8 +183,10 @@ export default function Home() {
     localStorage.removeItem('rentedge_user_fullname');
     localStorage.removeItem('rentedge_user_email');
     localStorage.removeItem('rentedge_token');
-    
-    // Trigger signout toast
+    localStorage.removeItem('rentedge_pending_signup_role');
+    localStorage.removeItem('rentedge_pending_signup_name');
+    localStorage.removeItem('rentedge_pending_signup_email');
+
     setToastMessage('Logged out. Secure session revoked.');
     setTimeout(() => {
       setToastMessage(null);
@@ -283,8 +342,7 @@ export default function Home() {
       ) : (
         <div id="discover">
           <Listings 
-            previewMode={true} 
-            onAuthRequired={() => handleAuthRequired()} 
+            onEnquire={(property) => handleAuthRequired(property)} 
           />
         </div>
       )}

@@ -1,13 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
-
-const plusJakartaSans = Plus_Jakarta_Sans({
-  variable: "--font-plus-jakarta",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   title: "RentEdge | India's Fintech-Powered Rental Network",
@@ -30,10 +22,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${plusJakartaSans.variable} h-full antialiased scroll-smooth`}
-    >
+    <html lang="en" className="h-full antialiased scroll-smooth">
       <body className="min-h-full flex flex-col bg-[#F7F9F8] dark:bg-[#0B0F19] text-[#16202A] dark:text-[#F8F9FA] font-sans selection:bg-[#0B6E4F]/10 selection:text-[#0B6E4F]">
         {children}
       </body>

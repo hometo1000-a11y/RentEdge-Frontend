@@ -45,14 +45,6 @@ function clearSession() {
 // ─── API Methods ──────────────────────────────────────────────────
 
 export const api = {
-  // Auth — Lookup Email
-  async lookupEmail(payload: { identifier: string }) {
-    return apiFetch('/auth/lookup-email', {
-      method: 'POST',
-      body: JSON.stringify(payload),
-    });
-  },
-
   // Auth — Pre-check account availability and handle JIT cleanup
   async preCheck(payload: { email: string; phone: string }) {
     return apiFetch('/auth/pre-check', {
@@ -61,11 +53,11 @@ export const api = {
     });
   },
 
-  // Auth — Complete signup with Firebase token
+  // Auth — Complete signup with Supabase access token
   async completeSignup(payload: {
     fullName: string;
     role: string;
-    firebaseIdToken: string;
+    supabaseAccessToken: string;
   }) {
     const data = await apiFetch('/auth/complete-signup', {
       method: 'POST',
@@ -77,8 +69,8 @@ export const api = {
     return data;
   },
 
-  // Auth — Login
-  async login(payload: { firebaseIdToken: string }) {
+  // Auth — Login with Supabase access token exchange
+  async login(payload: { supabaseAccessToken: string }) {
     const data = await apiFetch('/auth/login', {
       method: 'POST',
       body: JSON.stringify(payload),
