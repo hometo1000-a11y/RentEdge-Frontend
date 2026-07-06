@@ -44,7 +44,7 @@ export default function PropertyDetailPage({ propertyId }: PropertyDetailPagePro
     let found = mockProperties.find(p => p.id === propertyId);
     if (!found) {
       try {
-        const saved = localStorage.getItem('rentedge_all_properties');
+        const saved = localStorage.getItem('Homtu_all_properties');
         if (saved) {
           const parsed = JSON.parse(saved);
           found = parsed.find((p: any) => p.id === propertyId);
@@ -70,17 +70,17 @@ export default function PropertyDetailPage({ propertyId }: PropertyDetailPagePro
     }
     
     // Check if user is logged in
-    const authed = localStorage.getItem('rentedge_authenticated') === 'true';
+    const authed = localStorage.getItem('Homtu_authenticated') === 'true';
     setIsAuthed(authed);
     
     // Check if already enquired this property in this session
-    const enquiredLocal = localStorage.getItem(`rentedge_enquired_${propertyId}`) === 'true';
+    const enquiredLocal = localStorage.getItem(`Homtu_enquired_${propertyId}`) === 'true';
     if (enquiredLocal) {
       setHasEnquired(true);
     }
 
     // Init unlock state from localStorage
-    const alreadyUnlocked = authed || localStorage.getItem(`rentedge_unlocked_${propertyId}`) === 'true';
+    const alreadyUnlocked = authed || localStorage.getItem(`Homtu_unlocked_${propertyId}`) === 'true';
     if (alreadyUnlocked) {
       setIsNumberUnlocked(true);
     }
@@ -128,8 +128,8 @@ export default function PropertyDetailPage({ propertyId }: PropertyDetailPagePro
       setShowModal(false);
       setIsNumberUnlocked(true);
       setHasEnquired(true);
-      localStorage.setItem(`rentedge_unlocked_${propertyId}`, 'true');
-      localStorage.setItem(`rentedge_enquired_${propertyId}`, 'true');
+      localStorage.setItem(`Homtu_unlocked_${propertyId}`, 'true');
+      localStorage.setItem(`Homtu_enquired_${propertyId}`, 'true');
       if (property) triggerScramble(property.ownerPhoneFull);
     }, 1100);
   };
@@ -150,7 +150,7 @@ export default function PropertyDetailPage({ propertyId }: PropertyDetailPagePro
     setTimeout(() => {
       setIsEnquiring(false);
       setHasEnquired(true);
-      localStorage.setItem(`rentedge_enquired_${propertyId}`, 'true');
+      localStorage.setItem(`Homtu_enquired_${propertyId}`, 'true');
     }, 1500);
   };
 
@@ -160,8 +160,8 @@ export default function PropertyDetailPage({ propertyId }: PropertyDetailPagePro
       router.push(`/?auth=true&property=${property.id}`);
     } else {
       // Save details to transition tenant state machine to pending
-      localStorage.setItem('rentedge_lifecycle_state', 'REQUEST_PENDING');
-      localStorage.setItem('rentedge_selected_property_id', property.id);
+      localStorage.setItem('Homtu_lifecycle_state', 'REQUEST_PENDING');
+      localStorage.setItem('Homtu_selected_property_id', property.id);
       router.push('/');
     }
   };
@@ -357,11 +357,11 @@ export default function PropertyDetailPage({ propertyId }: PropertyDetailPagePro
               </div>
             </div>
 
-            {/* RentEdge fintech transparency notes */}
+            {/* Homtu fintech transparency notes */}
             <div className="p-4 bg-indigo-50/50 border border-indigo-100 rounded-2xl flex gap-3 text-left">
               <Shield className="w-5 h-5 text-indigo-600 shrink-0 mt-0.5" />
               <div className="space-y-1">
-                <h5 className="text-xs font-black text-slate-800">RentEdge Ledger Protected</h5>
+                <h5 className="text-xs font-black text-slate-800">Homtu Ledger Protected</h5>
                 <p className="text-[11px] text-slate-500 font-semibold leading-normal">
                   This property is managed securely on-chain. Zero brokerage fees, direct NPCI banking mandates for transfers, and 100% compliance under HRA Section 10(13A).
                 </p>

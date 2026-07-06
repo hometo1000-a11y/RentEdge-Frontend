@@ -45,7 +45,7 @@ export default function Navbar({ isAuthenticated, onAuthRequired, onSignOut }: N
     // Block transitions during initial theme application
     root.classList.add('no-transition');
 
-    const savedTheme = localStorage.getItem('rentedge_theme');
+    const savedTheme = localStorage.getItem('Homtu_theme');
     const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
     if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
@@ -68,11 +68,11 @@ export default function Navbar({ isAuthenticated, onAuthRequired, onSignOut }: N
     // User-triggered: transitions ARE enabled — smooth morph will play
     if (isDarkMode) {
       document.documentElement.classList.remove('dark');
-      localStorage.setItem('rentedge_theme', 'light');
+      localStorage.setItem('Homtu_theme', 'light');
       setIsDarkMode(false);
     } else {
       document.documentElement.classList.add('dark');
-      localStorage.setItem('rentedge_theme', 'dark');
+      localStorage.setItem('Homtu_theme', 'dark');
       setIsDarkMode(true);
     }
   };
@@ -99,14 +99,14 @@ export default function Navbar({ isAuthenticated, onAuthRequired, onSignOut }: N
         >
           <Image
             src={isDarkMode ? "/logo-dark.svg" : "/logo-light.svg"}
-            alt="RentEdge Logo"
+            alt="Homtu Logo"
             width={32}
             height={32}
             className="w-8 h-8 rounded-lg"
             priority
           />
           <span className="hidden md:block text-xl font-bold tracking-tight text-brand-primary dark:text-[#F8F5EE] font-sans">
-            RentEdge
+            Homtu
           </span>
         </a>
 

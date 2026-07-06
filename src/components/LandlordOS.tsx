@@ -78,11 +78,11 @@ function OwnerUserDropdown({
         const userData = await api.getMe();
         setUserName(userData.fullName);
         setUserEmail(userData.email);
-        localStorage.setItem('rentedge_user_fullname', userData.fullName);
-        localStorage.setItem('rentedge_user_email', userData.email);
+        localStorage.setItem('Homtu_user_fullname', userData.fullName);
+        localStorage.setItem('Homtu_user_email', userData.email);
       } catch (err) {
-        setUserName(localStorage.getItem('rentedge_user_fullname') || 'User');
-        setUserEmail(localStorage.getItem('rentedge_user_email') || '');
+        setUserName(localStorage.getItem('Homtu_user_fullname') || 'User');
+        setUserEmail(localStorage.getItem('Homtu_user_email') || '');
       }
     }
     fetchUser();
@@ -108,18 +108,18 @@ function OwnerUserDropdown({
   }, []);
 
   const doLogout = () => {
-    localStorage.removeItem('rentedge_authenticated');
-    localStorage.removeItem('rentedge_user_role');
-    localStorage.removeItem('rentedge_lifecycle_state');
-    localStorage.removeItem('rentedge_selected_property_id');
-    localStorage.removeItem('rentedge_user_fullname');
-    localStorage.removeItem('rentedge_user_email');
+    localStorage.removeItem('Homtu_authenticated');
+    localStorage.removeItem('Homtu_user_role');
+    localStorage.removeItem('Homtu_lifecycle_state');
+    localStorage.removeItem('Homtu_selected_property_id');
+    localStorage.removeItem('Homtu_user_fullname');
+    localStorage.removeItem('Homtu_user_email');
     onLogout?.();
     setOpen(false);
   };
 
   const doSwitchTenant = () => {
-    localStorage.setItem('rentedge_user_role', 'tenant');
+    localStorage.setItem('Homtu_user_role', 'tenant');
     onSwitchToTenant?.();
     setOpen(false);
   };
@@ -452,7 +452,7 @@ export default function LandlordOS({
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem('rentedge_theme');
+    const savedTheme = localStorage.getItem('Homtu_theme');
     const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
       setIsDarkMode(true);
@@ -466,11 +466,11 @@ export default function LandlordOS({
   const toggleTheme = () => {
     if (isDarkMode) {
       document.documentElement.classList.remove('dark');
-      localStorage.setItem('rentedge_theme', 'light');
+      localStorage.setItem('Homtu_theme', 'light');
       setIsDarkMode(false);
     } else {
       document.documentElement.classList.add('dark');
-      localStorage.setItem('rentedge_theme', 'dark');
+      localStorage.setItem('Homtu_theme', 'dark');
       setIsDarkMode(true);
     }
   };
@@ -487,7 +487,7 @@ export default function LandlordOS({
   useEffect(() => {
     async function loadLandlordData() {
       try {
-        const email = localStorage.getItem('rentedge_user_email') || '';
+        const email = localStorage.getItem('Homtu_user_email') || '';
         const [allProps, requestsData, tenantsData] = await Promise.all([
           api.getProperties(),
           api.getJoinRequests(),
@@ -528,7 +528,7 @@ export default function LandlordOS({
       // Update local request status
       setAllRequests(prev => prev.map(r => r.id === requestId ? { ...r, status } : r));
       // Re-fetch landlord properties / data since approval might affect listing states or active tenants
-      const email = localStorage.getItem('rentedge_user_email') || '';
+      const email = localStorage.getItem('Homtu_user_email') || '';
       const allProps = await api.getProperties();
       const landlordProps = allProps.filter((p: any) => p.ownerEmail === email);
       setMyProperties(landlordProps);
@@ -660,7 +660,7 @@ export default function LandlordOS({
           <OwnerUserDropdown 
             onLogout={onLogout} 
             onSwitchToTenant={() => {
-              localStorage.setItem('rentedge_user_role', 'tenant');
+              localStorage.setItem('Homtu_user_role', 'tenant');
               onLogout?.();
             }} 
             onViewChange={(view) => setActiveTab(view)}
@@ -710,7 +710,7 @@ export default function LandlordOS({
               <OwnerUserDropdown
                 onLogout={onLogout}
                 onSwitchToTenant={() => {
-                  localStorage.setItem('rentedge_user_role', 'tenant');
+                  localStorage.setItem('Homtu_user_role', 'tenant');
                   onLogout?.();
                 }}
                 onViewChange={(view) => setActiveTab(view)}
@@ -751,7 +751,7 @@ export default function LandlordOS({
                           images: data.images || []
                         });
                         
-                        const email = localStorage.getItem('rentedge_user_email') || '';
+                        const email = localStorage.getItem('Homtu_user_email') || '';
                         const allProps = await api.getProperties();
                         const landlordProps = allProps.filter((p: any) => p.ownerEmail === email || p.ownerName === 'Rajvardhan Pawar');
                         setMyProperties(landlordProps);
@@ -1045,14 +1045,14 @@ export default function LandlordOS({
                       const updated = myProperties.filter(p => p.title !== currentPropertyTitle);
                       setMyProperties(updated);
                       if (typeof window !== 'undefined') {
-                        localStorage.setItem('rentedge_properties', JSON.stringify(updated));
+                        localStorage.setItem('Homtu_properties', JSON.stringify(updated));
                         
                         // Sync with all properties for tenant discovery
-                        const savedAll = localStorage.getItem('rentedge_all_properties');
+                        const savedAll = localStorage.getItem('Homtu_all_properties');
                         if (savedAll) {
                           try {
                             const allProps: Property[] = JSON.parse(savedAll);
-                            localStorage.setItem('rentedge_all_properties', JSON.stringify(allProps.filter(p => p.title !== currentPropertyTitle)));
+                            localStorage.setItem('Homtu_all_properties', JSON.stringify(allProps.filter(p => p.title !== currentPropertyTitle)));
                           } catch (e) {}
                         }
                       }

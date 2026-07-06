@@ -2,10 +2,10 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "RentEdge | India's Fintech-Powered Rental Network",
+  title: "Homtu | India's Fintech-Powered Rental Network",
   description: "Zero brokers. Full transparency. Rent premium homes, pay rent seamlessly via UPI, and build your credit profile with India's first Rent Score.",
   keywords: ["rent", "broker-free", "fintech", "rent score", "india rental", "apartment rental", "nobroker alternative"],
-  authors: [{ name: "RentEdge Team" }],
+  authors: [{ name: "Homtu Team" }],
 };
 
 export const viewport: Viewport = {

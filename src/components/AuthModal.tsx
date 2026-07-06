@@ -54,13 +54,13 @@ export default function AuthModal({ isOpen, onClose, onSuccess }: AuthModalProps
 
   const persistLocalSession = (user: any) => {
     const role = user?.user_metadata?.role || user?.role || 'tenant';
-    localStorage.setItem('rentedge_authenticated', 'true');
+    localStorage.setItem('Homtu_authenticated', 'true');
     localStorage.setItem(
-      'rentedge_user_fullname',
+      'Homtu_user_fullname',
       user?.fullName || user?.full_name || user?.user_metadata?.full_name || user?.user_metadata?.fullName || ''
     );
-    localStorage.setItem('rentedge_user_email', user?.email || email);
-    localStorage.setItem('rentedge_user_role', role);
+    localStorage.setItem('Homtu_user_email', user?.email || email);
+    localStorage.setItem('Homtu_user_role', role);
   };
 
   const handleStartSignup = async () => {
@@ -102,9 +102,9 @@ export default function AuthModal({ isOpen, onClose, onSuccess }: AuthModalProps
       if (error) throw error;
 
       if (data.user) {
-        localStorage.setItem('rentedge_pending_signup_role', selectedRoleId);
-        localStorage.setItem('rentedge_pending_signup_name', fullName);
-        localStorage.setItem('rentedge_pending_signup_email', email);
+        localStorage.setItem('Homtu_pending_signup_role', selectedRoleId);
+        localStorage.setItem('Homtu_pending_signup_name', fullName);
+        localStorage.setItem('Homtu_pending_signup_email', email);
       }
 
       if (data.session) {

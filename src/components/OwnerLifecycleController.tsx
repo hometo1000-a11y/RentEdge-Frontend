@@ -30,7 +30,7 @@ export default function OwnerLifecycleController({ onLogout, onSwitchToTenant }:
 
   const checkPaymentInfo = async () => {
     try {
-      const token = localStorage.getItem('rentedge_token');
+      const token = localStorage.getItem('Homtu_token');
       if (!token) {
         setLoading(false);
         return;
@@ -64,7 +64,7 @@ export default function OwnerLifecycleController({ onLogout, onSwitchToTenant }:
 
     setSetupLoading(true);
     try {
-      const token = localStorage.getItem('rentedge_token');
+      const token = localStorage.getItem('Homtu_token');
       const res = await fetch('https://api.homtu.in/api/users/payment-info', {
         method: 'POST',
         headers: { 

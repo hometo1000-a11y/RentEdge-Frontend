@@ -67,7 +67,7 @@ export default function FinancialManagement() {
     setDownloadingReport(reportType);
     setTimeout(() => {
       setDownloadingReport(null);
-      alert(`RentEdge Financial Report (${reportType}) compiled and saved to downloads.`);
+      alert(`Homtu Financial Report (${reportType}) compiled and saved to downloads.`);
     }, 1800);
   };
 

@@ -32,29 +32,29 @@ export default function TenantLifecycleController({ onLogout, onSwitchToOwner }:
   // Persist state transitions
   const setLifecycleState = (newState: TenantLifecycleState) => {
     setState(newState);
-    localStorage.setItem('rentedge_lifecycle_state', newState);
+    localStorage.setItem('Homtu_lifecycle_state', newState);
   };
 
   const selectProperty = (property: Property | null) => {
     setSelectedProperty(property);
     if (property) {
-      localStorage.setItem('rentedge_selected_property_id', property.id);
+      localStorage.setItem('Homtu_selected_property_id', property.id);
     } else {
-      localStorage.removeItem('rentedge_selected_property_id');
+      localStorage.removeItem('Homtu_selected_property_id');
     }
   };
 
   // Sync state on mount
   useEffect(() => {
-    const savedState = localStorage.getItem('rentedge_lifecycle_state');
-    const savedPropId = localStorage.getItem('rentedge_selected_property_id');
+    const savedState = localStorage.getItem('Homtu_lifecycle_state');
+    const savedPropId = localStorage.getItem('Homtu_selected_property_id');
     
     // Only restore if it's a valid state, otherwise reset to BROWSING
     if (savedState === 'BROWSING') {
       setState('BROWSING');
     } else {
       // Clear any stale/invalid states from previous versions
-      localStorage.setItem('rentedge_lifecycle_state', 'BROWSING');
+      localStorage.setItem('Homtu_lifecycle_state', 'BROWSING');
       setState('BROWSING');
     }
     if (savedPropId) {

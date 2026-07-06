@@ -40,7 +40,7 @@ interface Notification {
   unread: boolean;
 }
 
-export default function RentEdgeLayout({ children, onLogout }: LayoutProps) {
+export default function HomtuLayout({ children, onLogout }: LayoutProps) {
   // Navigation tabs
   const navigationTabs = [
     { id: 'dashboard', label: 'Home', icon: LayoutDashboard },
@@ -142,7 +142,7 @@ export default function RentEdgeLayout({ children, onLogout }: LayoutProps) {
       case 'wallet':
         return 'Payment History';
       default:
-        return 'RentEdge';
+        return 'Homtu';
     }
   };
 
@@ -195,7 +195,7 @@ export default function RentEdgeLayout({ children, onLogout }: LayoutProps) {
       score: 710,
       status: 'Cleared',
       phone: newTenant.phone || '+91 99999 88888',
-      email: newTenant.email || 'tenant@rentedge.in'
+      email: newTenant.email || 'tenant@Homtu.in'
     };
 
     setTenantsList([newObj, ...tenantsList]);
@@ -281,7 +281,7 @@ export default function RentEdgeLayout({ children, onLogout }: LayoutProps) {
           <div className="p-6 flex items-center gap-3 border-b border-[#1F3A2B]/60">
             <Image
               src="/logo-dark.svg"
-              alt="RentEdge Logo"
+              alt="Homtu Logo"
               width={36}
               height={36}
               className="w-9 h-9 rounded-xl"
@@ -375,7 +375,7 @@ export default function RentEdgeLayout({ children, onLogout }: LayoutProps) {
           {/* Logo element visible only on mobile */}
           <Image
             src="/logo-light.svg"
-            alt="RentEdge Logo"
+            alt="Homtu Logo"
             width={28}
             height={28}
             className="md:hidden w-7 h-7 rounded-lg mr-1"
@@ -758,7 +758,7 @@ export default function RentEdgeLayout({ children, onLogout }: LayoutProps) {
                       {/* Right: Quick Insights */}
                       <div className="bg-white p-5 rounded-2xl border border-slate-200/50 shadow-sm space-y-4">
                         <span className="block text-xs uppercase font-extrabold tracking-wider text-slate-400">
-                          RentEdge Insights
+                          Homtu Insights
                         </span>
                         
                         <div className="space-y-3">
@@ -1031,7 +1031,7 @@ export default function RentEdgeLayout({ children, onLogout }: LayoutProps) {
                         <div className="relative z-10 pt-4 border-t border-slate-800">
                           <div className="flex justify-between text-xs font-bold text-slate-400">
                             <span>UPI Node ID</span>
-                            <span className="font-mono text-white">rentedge@icici</span>
+                            <span className="font-mono text-white">Homtu@icici</span>
                           </div>
                         </div>
                       </div>

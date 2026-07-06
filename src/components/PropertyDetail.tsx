@@ -213,7 +213,7 @@ export default function PropertyDetail({
               <span className="text-xl font-black text-slate-900 font-mono">₹25,000<span className="text-xs font-semibold text-slate-450">/mo</span></span>
               
               <button
-                onClick={() => triggerSuccess('Redirecting to RentEdge public link...')}
+                onClick={() => triggerSuccess('Redirecting to Homtu public link...')}
                 className="mt-1 px-3 py-1.5 border border-slate-200 hover:border-slate-350 hover:bg-white text-slate-650 hover:text-slate-900 text-[10px] font-black rounded-lg transition-all flex items-center gap-1 cursor-pointer"
               >
                 <ExternalLink className="w-3 h-3" />

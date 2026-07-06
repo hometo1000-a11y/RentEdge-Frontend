@@ -29,8 +29,8 @@ export default function LeadCaptureContactBlock({
 
   // Sync initial state from localStorage if enquired previously
   useEffect(() => {
-    const isAuthed = localStorage.getItem('rentedge_authenticated') === 'true';
-    const enquired = isAuthed || localStorage.getItem(`rentedge_enquired_${propertyId}`) === 'true';
+    const isAuthed = localStorage.getItem('Homtu_authenticated') === 'true';
+    const enquired = isAuthed || localStorage.getItem(`Homtu_enquired_${propertyId}`) === 'true';
     if (enquired || isUnlockedInitially) {
       setIsUnlocked(true);
       setDisplayedNumber(ownerPhoneFull);
@@ -61,7 +61,7 @@ export default function LeadCaptureContactBlock({
       setIsUnlocked(true);
       
       // Save leads validation
-      localStorage.setItem(`rentedge_enquired_${propertyId}`, 'true');
+      localStorage.setItem(`Homtu_enquired_${propertyId}`, 'true');
       
       // Scramble reveal animation
       triggerScramble(ownerPhoneFull);
@@ -147,7 +147,7 @@ export default function LeadCaptureContactBlock({
         <p className="text-[10.5px] text-slate-500 font-semibold leading-normal">
           {isUnlocked
             ? `Direct number unlocked. Contact landlord ${ownerName} to set up visits.`
-            : "Protected via RentEdge Privacy Shield. Verify WhatsApp to reveal number."
+            : "Protected via Homtu Privacy Shield. Verify WhatsApp to reveal number."
           }
         </p>
 

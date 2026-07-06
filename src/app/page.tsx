@@ -31,7 +31,7 @@ export default function Home() {
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
   const ensureBackendSession = async (session: any) => {
-    const existingToken = localStorage.getItem('rentedge_token');
+    const existingToken = localStorage.getItem('Homtu_token');
     if (existingToken) return { token: existingToken };
     if (!session?.access_token) throw new Error('Missing Supabase access token');
     const response = await api.login({ supabaseAccessToken: session.access_token });
@@ -62,41 +62,41 @@ export default function Home() {
       const session = data.session;
       if (session?.user) {
         const response = await ensureBackendSession(session);
-        const role = (session.user.user_metadata?.role || localStorage.getItem('rentedge_user_role') || 'tenant') as 'tenant' | 'owner' | 'hostel';
+        const role = (session.user.user_metadata?.role || localStorage.getItem('Homtu_user_role') || 'tenant') as 'tenant' | 'owner' | 'hostel';
         setIsAuthenticated(true);
         setUserRole(role);
-        localStorage.setItem('rentedge_authenticated', 'true');
-        localStorage.setItem('rentedge_user_role', role);
-        localStorage.setItem('rentedge_user_email', session.user.email || '');
-        localStorage.setItem('rentedge_user_fullname', session.user.user_metadata?.full_name || session.user.user_metadata?.fullName || '');
+        localStorage.setItem('Homtu_authenticated', 'true');
+        localStorage.setItem('Homtu_user_role', role);
+        localStorage.setItem('Homtu_user_email', session.user.email || '');
+        localStorage.setItem('Homtu_user_fullname', session.user.user_metadata?.full_name || session.user.user_metadata?.fullName || '');
         if (response?.user?.email) {
-          localStorage.setItem('rentedge_user_email', response.user.email);
+          localStorage.setItem('Homtu_user_email', response.user.email);
         }
       }
     };
 
     syncSession().catch(() => {
       setIsAuthenticated(false);
-      localStorage.removeItem('rentedge_authenticated');
-      localStorage.removeItem('rentedge_token');
+      localStorage.removeItem('Homtu_authenticated');
+      localStorage.removeItem('Homtu_token');
     });
 
     const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
       if (session?.user) {
         ensureBackendSession(session)
           .then((response) => {
-            const role = (response?.user?.role || session.user.user_metadata?.role || localStorage.getItem('rentedge_user_role') || 'tenant') as 'tenant' | 'owner' | 'hostel';
+            const role = (response?.user?.role || session.user.user_metadata?.role || localStorage.getItem('Homtu_user_role') || 'tenant') as 'tenant' | 'owner' | 'hostel';
             setIsAuthenticated(true);
             setUserRole(role);
-            localStorage.setItem('rentedge_authenticated', 'true');
-            localStorage.setItem('rentedge_user_role', role);
-            localStorage.setItem('rentedge_user_email', response?.user?.email || session.user.email || '');
-            localStorage.setItem('rentedge_user_fullname', response?.user?.fullName || session.user.user_metadata?.full_name || session.user.user_metadata?.fullName || '');
+            localStorage.setItem('Homtu_authenticated', 'true');
+            localStorage.setItem('Homtu_user_role', role);
+            localStorage.setItem('Homtu_user_email', response?.user?.email || session.user.email || '');
+            localStorage.setItem('Homtu_user_fullname', response?.user?.fullName || session.user.user_metadata?.full_name || session.user.user_metadata?.fullName || '');
           })
           .catch(() => {
             setIsAuthenticated(false);
-            localStorage.removeItem('rentedge_authenticated');
-            localStorage.removeItem('rentedge_token');
+            localStorage.removeItem('Homtu_authenticated');
+            localStorage.removeItem('Homtu_token');
           });
       } else {
         setIsAuthenticated(false);
@@ -132,13 +132,13 @@ export default function Home() {
   const handleAuthSuccess = (user: any) => {
     setIsAuthenticated(true);
     setAuthModalOpen(false);
-    localStorage.setItem('rentedge_authenticated', 'true');
+    localStorage.setItem('Homtu_authenticated', 'true');
     
     if (user.isTenant && user.isOwner) {
       const lastPortal = localStorage.getItem('last_selected_portal');
       if (lastPortal === 'tenant' || lastPortal === 'owner') {
         setUserRole(lastPortal);
-        localStorage.setItem('rentedge_user_role', lastPortal);
+        localStorage.setItem('Homtu_user_role', lastPortal);
         setToastMessage(`Authentication successful! Route: ${lastPortal === 'tenant' ? 'Tenant' : 'Owner'} Portal.`);
         handlePendingProperty();
       } else {
@@ -146,13 +146,13 @@ export default function Home() {
       }
     } else if (user.isOwner) {
       setUserRole('owner');
-      localStorage.setItem('rentedge_user_role', 'owner');
+      localStorage.setItem('Homtu_user_role', 'owner');
       localStorage.setItem('last_selected_portal', 'owner');
       setToastMessage(`Authentication successful! Route: Owner Portal.`);
       handlePendingProperty();
     } else {
       setUserRole('tenant');
-      localStorage.setItem('rentedge_user_role', 'tenant');
+      localStorage.setItem('Homtu_user_role', 'tenant');
       localStorage.setItem('last_selected_portal', 'tenant');
       setToastMessage(`Authentication successful! Route: Tenant Portal.`);
       handlePendingProperty();
@@ -161,7 +161,7 @@ export default function Home() {
 
   const handlePortalSelect = (role: 'tenant' | 'owner') => {
     setUserRole(role);
-    localStorage.setItem('rentedge_user_role', role);
+    localStorage.setItem('Homtu_user_role', role);
     localStorage.setItem('last_selected_portal', role);
     setShowPortalSelector(false);
     setToastMessage(`Welcome to the ${role === 'tenant' ? 'Tenant' : 'Owner'} Portal.`);
@@ -176,16 +176,16 @@ export default function Home() {
     setIsAuthenticated(false);
     setActiveProperty(null);
     setPendingProperty(null);
-    localStorage.removeItem('rentedge_authenticated');
-    localStorage.removeItem('rentedge_user_role');
-    localStorage.removeItem('rentedge_lifecycle_state');
-    localStorage.removeItem('rentedge_selected_property_id');
-    localStorage.removeItem('rentedge_user_fullname');
-    localStorage.removeItem('rentedge_user_email');
-    localStorage.removeItem('rentedge_token');
-    localStorage.removeItem('rentedge_pending_signup_role');
-    localStorage.removeItem('rentedge_pending_signup_name');
-    localStorage.removeItem('rentedge_pending_signup_email');
+    localStorage.removeItem('Homtu_authenticated');
+    localStorage.removeItem('Homtu_user_role');
+    localStorage.removeItem('Homtu_lifecycle_state');
+    localStorage.removeItem('Homtu_selected_property_id');
+    localStorage.removeItem('Homtu_user_fullname');
+    localStorage.removeItem('Homtu_user_email');
+    localStorage.removeItem('Homtu_token');
+    localStorage.removeItem('Homtu_pending_signup_role');
+    localStorage.removeItem('Homtu_pending_signup_name');
+    localStorage.removeItem('Homtu_pending_signup_email');
 
     setToastMessage('Logged out. Secure session revoked.');
     setTimeout(() => {
@@ -248,7 +248,7 @@ export default function Home() {
           onLogout={handleSignOut} 
           onSwitchToTenant={() => {
             setUserRole('tenant');
-            localStorage.setItem('rentedge_user_role', 'tenant');
+            localStorage.setItem('Homtu_user_role', 'tenant');
             localStorage.setItem('last_selected_portal', 'tenant');
           }}
         />
@@ -263,7 +263,7 @@ export default function Home() {
           onLogout={handleSignOut} 
           onSwitchToOwner={async () => {
             try {
-              const token = localStorage.getItem('rentedge_token');
+              const token = localStorage.getItem('Homtu_token');
               if (token) {
                 await fetch('`${API_URL}/api/users/switch-to-owner', {
                   method: 'POST',
@@ -274,7 +274,7 @@ export default function Home() {
               console.error(e);
             }
             setUserRole('owner');
-            localStorage.setItem('rentedge_user_role', 'owner');
+            localStorage.setItem('Homtu_user_role', 'owner');
             localStorage.setItem('last_selected_portal', 'owner');
           }}
         />
@@ -322,7 +322,7 @@ export default function Home() {
                 onLogout={handleSignOut} 
                 onSwitchToOwner={async () => {
                   try {
-                    const token = localStorage.getItem('rentedge_token');
+                    const token = localStorage.getItem('Homtu_token');
                     if (token) {
                       await fetch('`${API_URL}/api/users/switch-to-owner', {
                         method: 'POST',
@@ -333,7 +333,7 @@ export default function Home() {
                     console.error(e);
                   }
                   setUserRole('owner');
-                  localStorage.setItem('rentedge_user_role', 'owner');
+                  localStorage.setItem('Homtu_user_role', 'owner');
                 }}
               />
             )}
@@ -385,18 +385,18 @@ export default function Home() {
           </div>
           
           <div className="flex flex-col gap-3">
-            <span className="text-xs font-bold text-white uppercase tracking-wider">About RentEdge</span>
+            <span className="text-xs font-bold text-white uppercase tracking-wider">About Homtu</span>
             <p className="text-xs text-slate-500 leading-relaxed font-normal">
-              Founded in 2026, RentEdge is re-engineering how urban India rents homes. By combining smart lease contracts with credit bureau integrations, we eliminate security deposits and help build official credit histories.
+              Founded in 2026, Homtu is re-engineering how urban India rents homes. By combining smart lease contracts with credit bureau integrations, we eliminate security deposits and help build official credit histories.
             </p>
           </div>
 
           <div className="flex flex-col gap-3">
             <span className="text-xs font-bold text-white uppercase tracking-wider">Contact Us</span>
             <div className="flex flex-col gap-2.5">
-              <a href="mailto:support@rentedge.in" className="flex items-center gap-2 text-xs text-slate-500 hover:text-white transition-colors">
+              <a href="mailto:support@Homtu.in" className="flex items-center gap-2 text-xs text-slate-500 hover:text-white transition-colors">
                 <Mail className="w-4 h-4 text-[#D4AF37]" />
-                support@rentedge.in
+                support@Homtu.in
               </a>
               <a href="tel:+918049201827" className="flex items-center gap-2 text-xs text-slate-500 hover:text-white transition-colors">
                 <Phone className="w-4 h-4 text-[#D4AF37]" />
@@ -418,7 +418,7 @@ export default function Home() {
         </div>
 
         <div className="max-w-7xl mx-auto border-t border-white/5 pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-semibold">
-          <span>&copy; {new Date().getFullYear()} RentEdge Technologies Pvt Ltd. All rights reserved.</span>
+          <span>&copy; {new Date().getFullYear()} Homtu Technologies Pvt Ltd. All rights reserved.</span>
           <div className="flex gap-6">
             <span className="hover:text-white cursor-pointer">Terms of Service</span>
             <span className="hover:text-white cursor-pointer">Privacy Policy</span>

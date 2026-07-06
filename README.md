@@ -1,6 +1,6 @@
-# RentEdge | India's Fintech-Powered Rental Network
+# Homtu | India's Fintech-Powered Rental Network
 
-RentEdge is a premium broker-free rental platform that integrates modern financial services (credit score reporting, security deposit loans, and automated HRA e-receipts) into the Indian rental economy.
+Homtu is a premium broker-free rental platform that integrates modern financial services (credit score reporting, security deposit loans, and automated HRA e-receipts) into the Indian rental economy.
 
 This repository is built using **Next.js 16 (Turbopack)**, **Tailwind CSS**, and **Framer Motion** for micro-interactions, layout transitions, and rich aesthetics.
 
@@ -43,14 +43,14 @@ To maintain data persistency across role switching and reloads, the project leve
 
 | Key | Type | Description |
 | :--- | :--- | :--- |
-| `rentedge_authenticated` | `boolean` | Authenticated session status flag. |
-| `rentedge_user_role` | `string` | Stores active account role (`'tenant'`, `'owner'`, or `'hostel'`). |
-| `rentedge_user_fullname` | `string` | Full name of the authenticated user (defaults to *Rajvardhan Pawar*). |
-| `rentedge_user_email` | `string` | Email address of the logged-in user. |
-| `rentedge_properties` | `Array` | Landlord's registered property object records. |
-| `rentedge_all_properties` | `Array` | Extended list of properties cached for discovery and public searches. |
-| `rentedge_access_codes_registry` | `Array` | Active/pending lease entry code list owned by landlords. |
-| `rentedge_access_codes` | `Object` | Access code verification index map used by tenants to link leases. |
+| `Homtu_authenticated` | `boolean` | Authenticated session status flag. |
+| `Homtu_user_role` | `string` | Stores active account role (`'tenant'`, `'owner'`, or `'hostel'`). |
+| `Homtu_user_fullname` | `string` | Full name of the authenticated user (defaults to *Rajvardhan Pawar*). |
+| `Homtu_user_email` | `string` | Email address of the logged-in user. |
+| `Homtu_properties` | `Array` | Landlord's registered property object records. |
+| `Homtu_all_properties` | `Array` | Extended list of properties cached for discovery and public searches. |
+| `Homtu_access_codes_registry` | `Array` | Active/pending lease entry code list owned by landlords. |
+| `Homtu_access_codes` | `Object` | Access code verification index map used by tenants to link leases. |
 
 ---
 

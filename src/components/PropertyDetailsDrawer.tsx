@@ -50,8 +50,8 @@ export default function PropertyDetailsDrawer({ property, isOpen, onClose }: Pro
     if (!property) return;
     setImgIdx(0);
     const wasUnlocked =
-      localStorage.getItem('rentedge_authenticated') === 'true' ||
-      localStorage.getItem(`rentedge_unlocked_${property.id}`) === 'true';
+      localStorage.getItem('Homtu_authenticated') === 'true' ||
+      localStorage.getItem(`Homtu_unlocked_${property.id}`) === 'true';
     setIsUnlocked(wasUnlocked);
     setDisplayedPhone(wasUnlocked ? property.ownerPhoneFull : property.ownerPhoneMasked);
     setContactPhone('');
@@ -89,7 +89,7 @@ export default function PropertyDetailsDrawer({ property, isOpen, onClose }: Pro
       setIsSubmitting(false);
       setShowContactModal(false);
       setIsUnlocked(true);
-      localStorage.setItem(`rentedge_unlocked_${property.id}`, 'true');
+      localStorage.setItem(`Homtu_unlocked_${property.id}`, 'true');
       triggerScramble(property.ownerPhoneFull);
     }, 1100);
   };
@@ -270,11 +270,11 @@ export default function PropertyDetailsDrawer({ property, isOpen, onClose }: Pro
                     </div>
                   )}
 
-                  {/* RentEdge Trust Banner */}
+                  {/* Homtu Trust Banner */}
                   <div className="p-3 bg-indigo-50/50 dark:bg-indigo-500/5 border border-indigo-100 dark:border-indigo-500/15 rounded-xl flex gap-2.5 text-left">
                     <Shield className="w-4 h-4 text-indigo-600 dark:text-indigo-400 shrink-0 mt-0.5" />
                     <div className="space-y-0.5">
-                      <h5 className="text-[11px] font-black text-slate-800 dark:text-white">RentEdge Protected</h5>
+                      <h5 className="text-[11px] font-black text-slate-800 dark:text-white">Homtu Protected</h5>
                       <p className="text-[10px] text-slate-500 dark:text-slate-400 font-semibold leading-normal">
                         Zero brokerage fees, verified listings, and secure direct landlord communication.
                       </p>

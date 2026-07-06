@@ -159,7 +159,7 @@ export default function Features() {
             Our Edge
           </span>
           <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-brand-primary mt-4 font-sans">
-            How RentEdge Redefines Indian Renting
+            How Homtu Redefines Indian Renting
           </h2>
           <p className="text-slate-500 mt-4 text-base font-normal">
             No broker friction, no fake accounts. Just robust fintech tools built to make renting as clean and rewarding as checking out with Stripe.

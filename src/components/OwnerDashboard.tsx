@@ -78,11 +78,11 @@ function OwnerUserDropdown({
         const userData = await api.getMe();
         setUserName(userData.fullName);
         setUserEmail(userData.email);
-        localStorage.setItem('rentedge_user_fullname', userData.fullName);
-        localStorage.setItem('rentedge_user_email', userData.email);
+        localStorage.setItem('Homtu_user_fullname', userData.fullName);
+        localStorage.setItem('Homtu_user_email', userData.email);
       } catch (err) {
-        setUserName(localStorage.getItem('rentedge_user_fullname') || 'User');
-        setUserEmail(localStorage.getItem('rentedge_user_email') || '');
+        setUserName(localStorage.getItem('Homtu_user_fullname') || 'User');
+        setUserEmail(localStorage.getItem('Homtu_user_email') || '');
       }
     }
     fetchUser();
@@ -103,16 +103,16 @@ function OwnerUserDropdown({
   }, []);
 
   const doLogout = () => {
-    localStorage.removeItem('rentedge_authenticated');
-    localStorage.removeItem('rentedge_user_role');
-    localStorage.removeItem('rentedge_user_fullname');
-    localStorage.removeItem('rentedge_user_email');
+    localStorage.removeItem('Homtu_authenticated');
+    localStorage.removeItem('Homtu_user_role');
+    localStorage.removeItem('Homtu_user_fullname');
+    localStorage.removeItem('Homtu_user_email');
     onLogout?.();
     setOpen(false);
   };
 
   const doSwitchTenant = () => {
-    localStorage.setItem('rentedge_user_role', 'tenant');
+    localStorage.setItem('Homtu_user_role', 'tenant');
     onSwitchToTenant?.();
     setOpen(false);
   };
@@ -440,7 +440,7 @@ export default function OwnerDashboard({ onLogout, onSwitchToTenant }: OwnerDash
   const [requestLeaseStartDate, setRequestLeaseStartDate] = useState<string>(new Date().toISOString().split('T')[0]);
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem('rentedge_theme');
+    const savedTheme = localStorage.getItem('Homtu_theme');
     const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
       setIsDarkMode(true);
@@ -451,11 +451,11 @@ export default function OwnerDashboard({ onLogout, onSwitchToTenant }: OwnerDash
   const toggleTheme = () => {
     if (isDarkMode) {
       document.documentElement.classList.remove('dark');
-      localStorage.setItem('rentedge_theme', 'light');
+      localStorage.setItem('Homtu_theme', 'light');
       setIsDarkMode(false);
     } else {
       document.documentElement.classList.add('dark');
-      localStorage.setItem('rentedge_theme', 'dark');
+      localStorage.setItem('Homtu_theme', 'dark');
       setIsDarkMode(true);
     }
   };

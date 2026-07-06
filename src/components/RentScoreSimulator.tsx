@@ -37,7 +37,7 @@ export default function RentScoreSimulator() {
             Simulate Your Rent Score™
           </h2>
           <p className="text-slate-400 mt-4 text-base font-normal">
-            Rent is your largest recurring cost. Move the sliders to see how paying rent via RentEdge builds credit points and unlocks direct financial benefits.
+            Rent is your largest recurring cost. Move the sliders to see how paying rent via Homtu builds credit points and unlocks direct financial benefits.
           </p>
         </div>
 

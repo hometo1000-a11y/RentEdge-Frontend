@@ -106,7 +106,7 @@ export default function MyProperties({ onPropertySelect }: MyPropertiesProps) {
   }, [joinState]);
 
   useEffect(() => {
-    const storedName = localStorage.getItem('rentedge_user_fullname');
+    const storedName = localStorage.getItem('Homtu_user_fullname');
     if (storedName) setTenantName(storedName);
   }, []);
 
@@ -136,7 +136,7 @@ export default function MyProperties({ onPropertySelect }: MyPropertiesProps) {
     inputRef.current?.focus();
     
     if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('rentedge_access_codes');
+      const saved = localStorage.getItem('Homtu_access_codes');
       if (saved) {
         try {
           setDynamicCodes(JSON.parse(saved));
@@ -149,7 +149,7 @@ export default function MyProperties({ onPropertySelect }: MyPropertiesProps) {
 
   const getPropertyById = (propertyId: string) => {
     if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('rentedge_properties');
+      const saved = localStorage.getItem('Homtu_properties');
       if (saved) {
         try {
           const parsed: Property[] = JSON.parse(saved);
@@ -158,7 +158,7 @@ export default function MyProperties({ onPropertySelect }: MyPropertiesProps) {
         } catch (e) {}
       }
       
-      const savedAll = localStorage.getItem('rentedge_all_properties');
+      const savedAll = localStorage.getItem('Homtu_all_properties');
       if (savedAll) {
         try {
           const parsed: Property[] = JSON.parse(savedAll);

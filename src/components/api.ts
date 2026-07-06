@@ -1,7 +1,7 @@
 const API_BASE_URL = 'https://api.homtu.in/api';
 
 async function apiFetch(endpoint: string, options: RequestInit = {}) {
-  const token = typeof window !== 'undefined' ? localStorage.getItem('rentedge_token') : null;
+  const token = typeof window !== 'undefined' ? localStorage.getItem('Homtu_token') : null;
   
   const headers: Record<string, string> = {
     'Content-Type': 'application/json',
@@ -25,21 +25,21 @@ async function apiFetch(endpoint: string, options: RequestInit = {}) {
 // ─── Session helpers ──────────────────────────────────────────────
 
 function storeSession(data: { token: string; user: any }) {
-  localStorage.setItem('rentedge_token', data.token);
-  localStorage.setItem('rentedge_authenticated', 'true');
-  localStorage.setItem('rentedge_user_fullname', data.user.fullName);
-  localStorage.setItem('rentedge_user_email', data.user.email);
-  localStorage.setItem('rentedge_user_role', data.user.role);
+  localStorage.setItem('Homtu_token', data.token);
+  localStorage.setItem('Homtu_authenticated', 'true');
+  localStorage.setItem('Homtu_user_fullname', data.user.fullName);
+  localStorage.setItem('Homtu_user_email', data.user.email);
+  localStorage.setItem('Homtu_user_role', data.user.role);
 }
 
 function clearSession() {
-  localStorage.removeItem('rentedge_token');
-  localStorage.removeItem('rentedge_authenticated');
-  localStorage.removeItem('rentedge_user_fullname');
-  localStorage.removeItem('rentedge_user_email');
-  localStorage.removeItem('rentedge_user_role');
-  localStorage.removeItem('rentedge_lifecycle_state');
-  localStorage.removeItem('rentedge_selected_property_id');
+  localStorage.removeItem('Homtu_token');
+  localStorage.removeItem('Homtu_authenticated');
+  localStorage.removeItem('Homtu_user_fullname');
+  localStorage.removeItem('Homtu_user_email');
+  localStorage.removeItem('Homtu_user_role');
+  localStorage.removeItem('Homtu_lifecycle_state');
+  localStorage.removeItem('Homtu_selected_property_id');
 }
 
 // ─── API Methods ──────────────────────────────────────────────────

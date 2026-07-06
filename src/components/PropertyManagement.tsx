@@ -171,7 +171,7 @@ export default function PropertyManagement() {
   // Draft Protection & Recovery
   useEffect(() => {
     if (isWizardOpen && !editingPropertyId) {
-      const draft = localStorage.getItem('rentedge_property_draft');
+      const draft = localStorage.getItem('Homtu_property_draft');
       if (draft) {
         try {
           const parsed = JSON.parse(draft);
@@ -179,7 +179,7 @@ export default function PropertyManagement() {
             setFormData(parsed.formData);
             setWizardStep(parsed.wizardStep || 1);
           } else {
-            localStorage.removeItem('rentedge_property_draft');
+            localStorage.removeItem('Homtu_property_draft');
           }
         } catch(e) {}
       }
@@ -188,7 +188,7 @@ export default function PropertyManagement() {
 
   useEffect(() => {
     if (isWizardOpen && !editingPropertyId) {
-      localStorage.setItem('rentedge_property_draft', JSON.stringify({ formData, wizardStep }));
+      localStorage.setItem('Homtu_property_draft', JSON.stringify({ formData, wizardStep }));
     }
   }, [formData, wizardStep, isWizardOpen, editingPropertyId]);
 
@@ -211,9 +211,9 @@ export default function PropertyManagement() {
           ...prev,
           contacts: [{
             role: 'Owner',
-            name: user.full_name || user.fullName || user.name || localStorage.getItem('rentedge_user_fullname') || '',
+            name: user.full_name || user.fullName || user.name || localStorage.getItem('Homtu_user_fullname') || '',
             phone: user.phone || '',
-            email: user.email || localStorage.getItem('rentedge_user_email') || '',
+            email: user.email || localStorage.getItem('Homtu_user_email') || '',
             notes: ''
           }]
         }));
@@ -222,9 +222,9 @@ export default function PropertyManagement() {
           ...prev,
           contacts: [{
             role: 'Owner',
-            name: localStorage.getItem('rentedge_user_fullname') || '',
+            name: localStorage.getItem('Homtu_user_fullname') || '',
             phone: '',
-            email: localStorage.getItem('rentedge_user_email') || '',
+            email: localStorage.getItem('Homtu_user_email') || '',
             notes: ''
           }]
         }));
@@ -615,7 +615,7 @@ export default function PropertyManagement() {
       setEditingPropertyId(null);
       setWizardStep(1);
       setFormData(INITIAL_FORM_DATA);
-      localStorage.removeItem('rentedge_property_draft');
+      localStorage.removeItem('Homtu_property_draft');
       setSessionId(`property_wizard_${Math.random().toString(36).substr(2, 9)}`);
     } catch (err) {
       console.error("Failed to save property", err);
@@ -649,7 +649,7 @@ export default function PropertyManagement() {
     setEditingPropertyId(null);
     setWizardStep(1);
     setFormData(INITIAL_FORM_DATA);
-    localStorage.removeItem('rentedge_property_draft');
+    localStorage.removeItem('Homtu_property_draft');
     setSessionId(`property_wizard_${Math.random().toString(36).substr(2, 9)}`);
   };
 

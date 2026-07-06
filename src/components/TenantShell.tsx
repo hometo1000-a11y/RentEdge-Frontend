@@ -43,11 +43,11 @@ function UserDropdown({
         const userData = await api.getMe();
         setUserName(userData.fullName);
         setUserEmail(userData.email);
-        localStorage.setItem('rentedge_user_fullname', userData.fullName);
-        localStorage.setItem('rentedge_user_email', userData.email);
+        localStorage.setItem('Homtu_user_fullname', userData.fullName);
+        localStorage.setItem('Homtu_user_email', userData.email);
       } catch (err) {
-        setUserName(localStorage.getItem('rentedge_user_fullname') || 'User');
-        setUserEmail(localStorage.getItem('rentedge_user_email') || '');
+        setUserName(localStorage.getItem('Homtu_user_fullname') || 'User');
+        setUserEmail(localStorage.getItem('Homtu_user_email') || '');
       }
     }
     fetchUser();
@@ -73,18 +73,18 @@ function UserDropdown({
   }, []);
 
   const doLogout = () => {
-    localStorage.removeItem('rentedge_authenticated');
-    localStorage.removeItem('rentedge_user_role');
-    localStorage.removeItem('rentedge_lifecycle_state');
-    localStorage.removeItem('rentedge_selected_property_id');
-    localStorage.removeItem('rentedge_user_fullname');
-    localStorage.removeItem('rentedge_user_email');
+    localStorage.removeItem('Homtu_authenticated');
+    localStorage.removeItem('Homtu_user_role');
+    localStorage.removeItem('Homtu_lifecycle_state');
+    localStorage.removeItem('Homtu_selected_property_id');
+    localStorage.removeItem('Homtu_user_fullname');
+    localStorage.removeItem('Homtu_user_email');
     onLogout?.();
     setOpen(false);
   };
 
   const doSwitchOwner = () => {
-    localStorage.setItem('rentedge_user_role', 'owner');
+    localStorage.setItem('Homtu_user_role', 'owner');
     onSwitchToOwner?.();
     setOpen(false);
   };
@@ -253,10 +253,10 @@ export default function TenantShell({ activeView, onViewChange, onLogout, onSwit
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(() => {
-    const storedName = localStorage.getItem('rentedge_user_fullname');
+    const storedName = localStorage.getItem('Homtu_user_fullname');
     setUserName(storedName || 'User');
 
-    const savedTheme = localStorage.getItem('rentedge_theme');
+    const savedTheme = localStorage.getItem('Homtu_theme');
     const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
       setIsDarkMode(true);
@@ -270,11 +270,11 @@ export default function TenantShell({ activeView, onViewChange, onLogout, onSwit
   const toggleTheme = () => {
     if (isDarkMode) {
       document.documentElement.classList.remove('dark');
-      localStorage.setItem('rentedge_theme', 'light');
+      localStorage.setItem('Homtu_theme', 'light');
       setIsDarkMode(false);
     } else {
       document.documentElement.classList.add('dark');
-      localStorage.setItem('rentedge_theme', 'dark');
+      localStorage.setItem('Homtu_theme', 'dark');
       setIsDarkMode(true);
     }
   };

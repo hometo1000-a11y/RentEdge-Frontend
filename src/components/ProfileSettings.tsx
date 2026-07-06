@@ -55,7 +55,7 @@ export default function ProfileSettings() {
 
   const fetchProfile = async () => {
     try {
-      const token = localStorage.getItem('rentedge_token');
+      const token = localStorage.getItem('Homtu_token');
       if (!token) return;
 
       const res = await fetch('https://api.homtu.in/api/users/me', {
@@ -82,7 +82,7 @@ export default function ProfileSettings() {
   };
 
   const syncBackend = async (updates: any) => {
-    const token = localStorage.getItem('rentedge_token');
+    const token = localStorage.getItem('Homtu_token');
     const res = await fetch('https://api.homtu.in/api/users/me', {
       method: 'PUT',
       headers: {
@@ -114,7 +114,7 @@ export default function ProfileSettings() {
       return;
     }
     try {
-      const token = localStorage.getItem('rentedge_token');
+      const token = localStorage.getItem('Homtu_token');
       const checkRes = await fetch('https://api.homtu.in/api/users/check-email-change', {
         method: 'POST',
         headers: {
@@ -167,7 +167,7 @@ export default function ProfileSettings() {
       return;
     }
     try {
-      const token = localStorage.getItem('rentedge_token');
+      const token = localStorage.getItem('Homtu_token');
       const checkRes = await fetch('https://api.homtu.in/api/users/check-phone-change', {
         method: 'POST',
         headers: {

@@ -25,7 +25,7 @@ type Tab = 'tenant' | 'landlord';
 const tenantPlans = [
   {
     id: 'basic',
-    name: 'RentEdge Basic',
+    name: 'Homtu Basic',
     price: '₹0',
     period: 'forever',
     badge: null,
@@ -46,7 +46,7 @@ const tenantPlans = [
   },
   {
     id: 'plus',
-    name: 'RentEdge Plus',
+    name: 'Homtu Plus',
     price: '₹499',
     period: 'month',
     yearlyPrice: '₹4,999',
@@ -92,7 +92,7 @@ const landlordPlans = [
   },
   {
     id: 'pro',
-    name: 'RentEdge OS Pro',
+    name: 'Homtu OS Pro',
     price: '₹999',
     period: 'month',
     yearlyPrice: '₹9,999',
@@ -118,28 +118,28 @@ const comparisonRows = [
   {
     label: 'Brokerage Fees',
     icon: <CreditCard className="w-4 h-4" />,
-    rentedge: { value: '₹0 — Always', positive: true },
+    Homtu: { value: '₹0 — Always', positive: true },
     magicbricks: { value: 'Up to 1 month rent', positive: false },
     nobroker: { value: 'Up to 1 month rent', positive: false },
   },
   {
     label: 'Contact Owners',
     icon: <Building2 className="w-4 h-4" />,
-    rentedge: { value: 'Free & Instant', positive: true },
+    Homtu: { value: 'Free & Instant', positive: true },
     magicbricks: { value: '₹999+ subscription', positive: false },
     nobroker: { value: '₹999+ subscription', positive: false },
   },
   {
     label: 'Fake Listings',
     icon: <Shield className="w-4 h-4" />,
-    rentedge: { value: '0 — Aadhaar Verified', positive: true },
+    Homtu: { value: '0 — Aadhaar Verified', positive: true },
     magicbricks: { value: 'High volume', positive: false },
     nobroker: { value: 'High volume', positive: false },
   },
   {
     label: 'Credit Building',
     icon: <TrendingUp className="w-4 h-4" />,
-    rentedge: { value: 'CIBIL Integration', positive: true },
+    Homtu: { value: 'CIBIL Integration', positive: true },
     magicbricks: { value: 'None', positive: false },
     nobroker: { value: 'None', positive: false },
   },

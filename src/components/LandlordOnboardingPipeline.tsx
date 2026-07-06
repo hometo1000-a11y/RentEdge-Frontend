@@ -384,7 +384,7 @@ export default function LandlordOnboardingPipeline({ onLogout }: { onLogout?: ()
                     <div className="space-y-0.5 text-left">
                       <span className="block text-xs font-black text-slate-800">Digio Secure SDK Verification</span>
                       <p className="text-[10.5px] text-slate-400 font-medium leading-relaxed">
-                        RentEdge connects with Digio Sandbox OKYC API to generate a temporary identity authorization token.
+                        Homtu connects with Digio Sandbox OKYC API to generate a temporary identity authorization token.
                       </p>
                     </div>
                   </div>
@@ -1066,7 +1066,7 @@ export default function LandlordOnboardingPipeline({ onLogout }: { onLogout?: ()
                       </div>
 
                       <div className="p-3 bg-indigo-50/70 border border-indigo-100 text-[10.5px] text-slate-650 rounded-2xl leading-normal font-semibold text-left">
-                        💡 <strong>Media Checklist:</strong> Clean, high-contrast photos taken during daylight improve applicant approval speed by up to 40% on the RentEdge ecosystem.
+                        💡 <strong>Media Checklist:</strong> Clean, high-contrast photos taken during daylight improve applicant approval speed by up to 40% on the Homtu ecosystem.
                       </div>
                     </m.div>
                   )}
@@ -1116,11 +1116,11 @@ export default function LandlordOnboardingPipeline({ onLogout }: { onLogout?: ()
                           </div>
                         </div>
 
-                        {/* Min RentEdge Score */}
+                        {/* Min Homtu Score */}
                         <div className="space-y-1 sm:col-span-2">
                           <div className="flex justify-between items-center mb-1">
                             <label className="text-[9.5px] uppercase font-bold text-slate-400 tracking-wide">
-                              Minimum applicant rentedge score
+                              Minimum applicant Homtu score
                             </label>
                             <span className="text-xs font-black text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-100">
                               {formData.property.minScore} &bull; Verified Tier
