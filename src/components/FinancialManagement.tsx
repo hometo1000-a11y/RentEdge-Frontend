@@ -112,7 +112,7 @@ export default function FinancialManagement() {
           
           <div className="border-b border-slate-100 pb-4">
             <h3 className="text-sm font-black text-slate-900 uppercase tracking-wider flex items-center gap-2">
-              <Wallet className="w-4.5 h-4.5 text-[#7C3AED]" />
+              <Wallet className="w-4.5 h-4.5 text-[#01411C]" />
               Financial OS Center
             </h3>
             <p className="text-[10px] text-slate-450 font-bold mt-1">
@@ -135,7 +135,7 @@ export default function FinancialManagement() {
               onClick={handleWithdraw}
               className={`w-full py-3.5 rounded-xl text-xs font-black flex items-center justify-center gap-2 transition-all cursor-pointer ${
                 walletBalance > 0 && !isWithdrawing
-                  ? 'bg-[#7C3AED] hover:bg-[#6D28D9] text-white shadow-md shadow-indigo-500/10'
+                  ? 'bg-[#01411C] hover:bg-[#003B1F] text-white shadow-md shadow-indigo-500/10'
                   : 'bg-slate-200 text-slate-400 cursor-not-allowed'
               }`}
             >
@@ -236,12 +236,12 @@ export default function FinancialManagement() {
                         </td>
                         <td className="p-3.5">
                           {tx.type === 'Rent' && (
-                            <span className="inline-flex items-center gap-1 text-[9px] bg-emerald-50 text-[#10B981] px-1.5 py-0.5 rounded font-black border border-emerald-100 uppercase">
+                            <span className="inline-flex items-center gap-1 text-[9px] bg-emerald-50 text-[#01411C] px-1.5 py-0.5 rounded font-black border border-emerald-100 uppercase">
                               Rent Collected
                             </span>
                           )}
                           {tx.type === 'Deposit' && (
-                            <span className="inline-flex items-center gap-1 text-[9px] bg-indigo-50 text-[#7C3AED] px-1.5 py-0.5 rounded font-black border border-indigo-100 uppercase">
+                            <span className="inline-flex items-center gap-1 text-[9px] bg-indigo-50 text-[#01411C] px-1.5 py-0.5 rounded font-black border border-indigo-100 uppercase">
                               Escrow Lock
                             </span>
                           )}
@@ -255,7 +255,7 @@ export default function FinancialManagement() {
                           {tx.method}
                         </td>
                         <td className={`p-3.5 text-right font-mono font-black text-xs ${
-                          tx.type === 'Payout' ? 'text-slate-600' : 'text-[#10B981]'
+                          tx.type === 'Payout' ? 'text-slate-600' : 'text-[#01411C]'
                         }`}>
                           {tx.type === 'Payout' ? '-' : '+'}₹{tx.amount.toLocaleString('en-IN')}
                         </td>

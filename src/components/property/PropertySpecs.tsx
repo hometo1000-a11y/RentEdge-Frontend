@@ -94,7 +94,7 @@ export default function PropertySpecs({ property, variant = 'compact' }: Propert
 
   // ─── Expanded Variant (Detail View) ───
   return (
-    <div className={`grid gap-2 sm:gap-4 grid-cols-${specs.length} bg-white dark:bg-[#101420] border border-slate-100 dark:border-white/5 rounded-2xl p-3.5 sm:p-5 shadow-xs`}>
+    <div className={`grid gap-2 sm:gap-4 grid-cols-${specs.length} bg-white dark:bg-[#0B1F14] border border-slate-100 dark:border-white/5 rounded-2xl p-3.5 sm:p-5 shadow-xs`}>
       {specs.map((spec, i) => (
         <div
           key={spec.label}

@@ -86,7 +86,7 @@ export default function PropertyCard({
       }}
       onClick={() => onView(property)}
       onMouseMove={handleMouseMove}
-      className="group relative bg-white dark:bg-[#101420] rounded-[24px] overflow-hidden border border-slate-100 dark:border-white/5 shadow-sm hover:shadow-[0_20px_35px_-8px_rgba(124,58,237,0.12),0_12px_20px_-10px_rgba(0,0,0,0.04)] transition-shadow duration-500 flex flex-col cursor-pointer"
+      className="group relative bg-white dark:bg-[#0B1F14] rounded-[24px] overflow-hidden border border-slate-100 dark:border-white/5 shadow-sm hover:shadow-lg transition-shadow duration-500 flex flex-col cursor-pointer"
       tabIndex={0}
       role="button"
       aria-label={`View ${property.title} - ₹${property.price.toLocaleString('en-IN')} per month`}
@@ -96,7 +96,7 @@ export default function PropertyCard({
       <motion.div 
         className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"
         style={{
-          background: useMotionTemplate`radial-gradient(350px circle at ${mouseX}px ${mouseY}px, rgba(124, 58, 237, 0.06), transparent 80%)`
+          background: useMotionTemplate`radial-gradient(350px circle at ${mouseX}px ${mouseY}px, rgba(1, 65, 28, 0.04), transparent 80%)`
         }}
       />
 
@@ -105,7 +105,7 @@ export default function PropertyCard({
         className="pointer-events-none absolute -inset-px rounded-[24px] opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20"
         style={{
           border: '1.5px solid transparent',
-          background: useMotionTemplate`radial-gradient(280px circle at ${mouseX}px ${mouseY}px, rgba(124, 58, 237, 0.22), transparent 80%) border-box`,
+          background: useMotionTemplate`radial-gradient(280px circle at ${mouseX}px ${mouseY}px, rgba(1, 65, 28, 0.15), transparent 80%) border-box`,
           WebkitMask: 'linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0)',
           WebkitMaskComposite: 'destination-out',
           maskComposite: 'exclude',
@@ -179,7 +179,7 @@ export default function PropertyCard({
             </span>
           )}
           {property.is_city_pioneer && (
-            <span className="inline-flex items-center gap-1 text-[9px] font-black uppercase tracking-wide px-2.5 py-0.5 rounded-full bg-gradient-to-r from-amber-200 to-yellow-400 text-yellow-900 shadow-md border border-yellow-300 w-max">
+            <span className="inline-flex items-center gap-1 text-[9px] font-black uppercase tracking-wide px-2.5 py-0.5 rounded-full bg-[#D4AF37] text-yellow-900 shadow-md border border-yellow-300 w-max">
               <Star className="w-3 h-3 fill-yellow-600 text-yellow-600" />
               Pioneer
             </span>
@@ -319,7 +319,7 @@ export default function PropertyCard({
               {smartTags.slice(0, 3).map((tag) => (
                 <span
                   key={tag}
-                  className="text-[10px] font-bold px-2 py-0.5 bg-slate-50 dark:bg-white/5 text-slate-600 dark:text-slate-300 rounded-md border border-slate-100 dark:border-white/5 group-hover:bg-brand-purple/5 dark:group-hover:bg-brand-purple/10 group-hover:text-brand-purple dark:group-hover:text-[#A78BFA] group-hover:border-brand-purple/20 transition-all duration-300"
+                  className="text-[10px] font-bold px-2 py-0.5 bg-slate-50 dark:bg-white/5 text-slate-600 dark:text-slate-300 rounded-md border border-slate-100 dark:border-white/5 group-hover:bg-brand-purple/5 dark:group-hover:bg-brand-purple/10 group-hover:text-brand-purple dark:group-hover:text-[#D4AF37] group-hover:border-brand-purple/20 transition-all duration-300"
                 >
                   {tag}
                 </span>
@@ -331,7 +331,7 @@ export default function PropertyCard({
         {/* CTA with high-trust micro-interactions */}
         <button
           onClick={(e) => { e.stopPropagation(); onView(property); }}
-          className="mt-auto w-full flex items-center justify-center gap-2 py-3 bg-slate-950 dark:bg-slate-900 group-hover:bg-gradient-to-r group-hover:from-brand-purple group-hover:to-indigo-600 text-white text-xs font-black rounded-xl transition-all duration-500 cursor-pointer shadow-sm group-hover:scale-[1.015] group-hover:shadow-[0_8px_20px_-6px_rgba(124,58,237,0.25)]"
+          className="mt-auto w-full flex items-center justify-center gap-2 py-3 bg-slate-950 dark:bg-slate-900 group-hover:bg-brand-primary text-white text-xs font-black rounded-xl transition-all duration-500 cursor-pointer shadow-sm group-hover:scale-[1.015] group-hover:shadow-md"
         >
           <span>View Property</span>
           <ViewArrow className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />

@@ -352,7 +352,7 @@ export default function MyProperties({ onPropertySelect }: MyPropertiesProps) {
                   onClick={() => { setActiveImg(i); startAutoplay(); }}
                   className={`shrink-0 w-20 h-14 rounded-xl overflow-hidden border-2 transition-all cursor-pointer ${
                     i === activeImg
-                      ? 'border-brand-purple shadow-md shadow-purple-200 scale-105'
+                      ? 'border-brand-purple shadow-md shadow-sm scale-105'
                       : 'border-transparent opacity-60 hover:opacity-100'
                   }`}
                 >
@@ -491,7 +491,7 @@ export default function MyProperties({ onPropertySelect }: MyPropertiesProps) {
                     onClick={handlePayRent}
                     className={`w-full py-4 text-white font-black rounded-xl transition-all flex items-center justify-center gap-2 cursor-pointer ${
                       (viewedProperty as any).rent_status === 'due' 
-                        ? 'bg-emerald-500 hover:bg-emerald-400 shadow-[0_0_20px_rgba(16,185,129,0.3)]' 
+                        ? 'bg-[#01411C] hover:bg-[#003B1F] shadow-[0_0_20px_rgba(16,185,129,0.3)]' 
                         : (viewedProperty as any).rent_status === 'pending'
                         ? 'bg-amber-500 hover:bg-amber-400 shadow-[0_0_20px_rgba(245,158,11,0.3)]'
                         : 'bg-slate-800 hover:bg-slate-700 shadow-md'
@@ -656,7 +656,7 @@ export default function MyProperties({ onPropertySelect }: MyPropertiesProps) {
                         <div className="grid grid-cols-2 gap-3">
                           <div>
                             <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">Payment Method</label>
-                            <select value={paymentMethod} onChange={e => setPaymentMethod(e.target.value)} className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs font-bold outline-none focus:border-brand-purple focus:ring-1 focus:ring-purple-200">
+                            <select value={paymentMethod} onChange={e => setPaymentMethod(e.target.value)} className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs font-bold outline-none focus:border-brand-primary focus:ring-1 focus:ring-purple-200">
                               <option value="">Select...</option>
                               <option value="UPI">UPI</option>
                               <option value="Bank Transfer">Bank Transfer</option>
@@ -665,11 +665,11 @@ export default function MyProperties({ onPropertySelect }: MyPropertiesProps) {
                           </div>
                           <div>
                             <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">Payment Date</label>
-                            <input type="date" value={paymentDate} onChange={e => setPaymentDate(e.target.value)} className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs font-bold outline-none focus:border-brand-purple focus:ring-1 focus:ring-purple-200" />
+                            <input type="date" value={paymentDate} onChange={e => setPaymentDate(e.target.value)} className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs font-bold outline-none focus:border-brand-primary focus:ring-1 focus:ring-purple-200" />
                           </div>
                           <div className="col-span-2">
                             <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">Reference Number</label>
-                            <input type="text" placeholder="Transaction ID or UPI Ref" value={referenceNumber} onChange={e => setReferenceNumber(e.target.value)} className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs font-bold outline-none focus:border-brand-purple focus:ring-1 focus:ring-purple-200" />
+                            <input type="text" placeholder="Transaction ID or UPI Ref" value={referenceNumber} onChange={e => setReferenceNumber(e.target.value)} className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs font-bold outline-none focus:border-brand-primary focus:ring-1 focus:ring-purple-200" />
                           </div>
                           <div className="col-span-2">
                             <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">Screenshot Proof</label>
@@ -701,12 +701,12 @@ export default function MyProperties({ onPropertySelect }: MyPropertiesProps) {
                       <button onClick={() => setShowPaymentModal(false)} className="flex-1 py-3 bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 font-black rounded-xl transition-colors cursor-pointer text-sm">
                         Cancel
                       </button>
-                      <button disabled={isSubmittingProof} onClick={submitProof} className="flex-1 py-3 bg-brand-purple hover:bg-purple-700 text-white font-black rounded-xl transition-colors cursor-pointer text-sm flex justify-center items-center gap-2">
+                      <button disabled={isSubmittingProof} onClick={submitProof} className="flex-1 py-3 bg-brand-purple hover:bg-[#003B1F] text-white font-black rounded-xl transition-colors cursor-pointer text-sm flex justify-center items-center gap-2">
                         {isSubmittingProof ? <><Loader2 className="w-4 h-4 animate-spin" /> Submitting...</> : 'Submit Proof'}
                       </button>
                     </>
                   ) : (
-                    <button onClick={() => setShowPaymentModal(false)} className="w-full py-3 bg-brand-purple hover:bg-purple-700 text-white font-black rounded-xl transition-colors cursor-pointer text-sm">
+                    <button onClick={() => setShowPaymentModal(false)} className="w-full py-3 bg-brand-purple hover:bg-[#003B1F] text-white font-black rounded-xl transition-colors cursor-pointer text-sm">
                       Done
                     </button>
                   )}
@@ -798,7 +798,7 @@ export default function MyProperties({ onPropertySelect }: MyPropertiesProps) {
                             ? 'border-red-500 bg-red-950/20 text-red-400 shadow-[0_0_10px_rgba(239,68,68,0.15)]'
                             : code
                             ? 'border-brand-purple bg-brand-purple/5 text-white shadow-[0_0_10px_rgba(124,58,237,0.1)]'
-                            : 'border-white/10 bg-slate-950/50 text-white focus:border-brand-purple focus:bg-slate-900'
+                            : 'border-white/10 bg-slate-950/50 text-white focus:border-brand-primary focus:bg-slate-900'
                         }`}
                       />
                       {joinState === 'error' && (
@@ -814,7 +814,7 @@ export default function MyProperties({ onPropertySelect }: MyPropertiesProps) {
                       disabled={!isFull || joinState === 'verifying'}
                       className={`h-10 px-4 rounded-lg text-[10px] font-black transition-all cursor-pointer flex items-center justify-center gap-1.5 shrink-0 ${
                         isFull && joinState !== 'verifying'
-                          ? 'bg-brand-purple text-white shadow-[0_0_15px_rgba(124,58,237,0.2)] hover:bg-purple-600'
+                          ? 'bg-brand-purple text-white shadow-[0_0_15px_rgba(1,65,28,0.12)] hover:bg-[#003B1F]'
                           : 'bg-white/5 text-slate-500 cursor-not-allowed border border-white/5'
                       }`}
                     >

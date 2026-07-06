@@ -195,13 +195,13 @@ export default function Home() {
 
   if (showPortalSelector) {
     return (
-      <PageTransitionShell className="min-h-screen flex items-center justify-center bg-[#F7F9F8] dark:bg-[#0B0F19] p-4">
+      <PageTransitionShell className="min-h-screen flex items-center justify-center bg-[#F8F5EE] dark:bg-[#06130C] p-4">
         <motion.div 
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           className="w-full max-w-md bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-8 shadow-2xl text-center"
         >
-          <div className="w-16 h-16 bg-[#DDF7EE] text-[#1D9E75] rounded-full flex items-center justify-center mx-auto mb-6">
+          <div className="w-16 h-16 bg-[#EAF3EC] text-[#01411C] rounded-full flex items-center justify-center mx-auto mb-6">
             <User className="w-8 h-8" />
           </div>
           <h2 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight mb-2">Select Your Portal</h2>
@@ -212,9 +212,9 @@ export default function Home() {
           <div className="space-y-4">
             <button 
               onClick={() => handlePortalSelect('tenant')}
-              className="w-full p-4 rounded-xl border-2 border-slate-200 dark:border-slate-800 hover:border-[#0B6E4F] hover:bg-[#DDF7EE]/30 transition-all text-left flex items-center gap-4 group"
+              className="w-full p-4 rounded-xl border-2 border-slate-200 dark:border-slate-800 hover:border-[#003B1F] hover:bg-[#EAF3EC]/30 transition-all text-left flex items-center gap-4 group"
             >
-              <div className="p-3 bg-[#DDF7EE] text-[#1D9E75] rounded-xl group-hover:bg-[#0B6E4F] group-hover:text-white transition-colors">
+              <div className="p-3 bg-[#EAF3EC] text-[#01411C] rounded-xl group-hover:bg-[#003B1F] group-hover:text-white transition-colors">
                 <HomeIcon className="w-6 h-6" />
               </div>
               <div>
@@ -225,9 +225,9 @@ export default function Home() {
 
             <button 
               onClick={() => handlePortalSelect('owner')}
-              className="w-full p-4 rounded-xl border-2 border-slate-200 dark:border-slate-800 hover:border-[#2B4162] hover:bg-[#E8EEF8]/30 transition-all text-left flex items-center gap-4 group"
+              className="w-full p-4 rounded-xl border-2 border-slate-200 dark:border-slate-800 hover:border-[#2B4162] hover:bg-[#EAF3EC]/30 transition-all text-left flex items-center gap-4 group"
             >
-              <div className="p-3 bg-[#E8EEF8] text-[#2B4162] rounded-xl group-hover:bg-[#2B4162] group-hover:text-white transition-colors">
+              <div className="p-3 bg-[#EAF3EC] text-[#2B4162] rounded-xl group-hover:bg-[#2B4162] group-hover:text-white transition-colors">
                 <Building2 className="w-6 h-6" />
               </div>
               <div>
@@ -295,7 +295,7 @@ export default function Home() {
             exit={{ opacity: 0, y: -50, x: '-50%' }}
             className="fixed top-24 left-1/2 -translate-x-1/2 z-50 bg-[#2B4162] border border-white/10 text-white px-5 py-3 rounded-2xl shadow-2xl flex items-center gap-2.5 text-xs font-bold"
           >
-            <span className="w-2 h-2 rounded-full bg-[#0F8A63] animate-pulse" />
+            <span className="w-2 h-2 rounded-full bg-[#01411C] animate-pulse" />
             <span>{toastMessage}</span>
           </motion.div>
         )}
@@ -313,7 +313,7 @@ export default function Home() {
 
       {/* Dynamic Dashboard / Discovery Grid */}
       {isAuthenticated ? (
-        <section className="w-full bg-[#F7F9F8] py-12 px-4 md:px-8 border-t border-[rgba(15,23,42,0.06)]" id="discover">
+        <section className="w-full bg-[#F8F5EE] py-12 px-4 md:px-8 border-t border-[#E3D9C8]" id="discover">
           <div className="max-w-7xl mx-auto">
             {userRole === 'owner' || userRole === 'hostel' ? (
               <OwnerDashboard onLogout={handleSignOut} />
@@ -362,7 +362,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-8 mb-8 md:mb-12 text-left">
           <div className="flex flex-col gap-4">
             <span className="text-lg font-bold text-white tracking-tight">
-              Rent<span className="text-[#1D9E75]">Edge</span>
+              Rent<span className="text-[#D4AF37]">Edge</span>
             </span>
             <p className="text-xs text-slate-500 leading-relaxed font-normal">
               India's first fintech-powered operating system for the rental economy. Zero Brokerage. Pure credit building.
@@ -395,15 +395,15 @@ export default function Home() {
             <span className="text-xs font-bold text-white uppercase tracking-wider">Contact Us</span>
             <div className="flex flex-col gap-2.5">
               <a href="mailto:support@rentedge.in" className="flex items-center gap-2 text-xs text-slate-500 hover:text-white transition-colors">
-                <Mail className="w-4 h-4 text-[#1D9E75]" />
+                <Mail className="w-4 h-4 text-[#D4AF37]" />
                 support@rentedge.in
               </a>
               <a href="tel:+918049201827" className="flex items-center gap-2 text-xs text-slate-500 hover:text-white transition-colors">
-                <Phone className="w-4 h-4 text-[#1D9E75]" />
+                <Phone className="w-4 h-4 text-[#D4AF37]" />
                 +91 80 4920 1827
               </a>
               <div className="flex items-start gap-2 text-xs text-slate-500">
-                <MapPin className="w-4 h-4 text-[#1D9E75] mt-0.5 shrink-0" />
+                <MapPin className="w-4 h-4 text-[#D4AF37] mt-0.5 shrink-0" />
                 <span>Indiranagar, Bengaluru, KA, India</span>
               </div>
             </div>

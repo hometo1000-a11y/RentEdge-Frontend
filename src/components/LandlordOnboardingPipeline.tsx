@@ -295,7 +295,7 @@ export default function LandlordOnboardingPipeline({ onLogout }: { onLogout?: ()
   };
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] dark:bg-[#0B0F19] text-[#0F172A] dark:text-slate-100 relative flex flex-col font-sans">
+    <div className="min-h-screen bg-[#F8F5EE] dark:bg-[#06130C] text-[#06130C] dark:text-slate-100 relative flex flex-col font-sans">
       
       {/* Dev Mode Notification Strip */}
       {!hasCompletedOnboarding && (
@@ -396,7 +396,7 @@ export default function LandlordOnboardingPipeline({ onLogout }: { onLogout?: ()
                         setDigioState('digilocker');
                       }, 1200);
                     }}
-                    className="w-full py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-black rounded-2xl flex items-center justify-center gap-2 transition-all cursor-pointer shadow-md shadow-emerald-500/10"
+                    className="w-full py-3.5 bg-[#01411C] hover:bg-[#003B1F] text-white text-xs font-black rounded-2xl flex items-center justify-center gap-2 transition-all cursor-pointer shadow-md shadow-sm"
                   >
                     Start Verification Session
                     <ExternalLink className="w-3.5 h-3.5" />
@@ -417,11 +417,11 @@ export default function LandlordOnboardingPipeline({ onLogout }: { onLogout?: ()
               {digioState === 'digilocker' && (
                 <m.div key="digio-digilocker" initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} className="space-y-6 text-left">
                   {/* Mock Digio Portal interface header */}
-                  <div className="bg-[#EF6C00]/10 border border-[#EF6C00]/25 rounded-2xl p-4 flex items-center justify-between">
+                  <div className="bg-[#D4AF37]/10 border border-[#D4AF37]/25 rounded-2xl p-4 flex items-center justify-between">
                     <div className="flex items-center gap-2.5">
-                      <div className="w-8 h-8 rounded-lg bg-[#EF6C00] text-white font-extrabold flex items-center justify-center text-xs">DL</div>
+                      <div className="w-8 h-8 rounded-lg bg-[#D4AF37] text-white font-extrabold flex items-center justify-center text-xs">DL</div>
                       <div>
-                        <span className="block text-xs font-black text-[#E65100]">DigiLocker KYC Gateway</span>
+                        <span className="block text-xs font-black text-[#C9A42F]">DigiLocker KYC Gateway</span>
                         <span className="block text-[8px] text-slate-400 uppercase tracking-widest">Powered by Digio Sandbox</span>
                       </div>
                     </div>
@@ -460,7 +460,7 @@ export default function LandlordOnboardingPipeline({ onLogout }: { onLogout?: ()
                       setDigioState('selfie');
                     }}
                     disabled={digioAadhaarInput.length !== 12 || digioAadhaarOtp.length !== 6}
-                    className="w-full py-3.5 bg-[#EF6C00] hover:bg-[#E65100] disabled:bg-slate-200 disabled:text-slate-400 text-white text-xs font-black rounded-2xl transition-all cursor-pointer flex items-center justify-center gap-1.5"
+                    className="w-full py-3.5 bg-[#D4AF37] hover:bg-[#C9A42F] disabled:bg-slate-200 disabled:text-slate-400 text-white text-xs font-black rounded-2xl transition-all cursor-pointer flex items-center justify-center gap-1.5"
                   >
                     Confirm DigiLocker Sync
                   </button>
@@ -554,7 +554,7 @@ export default function LandlordOnboardingPipeline({ onLogout }: { onLogout?: ()
                           idx++;
                         }, 500);
                       }}
-                      className="w-full py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-black rounded-2xl transition-all cursor-pointer flex items-center justify-center gap-1.5"
+                      className="w-full py-3.5 bg-[#01411C] hover:bg-[#003B1F] text-white text-xs font-black rounded-2xl transition-all cursor-pointer flex items-center justify-center gap-1.5"
                     >
                       Complete KYC
                       <ChevronRight className="w-4 h-4" />
@@ -573,7 +573,7 @@ export default function LandlordOnboardingPipeline({ onLogout }: { onLogout?: ()
                     <p className="text-[10px] text-slate-400 font-medium">Listening on webhook port inside mock background thread</p>
                   </div>
 
-                  <div className="bg-[#0F172A] rounded-2xl p-4 border border-white/5 font-mono text-[9px] text-slate-350 space-y-1 min-h-[140px]">
+                  <div className="bg-[#06130C] rounded-2xl p-4 border border-white/5 font-mono text-[9px] text-slate-350 space-y-1 min-h-[140px]">
                     {webhookLogs.map((log, i) => (
                       <p key={i} className={
                         log.includes('SUCCESS') || log.includes('Aarav Sharma') || log.includes('verified')
@@ -756,17 +756,17 @@ export default function LandlordOnboardingPipeline({ onLogout }: { onLogout?: ()
                 <m.div key="depositing" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-4 text-left">
                   <div>
                     <h3 className="text-sm font-black text-slate-800 flex items-center gap-2">
-                      <RefreshCw className="w-4 h-4 animate-spin text-[#008ECF]" />
+                      <RefreshCw className="w-4 h-4 animate-spin text-[#01411C]" />
                       RazorpayX Penny Drop Active...
                     </h3>
                     <p className="text-[10px] text-slate-400 font-medium">Depositing ₹1 into account to fetch true legal registration</p>
                   </div>
 
                   <div className="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
-                    <div className="bg-[#008ECF] h-full" style={{ width: `${pennyDropProgress}%` }} />
+                    <div className="bg-[#01411C] h-full" style={{ width: `${pennyDropProgress}%` }} />
                   </div>
 
-                  <div className="bg-[#0F172A] rounded-2xl p-4 border border-white/5 font-mono text-[9px] text-slate-350 space-y-1 min-h-[140px]">
+                  <div className="bg-[#06130C] rounded-2xl p-4 border border-white/5 font-mono text-[9px] text-slate-350 space-y-1 min-h-[140px]">
                     {pennyDropLogs.map((log, i) => (
                       <p key={i} className={log.includes('AARAV SHARMA') ? 'text-emerald-400' : 'text-slate-450'}>
                         &gt; {log}
@@ -816,7 +816,7 @@ export default function LandlordOnboardingPipeline({ onLogout }: { onLogout?: ()
                       setPipelineState('WIZARD');
                       setWizardStep(1);
                     }}
-                    className="w-full py-3.5 bg-gradient-to-r from-[#008ECF] to-[#7C3AED] text-white text-xs font-black rounded-2xl flex items-center justify-center gap-2 shadow-lg transition-all cursor-pointer"
+                    className="w-full py-3.5 bg-gradient-to-r from-[#01411C] to-[#01411C] text-white text-xs font-black rounded-2xl flex items-center justify-center gap-2 shadow-lg transition-all cursor-pointer"
                   >
                     Proceed to Property Listing
                     <ChevronRight className="w-4 h-4" />
@@ -1009,7 +1009,7 @@ export default function LandlordOnboardingPipeline({ onLogout }: { onLogout?: ()
                         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-indigo-50/50 via-slate-100 to-slate-200/80 pointer-events-none" />
                         
                         {/* Interactive maps layout grids */}
-                        <div className="absolute inset-0 opacity-10 bg-[linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] bg-[size:14px_24px]" />
+                        <div className="absolute inset-0 opacity-10 bg-[linear-gradient(to_right,#4B554F_1px,transparent_1px),linear-gradient(to_bottom,#4B554F_1px,transparent_1px)] bg-[size:14px_24px]" />
 
                         <div className="relative flex flex-col items-center gap-1.5 z-10 text-slate-600">
                           <MapPin className="w-8 h-8 text-indigo-600 animate-bounce" />
@@ -1178,7 +1178,7 @@ export default function LandlordOnboardingPipeline({ onLogout }: { onLogout?: ()
                   <button
                     type="button"
                     onClick={handlePublishProperty}
-                    className="px-6 py-3 bg-[#10B981] hover:bg-[#059669] text-white text-xs font-black rounded-xl transition-colors cursor-pointer flex items-center gap-1.5 shadow-md shadow-emerald-500/10 animate-pulse"
+                    className="px-6 py-3 bg-[#01411C] hover:bg-[#01411C] text-white text-xs font-black rounded-xl transition-colors cursor-pointer flex items-center gap-1.5 shadow-md shadow-sm animate-pulse"
                   >
                     <Compass className="w-4 h-4" />
                     Publish to Live Network

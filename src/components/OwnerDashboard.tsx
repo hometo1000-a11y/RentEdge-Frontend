@@ -607,7 +607,7 @@ export default function OwnerDashboard({ onLogout, onSwitchToTenant }: OwnerDash
 
 
   return (
-    <div className="flex min-h-screen bg-[#F8F9FA] text-slate-800 transition-colors duration-300">
+    <div className="flex min-h-screen bg-[#F8F5EE] text-slate-800 transition-colors duration-300">
       
       {/* Toast Reminder Alert */}
       <AnimatePresence>
@@ -793,7 +793,7 @@ export default function OwnerDashboard({ onLogout, onSwitchToTenant }: OwnerDash
                         <input 
                           type="text" 
                           placeholder="Search tenant..." 
-                          className="w-full pl-9 pr-3 py-2.5 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-xl text-xs font-bold outline-none focus:border-brand-purple focus:bg-white dark:focus:bg-slate-800 transition-colors"
+                          className="w-full pl-9 pr-3 py-2.5 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-xl text-xs font-bold outline-none focus:border-brand-primary focus:bg-white dark:focus:bg-slate-800 transition-colors"
                         />
                       </div>
                       
@@ -1124,7 +1124,7 @@ export default function OwnerDashboard({ onLogout, onSwitchToTenant }: OwnerDash
                         required 
                         value={agreementTenant}
                         onChange={(e) => setAgreementTenant(e.target.value)}
-                        className="w-full bg-white/5 border border-white/10 focus:border-brand-purple rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none transition-colors font-bold"
+                        className="w-full bg-white/5 border border-white/10 focus:border-brand-primary rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none transition-colors font-bold"
                         placeholder="Tenant Name"
                       />
                     </div>
@@ -1135,7 +1135,7 @@ export default function OwnerDashboard({ onLogout, onSwitchToTenant }: OwnerDash
                         required 
                         value={agreementProperty}
                         onChange={(e) => setAgreementProperty(e.target.value)}
-                        className="w-full bg-white/5 border border-white/10 focus:border-brand-purple rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none transition-colors font-bold"
+                        className="w-full bg-white/5 border border-white/10 focus:border-brand-primary rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none transition-colors font-bold"
                         placeholder="Property Name"
                       />
                     </div>
@@ -1192,7 +1192,7 @@ export default function OwnerDashboard({ onLogout, onSwitchToTenant }: OwnerDash
       </AnimatePresence>
 
       {/* ─── Mobile Bottom Nav ──────────────────────────── */}
-      <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 dark:bg-[#101420]/95 backdrop-blur-xl border-t border-slate-200/80 dark:border-white/5 pt-2.5 pb-safe px-4 flex items-center justify-around shadow-[0_-8px_30px_rgba(0,0,0,0.08)]">
+      <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 dark:bg-[#0B1F14]/95 backdrop-blur-xl border-t border-slate-200/80 dark:border-white/5 pt-2.5 pb-safe px-4 flex items-center justify-around shadow-[0_-8px_30px_rgba(0,0,0,0.08)]">
         {navigationItems.map((item) => {
           const Icon = item.icon;
           const isActive = activeTab === item.id;

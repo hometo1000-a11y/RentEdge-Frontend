@@ -29,7 +29,7 @@ export default function OwnerCard({ property, displayedPhone, isUnlocked }: Owne
         <div className="flex items-center gap-3">
           {/* Avatar */}
           <div className="w-11 h-11 rounded-full bg-brand-purple/10 dark:bg-brand-purple/20 border border-brand-purple/20 dark:border-brand-purple/30 flex items-center justify-center shrink-0">
-            <span className="text-brand-purple dark:text-[#A78BFA] font-black text-xs">{initials}</span>
+            <span className="text-brand-purple dark:text-[#D4AF37] font-black text-xs">{initials}</span>
           </div>
           <div>
             <p className="text-sm font-black text-slate-800 dark:text-white flex items-center gap-1.5">

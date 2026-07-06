@@ -16,7 +16,7 @@ export default function PricingCard({ property }: PricingCardProps) {
   const maintenance = (property.details?.maintenance_charges as number) || 0;
 
   return (
-    <div className="bg-white dark:bg-[#101420] border border-slate-200/80 dark:border-white/5 rounded-2xl p-5 space-y-4 shadow-sm">
+    <div className="bg-white dark:bg-[#0B1F14] border border-slate-200/80 dark:border-white/5 rounded-2xl p-5 space-y-4 shadow-sm">
       {/* Rent — Hero Element */}
       {property.type === 'PG' && property.details ? (
         <div className="text-left space-y-3">

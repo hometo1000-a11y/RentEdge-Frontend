@@ -242,7 +242,7 @@ export default function Listings({ onEnquire }: { onEnquire?: (property: Propert
             placeholder="Min" 
             value={filters.min_rent}
             onChange={(e) => updateFilter('min_rent', e.target.value)}
-            className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:border-brand-purple transition-colors"
+            className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:border-brand-primary transition-colors"
           />
           <span className="text-slate-400 font-bold">-</span>
           <input 
@@ -250,7 +250,7 @@ export default function Listings({ onEnquire }: { onEnquire?: (property: Propert
             placeholder="Max" 
             value={filters.max_rent}
             onChange={(e) => updateFilter('max_rent', e.target.value)}
-            className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:border-brand-purple transition-colors"
+            className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:border-brand-primary transition-colors"
           />
         </div>
       </div>
@@ -421,7 +421,7 @@ export default function Listings({ onEnquire }: { onEnquire?: (property: Propert
                 placeholder="Min Area" 
                 value={filters.min_area}
                 onChange={(e) => updateFilter('min_area', e.target.value)}
-                className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:border-brand-purple"
+                className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:border-brand-primary"
               />
               <span className="text-slate-400 font-bold">-</span>
               <input 
@@ -429,7 +429,7 @@ export default function Listings({ onEnquire }: { onEnquire?: (property: Propert
                 placeholder="Max Area" 
                 value={filters.max_area}
                 onChange={(e) => updateFilter('max_area', e.target.value)}
-                className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:border-brand-purple"
+                className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:border-brand-primary"
               />
             </div>
           </div>
@@ -498,7 +498,7 @@ export default function Listings({ onEnquire }: { onEnquire?: (property: Propert
                 placeholder="Search by locality, building, or city..."
                 value={filters.q}
                 onChange={(e) => updateFilter('q', e.target.value)}
-                className="w-full pl-12 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-sm font-medium outline-none focus:bg-white focus:border-brand-purple focus:ring-2 focus:ring-brand-purple/20 transition-all shadow-inner"
+                className="w-full pl-12 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-sm font-medium outline-none focus:bg-white focus:border-brand-primary focus:ring-2 focus:ring-brand-purple/20 transition-all shadow-inner"
               />
             </div>
 

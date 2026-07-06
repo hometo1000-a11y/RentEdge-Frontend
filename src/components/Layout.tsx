@@ -24,6 +24,7 @@ import {
   CreditCard,
   Building
 } from 'lucide-react';
+import Image from 'next/image';
 
 interface LayoutProps {
   children?: React.ReactNode;
@@ -243,7 +244,7 @@ export default function RentEdgeLayout({ children, onLogout }: LayoutProps) {
   };
 
   return (
-    <div className="min-h-screen bg-[#F8F9FA] dark:bg-[#0B0F19] text-[#0F172A] dark:text-slate-100 font-sans antialiased relative overflow-x-hidden">
+    <div className="min-h-screen bg-[#F8F5EE] dark:bg-[#06130C] text-[#111111] dark:text-slate-100 font-sans antialiased relative overflow-x-hidden">
       
       {/* TOAST SYSTEM */}
       <div className="fixed top-20 right-4 z-50 flex flex-col gap-2 pointer-events-none">
@@ -260,7 +261,7 @@ export default function RentEdgeLayout({ children, onLogout }: LayoutProps) {
                   : 'bg-red-500 border-red-600 text-white'
               }`}
             >
-              <div className={`w-2 h-2 rounded-full ${toast.type === 'success' ? 'bg-[#10B981] animate-pulse' : 'bg-white'}`} />
+              <div className={`w-2 h-2 rounded-full ${toast.type === 'success' ? 'bg-[#01411C] animate-pulse' : 'bg-white'}`} />
               <span>{toast.message}</span>
               <button
                 onClick={() => setToasts((prev) => prev.filter((t) => t.id !== toast.id))}
@@ -274,22 +275,23 @@ export default function RentEdgeLayout({ children, onLogout }: LayoutProps) {
       </div>
 
       {/* DESKTOP SIDEBAR */}
-      <aside className="hidden md:flex fixed top-0 left-0 bottom-0 w-[260px] bg-[#0F172A] text-slate-300 flex-col justify-between border-r border-slate-800 z-30">
+      <aside className="hidden md:flex fixed top-0 left-0 bottom-0 w-[260px] bg-[#06130C] text-slate-300 flex-col justify-between border-r border-[#1F3A2B] z-30">
         <div>
           {/* Logo Area */}
-          <div className="p-6 flex items-center gap-3 border-b border-slate-800/60">
-            <div className="relative flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-[#7C3AED] to-[#4F46E5] text-white font-black shadow-lg">
-              <span className="text-base tracking-tighter">RE</span>
-              <span className="absolute -top-0.5 -right-0.5 flex h-2.5 w-2.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#10B981] opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#10B981]"></span>
-              </span>
-            </div>
+          <div className="p-6 flex items-center gap-3 border-b border-[#1F3A2B]/60">
+            <Image
+              src="/logo-dark.svg"
+              alt="RentEdge Logo"
+              width={36}
+              height={36}
+              className="w-9 h-9 rounded-xl"
+              priority
+            />
             <div>
               <span className="text-lg font-black tracking-tight text-white block">
-                Rent<span className="text-[#A78BFA]">Edge</span>
+                Rent<span className="text-[#D4AF37]">Edge</span>
               </span>
-              <span className="text-[9px] uppercase tracking-wider font-extrabold text-slate-500">
+              <span className="text-[9px] uppercase tracking-wider font-extrabold text-[#6B7F72]">
                 Landlord Node v1.4
               </span>
             </div>
@@ -315,7 +317,7 @@ export default function RentEdgeLayout({ children, onLogout }: LayoutProps) {
                   {isActive && (
                     <motion.div
                       layoutId="sidebarActivePill"
-                      className="absolute inset-0 bg-[#7C3AED]/20 border-l-4 border-[#7C3AED] rounded-xl -z-10"
+                      className="absolute inset-0 bg-[#01411C]/20 border-l-4 border-[#01411C] rounded-xl -z-10"
                       transition={{ type: 'spring', stiffness: 350, damping: 28 }}
                     />
                   )}
@@ -329,7 +331,7 @@ export default function RentEdgeLayout({ children, onLogout }: LayoutProps) {
                     />
                   )}
 
-                  <Icon className={`w-5 h-5 transition-transform duration-200 ${isActive ? 'text-[#A78BFA] scale-105' : 'text-slate-400'}`} />
+                  <Icon className={`w-5 h-5 transition-transform duration-200 ${isActive ? 'text-[#D4AF37] scale-105' : 'text-slate-400'}`} />
                   <span>{tab.label}</span>
                 </button>
               );
@@ -338,11 +340,11 @@ export default function RentEdgeLayout({ children, onLogout }: LayoutProps) {
         </div>
 
         {/* Sidebar Footer (Avatar & LogOut) */}
-        <div className="p-4 border-t border-slate-800/60 bg-slate-950/40">
+        <div className="p-4 border-t border-[#1F3A2B]/60 bg-[#06130C]/40">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-[#7C3AED] to-[#10B981] p-[2px] shadow-md">
-                <div className="w-full h-full bg-[#0F172A] rounded-full flex items-center justify-center font-bold text-white text-xs">
+              <div className="w-10 h-10 rounded-full bg-[#01411C] p-[2px] shadow-md">
+                <div className="w-full h-full bg-[#06130C] rounded-full flex items-center justify-center font-bold text-white text-xs">
                   RP
                 </div>
               </div>
@@ -371,9 +373,13 @@ export default function RentEdgeLayout({ children, onLogout }: LayoutProps) {
         {/* Left Side: Page Title */}
         <div className="flex items-center gap-3">
           {/* Logo element visible only on mobile */}
-          <div className="md:hidden flex items-center justify-center w-7 h-7 rounded-lg bg-[#0F172A] text-white font-bold text-xs mr-1 shadow-sm">
-            RE
-          </div>
+          <Image
+            src="/logo-light.svg"
+            alt="RentEdge Logo"
+            width={28}
+            height={28}
+            className="md:hidden w-7 h-7 rounded-lg mr-1"
+          />
           <h1 className="text-base md:text-xl font-extrabold tracking-tight text-slate-900 font-sans">
             {getHeaderTitle()}
           </h1>
@@ -399,7 +405,7 @@ export default function RentEdgeLayout({ children, onLogout }: LayoutProps) {
           {/* THE BIG BUTTON CONCEPT */}
           <button
             onClick={() => setActiveModal(getBigButtonInfo().id)}
-            className="inline-flex items-center gap-1.5 px-4 py-2 bg-[#7C3AED] hover:bg-[#6D28D9] active:scale-95 text-white text-xs font-bold rounded-xl shadow-lg shadow-purple-500/20 hover:shadow-purple-500/30 transition-all duration-200 cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-4 py-2 bg-[#01411C] hover:bg-[#003B1F] active:scale-95 text-white text-xs font-bold rounded-xl shadow-lg transition-all duration-200 cursor-pointer"
           >
             <Plus className="w-4 h-4 stroke-[3px]" />
             <span className="hidden sm:inline">{getBigButtonInfo().label}</span>
@@ -423,7 +429,7 @@ export default function RentEdgeLayout({ children, onLogout }: LayoutProps) {
               {isActive && (
                 <motion.div
                   layoutId="mobileActivePill"
-                  className="absolute inset-x-2 inset-y-1.5 bg-[#7C3AED]/10 rounded-2xl -z-10"
+                  className="absolute inset-x-2 inset-y-1.5 bg-[#01411C]/10 rounded-2xl -z-10"
                   transition={{ type: 'spring', stiffness: 350, damping: 28 }}
                 />
               )}
@@ -432,13 +438,13 @@ export default function RentEdgeLayout({ children, onLogout }: LayoutProps) {
               {isActive && (
                 <motion.div
                   layoutId="mobileActiveIndicator"
-                  className="absolute top-0 w-8 h-1 bg-[#7C3AED] rounded-full shadow-[0_0_10px_rgba(124,58,237,0.5)]"
+                  className="absolute top-0 w-8 h-1 bg-[#01411C] rounded-full shadow-[0_0_10px_rgba(124,58,237,0.5)]"
                   transition={{ type: 'spring', stiffness: 350, damping: 28 }}
                 />
               )}
 
-              <Icon className={`w-5 h-5 transition-all duration-250 ${isActive ? 'text-[#7C3AED] scale-110' : 'text-slate-400'}`} />
-              <span className={`text-[10px] font-bold mt-1 tracking-wide transition-colors duration-250 ${isActive ? 'text-[#7C3AED]' : 'text-slate-500/70'}`}>
+              <Icon className={`w-5 h-5 transition-all duration-250 ${isActive ? 'text-[#01411C] scale-110' : 'text-slate-400'}`} />
+              <span className={`text-[10px] font-bold mt-1 tracking-wide transition-colors duration-250 ${isActive ? 'text-[#01411C]' : 'text-slate-500/70'}`}>
                 {tab.label}
               </span>
             </button>
@@ -468,7 +474,7 @@ export default function RentEdgeLayout({ children, onLogout }: LayoutProps) {
             >
               <div className="p-4 border-b border-slate-100 flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <Bell className="w-4.5 h-4.5 text-[#7C3AED]" />
+                  <Bell className="w-4.5 h-4.5 text-[#01411C]" />
                   <span className="font-bold text-sm text-slate-800">Notifications</span>
                   {unreadCount > 0 && (
                     <span className="bg-red-100 text-red-600 text-[10px] font-extrabold px-2 py-0.5 rounded-full">
@@ -480,7 +486,7 @@ export default function RentEdgeLayout({ children, onLogout }: LayoutProps) {
                   {unreadCount > 0 && (
                     <button
                       onClick={handleMarkAllRead}
-                      className="text-[10px] font-bold text-[#7C3AED] hover:underline"
+                      className="text-[10px] font-bold text-[#01411C] hover:underline"
                     >
                       Mark all read
                     </button>
@@ -508,17 +514,17 @@ export default function RentEdgeLayout({ children, onLogout }: LayoutProps) {
                     }}
                     className={`p-3.5 rounded-2xl border transition-all cursor-pointer ${
                       item.unread
-                        ? 'bg-[#7C3AED]/5 border-[#7C3AED]/20 shadow-xs'
+                        ? 'bg-[#01411C]/5 border-[#01411C]/20 shadow-xs'
                         : 'bg-slate-50/50 border-slate-100'
-                    } hover:border-[#7C3AED]/30`}
+                    } hover:border-[#01411C]/30`}
                   >
                     <div className="flex justify-between items-start gap-2">
                       <span className={`text-[11px] font-extrabold tracking-tight ${
                         item.type === 'alert'
                           ? 'text-red-500'
                           : item.type === 'success'
-                          ? 'text-[#10B981]'
-                          : 'text-[#7C3AED]'
+                          ? 'text-[#01411C]'
+                          : 'text-[#01411C]'
                       }`}>
                         {item.title}
                       </span>
@@ -534,7 +540,7 @@ export default function RentEdgeLayout({ children, onLogout }: LayoutProps) {
                           addToast('UPI Autopay reminder dispatched successfully!', 'success');
                           handleNotificationClick('1');
                         }}
-                        className="mt-2.5 px-3 py-1 bg-[#7C3AED] text-white text-[9px] font-extrabold rounded-lg hover:bg-purple-700 transition-colors"
+                        className="mt-2.5 px-3 py-1 bg-[#01411C] text-white text-[9px] font-extrabold rounded-lg hover:bg-brand-primary-hover transition-colors"
                       >
                         Nudge Now
                       </button>
@@ -573,11 +579,11 @@ export default function RentEdgeLayout({ children, onLogout }: LayoutProps) {
                 {activeTab === 'dashboard' && (
                   <div className="space-y-6">
                     {/* Welcome Banner */}
-                    <div className="relative bg-[#0F172A] rounded-3xl p-6 text-white overflow-hidden shadow-xl border border-white/5">
-                      <div className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-bl from-[#7C3AED]/25 via-indigo-600/5 to-transparent rounded-full pointer-events-none -mr-20 -mt-20" />
+                    <div className="relative bg-[#06130C] rounded-3xl p-6 text-white overflow-hidden shadow-xl border border-[#1F3A2B]">
+                      <div className="absolute top-0 right-0 w-80 h-80 bg-[#01411C]/10 rounded-full pointer-events-none -mr-20 -mt-20" />
                       <div className="relative z-10 space-y-2">
-                        <div className="inline-flex items-center gap-1 bg-[#7C3AED]/30 text-[#A78BFA] px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider border border-[#7C3AED]/30">
-                          <Sparkles className="w-3 h-3 text-[#A78BFA]" />
+                        <div className="inline-flex items-center gap-1 bg-[#01411C]/30 text-[#D4AF37] px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider border border-[#01411C]/30">
+                          <Sparkles className="w-3 h-3 text-[#D4AF37]" />
                           Fintech Compliance Active
                         </div>
                         <h2 className="text-xl sm:text-2xl font-black tracking-tight">
@@ -593,7 +599,7 @@ export default function RentEdgeLayout({ children, onLogout }: LayoutProps) {
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
                       
                       {/* Metric 1 */}
-                      <div className="bg-white p-5 rounded-2xl border border-slate-200/50 shadow-sm flex flex-col justify-between hover:shadow-md hover:border-[#7C3AED]/20 transition-all duration-300">
+                      <div className="bg-white p-5 rounded-2xl border border-slate-200/50 shadow-sm flex flex-col justify-between hover:shadow-md hover:border-[#01411C]/20 transition-all duration-300">
                         <div>
                           <span className="block text-[10px] uppercase font-bold tracking-wider text-slate-400">
                             Expected Collection
@@ -609,7 +615,7 @@ export default function RentEdgeLayout({ children, onLogout }: LayoutProps) {
                         </div>
                         <div className="mt-4 flex items-center justify-between pt-3 border-t border-slate-50">
                           <span className="text-[10px] text-slate-500 font-bold">Monthly target rate</span>
-                          <span className="inline-flex items-center gap-0.5 text-[9px] font-bold text-[#10B981] bg-emerald-50 px-2 py-0.5 rounded-full">
+                          <span className="inline-flex items-center gap-0.5 text-[9px] font-bold text-[#01411C] bg-emerald-50 px-2 py-0.5 rounded-full">
                             <TrendingUp className="w-3 h-3" />
                             +100% Reach
                           </span>
@@ -617,13 +623,13 @@ export default function RentEdgeLayout({ children, onLogout }: LayoutProps) {
                       </div>
 
                       {/* Metric 2 */}
-                      <div className="bg-white p-5 rounded-2xl border border-slate-200/50 shadow-sm flex flex-col justify-between hover:shadow-md hover:border-[#7C3AED]/20 transition-all duration-300">
+                      <div className="bg-white p-5 rounded-2xl border border-slate-200/50 shadow-sm flex flex-col justify-between hover:shadow-md hover:border-[#01411C]/20 transition-all duration-300">
                         <div>
                           <span className="block text-[10px] uppercase font-bold tracking-wider text-slate-400">
                             Collected (UPI Rails)
                           </span>
                           <div className="flex items-baseline gap-2 mt-1.5">
-                            <span className="text-2xl font-black text-[#10B981] tracking-tight font-mono">
+                            <span className="text-2xl font-black text-[#01411C] tracking-tight font-mono">
                               ₹2,45,000
                             </span>
                             <span className="text-[10px] text-slate-400 font-bold">
@@ -633,14 +639,14 @@ export default function RentEdgeLayout({ children, onLogout }: LayoutProps) {
                         </div>
                         <div className="mt-4 flex items-center justify-between pt-3 border-t border-slate-50">
                           <div className="w-24 bg-slate-100 h-1.5 rounded-full overflow-hidden">
-                            <div className="bg-[#10B981] h-full rounded-full" style={{ width: '87.5%' }} />
+                            <div className="bg-[#01411C] h-full rounded-full" style={{ width: '87.5%' }} />
                           </div>
                           <span className="text-[10px] text-slate-500 font-bold">3 of 4 Renters</span>
                         </div>
                       </div>
 
                       {/* Metric 3 */}
-                      <div className="bg-white p-5 rounded-2xl border border-slate-200/50 shadow-sm flex flex-col justify-between hover:shadow-md hover:border-[#7C3AED]/20 transition-all duration-300">
+                      <div className="bg-white p-5 rounded-2xl border border-slate-200/50 shadow-sm flex flex-col justify-between hover:shadow-md hover:border-[#01411C]/20 transition-all duration-300">
                         <div>
                           <span className="block text-[10px] uppercase font-bold tracking-wider text-slate-400">
                             Outstanding Dues
@@ -662,7 +668,7 @@ export default function RentEdgeLayout({ children, onLogout }: LayoutProps) {
                             onClick={() => {
                               addToast('UPI Autopay remainder dispatched successfully!', 'success');
                             }}
-                            className="text-[10px] font-extrabold text-[#7C3AED] hover:underline"
+                            className="text-[10px] font-extrabold text-[#01411C] hover:underline"
                           >
                             Nudge UPI
                           </button>
@@ -682,7 +688,7 @@ export default function RentEdgeLayout({ children, onLogout }: LayoutProps) {
                           </span>
                           <button
                             onClick={() => setActiveTab('tenants')}
-                            className="text-xs font-bold text-[#7C3AED] hover:underline"
+                            className="text-xs font-bold text-[#01411C] hover:underline"
                           >
                             View All
                           </button>
@@ -713,9 +719,9 @@ export default function RentEdgeLayout({ children, onLogout }: LayoutProps) {
                                     <td className="py-3.5 font-mono text-slate-800">{tenant.rent}</td>
                                     <td className="py-3.5">
                                       <span className={`inline-flex items-center gap-0.5 text-[10px] font-bold ${
-                                        tenant.score >= 740 ? 'text-[#7C3AED]' : 'text-slate-600'
+                                        tenant.score >= 740 ? 'text-[#01411C]' : 'text-slate-600'
                                       }`}>
-                                        <Sparkles className="w-3 h-3 text-[#A78BFA]" />
+                                        <Sparkles className="w-3 h-3 text-[#D4AF37]" />
                                         {tenant.score}
                                       </span>
                                     </td>
@@ -730,7 +736,7 @@ export default function RentEdgeLayout({ children, onLogout }: LayoutProps) {
                                           Remind
                                         </button>
                                       ) : (
-                                        <span className="inline-flex items-center px-1.5 py-0.5 rounded-full text-[9px] font-bold bg-emerald-50 text-[#10B981] uppercase">
+                                        <span className="inline-flex items-center px-1.5 py-0.5 rounded-full text-[9px] font-bold bg-emerald-50 text-[#01411C] uppercase">
                                           Paid
                                         </span>
                                       )}
@@ -757,8 +763,8 @@ export default function RentEdgeLayout({ children, onLogout }: LayoutProps) {
                         
                         <div className="space-y-3">
                           
-                          <div className="p-3 bg-[#7C3AED]/5 border border-[#7C3AED]/10 rounded-xl space-y-1">
-                            <div className="flex items-center gap-1.5 text-xs font-bold text-[#7C3AED]">
+                          <div className="p-3 bg-[#01411C]/5 border border-[#01411C]/10 rounded-xl space-y-1">
+                            <div className="flex items-center gap-1.5 text-xs font-bold text-[#01411C]">
                               <Sparkles className="w-4 h-4" />
                               <span>Rent Score Hub</span>
                             </div>
@@ -813,7 +819,7 @@ export default function RentEdgeLayout({ children, onLogout }: LayoutProps) {
                       {propertiesList.map((prop) => (
                         <div
                           key={prop.id}
-                          className="bg-white rounded-3xl overflow-hidden border border-slate-200/50 shadow-sm hover:shadow-md hover:border-[#7C3AED]/20 transition-all duration-300 flex flex-col group"
+                          className="bg-white rounded-3xl overflow-hidden border border-slate-200/50 shadow-sm hover:shadow-md hover:border-[#01411C]/20 transition-all duration-300 flex flex-col group"
                         >
                           <div className="h-44 w-full bg-slate-100 relative overflow-hidden">
                             <img
@@ -821,7 +827,7 @@ export default function RentEdgeLayout({ children, onLogout }: LayoutProps) {
                               alt={prop.name}
                               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                             />
-                            <div className="absolute top-3 right-3 bg-[#0F172A]/80 backdrop-blur-md text-white text-[10px] font-extrabold px-2.5 py-1 rounded-full border border-white/10">
+                            <div className="absolute top-3 right-3 bg-[#06130C]/80 backdrop-blur-md text-white text-[10px] font-extrabold px-2.5 py-1 rounded-full border border-white/10">
                               {prop.units}
                             </div>
                           </div>
@@ -873,7 +879,7 @@ export default function RentEdgeLayout({ children, onLogout }: LayoutProps) {
                       {tenantsList.map((tenant) => (
                         <div
                           key={tenant.id}
-                          className="bg-white p-5 rounded-3xl border border-slate-200/50 shadow-sm flex flex-col justify-between space-y-4 hover:shadow-md hover:border-[#7C3AED]/20 transition-all duration-300"
+                          className="bg-white p-5 rounded-3xl border border-slate-200/50 shadow-sm flex flex-col justify-between space-y-4 hover:shadow-md hover:border-[#01411C]/20 transition-all duration-300"
                         >
                           <div className="flex justify-between items-start">
                             <div className="flex items-center gap-3">
@@ -882,7 +888,7 @@ export default function RentEdgeLayout({ children, onLogout }: LayoutProps) {
                               </div>
                               <div>
                                 <h4 className="font-extrabold text-sm text-slate-800">{tenant.name}</h4>
-                                <span className="inline-flex items-center gap-1 px-2 py-0.5 mt-0.5 rounded-full text-[9px] font-bold bg-[#7C3AED]/10 text-[#7C3AED] uppercase">
+                                <span className="inline-flex items-center gap-1 px-2 py-0.5 mt-0.5 rounded-full text-[9px] font-bold bg-[#01411C]/10 text-[#01411C] uppercase">
                                   Score: {tenant.score}
                                 </span>
                               </div>
@@ -890,7 +896,7 @@ export default function RentEdgeLayout({ children, onLogout }: LayoutProps) {
                             
                             <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[9px] font-extrabold uppercase ${
                               tenant.status === 'Cleared'
-                                ? 'bg-emerald-50 text-[#10B981]'
+                                ? 'bg-emerald-50 text-[#01411C]'
                                 : 'bg-amber-50 text-amber-600'
                             }`}>
                               {tenant.status}
@@ -966,16 +972,16 @@ export default function RentEdgeLayout({ children, onLogout }: LayoutProps) {
 
                           {/* SVG Path Sparkline */}
                           <div className="w-full h-full pl-8 pr-4 py-2 relative">
-                            <svg className="w-full h-full text-[#7C3AED]" viewBox="0 0 100 50" preserveAspectRatio="none">
+                            <svg className="w-full h-full text-[#01411C]" viewBox="0 0 100 50" preserveAspectRatio="none">
                               {/* Grid lines */}
-                              <line x1="0" y1="12.5" x2="100" y2="12.5" stroke="#E2E8F0" strokeWidth="0.5" strokeDasharray="3,3" />
-                              <line x1="0" y1="25" x2="100" y2="25" stroke="#E2E8F0" strokeWidth="0.5" strokeDasharray="3,3" />
-                              <line x1="0" y1="37.5" x2="100" y2="37.5" stroke="#E2E8F0" strokeWidth="0.5" strokeDasharray="3,3" />
+                              <line x1="0" y1="12.5" x2="100" y2="12.5" stroke="#E3D9C8" strokeWidth="0.5" strokeDasharray="3,3" />
+                              <line x1="0" y1="25" x2="100" y2="25" stroke="#E3D9C8" strokeWidth="0.5" strokeDasharray="3,3" />
+                              <line x1="0" y1="37.5" x2="100" y2="37.5" stroke="#E3D9C8" strokeWidth="0.5" strokeDasharray="3,3" />
                               
                               <defs>
                                 <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
-                                  <stop offset="0%" stopColor="#7C3AED" stopOpacity="0.25" />
-                                  <stop offset="100%" stopColor="#7C3AED" stopOpacity="0.0" />
+                                  <stop offset="0%" stopColor="#01411C" stopOpacity="0.25" />
+                                  <stop offset="100%" stopColor="#01411C" stopOpacity="0.0" />
                                 </linearGradient>
                               </defs>
                               
@@ -994,7 +1000,7 @@ export default function RentEdgeLayout({ children, onLogout }: LayoutProps) {
                             </svg>
                             
                             {/* Points */}
-                            <div className="absolute top-1/4 right-[2%] w-2 h-2 rounded-full bg-[#10B981] border border-white ring-4 ring-[#10B981]/25 animate-pulse" />
+                            <div className="absolute top-1/4 right-[2%] w-2 h-2 rounded-full bg-[#01411C] border border-white ring-4 ring-[#01411C]/25 animate-pulse" />
                           </div>
                         </div>
 
@@ -1005,8 +1011,8 @@ export default function RentEdgeLayout({ children, onLogout }: LayoutProps) {
                       </div>
 
                       {/* Summary Info */}
-                      <div className="bg-[#0F172A] text-white p-5 rounded-3xl border border-white/5 shadow-xl flex flex-col justify-between space-y-6 relative overflow-hidden">
-                        <div className="absolute bottom-0 right-0 w-44 h-44 bg-gradient-to-tr from-[#10B981]/15 to-transparent rounded-full -mr-12 -mb-12" />
+                      <div className="bg-[#06130C] text-white p-5 rounded-3xl border border-[#1F3A2B] shadow-xl flex flex-col justify-between space-y-6 relative overflow-hidden">
+                        <div className="absolute bottom-0 right-0 w-44 h-44 bg-[#01411C]/10 rounded-full -mr-12 -mb-12" />
                         
                         <div className="space-y-3.5 relative z-10">
                           <span className="block text-[10px] text-slate-400 font-bold uppercase tracking-wider">UPI Auto Settlement</span>
@@ -1047,12 +1053,12 @@ export default function RentEdgeLayout({ children, onLogout }: LayoutProps) {
                         {paymentsList.map((pay) => (
                           <div
                             key={pay.id}
-                            className="flex flex-col sm:flex-row sm:items-center justify-between p-3.5 rounded-2xl border border-slate-100 hover:border-[#7C3AED]/20 transition-all duration-200 gap-3"
+                            className="flex flex-col sm:flex-row sm:items-center justify-between p-3.5 rounded-2xl border border-slate-100 hover:border-[#01411C]/20 transition-all duration-200 gap-3"
                           >
                             <div className="flex items-center gap-3">
                               <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${
                                 pay.status === 'Settled'
-                                  ? 'bg-emerald-50 text-[#10B981]'
+                                  ? 'bg-emerald-50 text-[#01411C]'
                                   : 'bg-red-50 text-red-500'
                               }`}>
                                 <CreditCard className="w-4 h-4" />
@@ -1067,7 +1073,7 @@ export default function RentEdgeLayout({ children, onLogout }: LayoutProps) {
                               <span className="font-mono text-xs font-black text-slate-800">{pay.amount}</span>
                               <span className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[9px] font-extrabold uppercase ${
                                 pay.status === 'Settled'
-                                  ? 'bg-emerald-50 text-[#10B981]'
+                                  ? 'bg-emerald-50 text-[#01411C]'
                                   : 'bg-red-50 text-red-500'
                               }`}>
                                 {pay.status}
@@ -1108,12 +1114,12 @@ export default function RentEdgeLayout({ children, onLogout }: LayoutProps) {
                 animate={{ scale: 1, opacity: 1, y: 0 }}
                 exit={{ scale: 0.95, opacity: 0, y: 15 }}
                 transition={{ type: 'spring', damping: 25, stiffness: 220 }}
-                className="pointer-events-auto bg-[#0F172A] border border-white/10 text-white rounded-3xl p-6 max-w-md w-full shadow-2xl relative overflow-hidden space-y-4"
+                className="pointer-events-auto bg-[#06130C] border border-white/10 text-white rounded-3xl p-6 max-w-md w-full shadow-2xl relative overflow-hidden space-y-4"
               >
                 {/* Modal Title Banner */}
                 <div className="flex justify-between items-start">
                   <div className="flex items-center gap-2.5">
-                    <div className="p-2 bg-white/10 rounded-xl text-[#A78BFA]">
+                    <div className="p-2 bg-white/10 rounded-xl text-[#D4AF37]">
                       {activeModal === 'add-property' && <Building2 className="w-5 h-5" />}
                       {activeModal === 'add-unit' && <Building className="w-5 h-5" />}
                       {activeModal === 'add-tenant' && <Users className="w-5 h-5" />}
@@ -1151,7 +1157,7 @@ export default function RentEdgeLayout({ children, onLogout }: LayoutProps) {
                         required
                         value={newProperty.name}
                         onChange={(e) => setNewProperty({ ...newProperty, name: e.target.value })}
-                        className="w-full bg-white/5 border border-white/10 focus:border-[#7C3AED] rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none transition-colors"
+                        className="w-full bg-white/5 border border-white/10 focus:border-[#01411C] rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none transition-colors"
                         placeholder="e.g. Prestige Heights Apartment"
                       />
                     </div>
@@ -1164,7 +1170,7 @@ export default function RentEdgeLayout({ children, onLogout }: LayoutProps) {
                         required
                         value={newProperty.location}
                         onChange={(e) => setNewProperty({ ...newProperty, location: e.target.value })}
-                        className="w-full bg-white/5 border border-white/10 focus:border-[#7C3AED] rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none transition-colors"
+                        className="w-full bg-white/5 border border-white/10 focus:border-[#01411C] rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none transition-colors"
                         placeholder="e.g. Koramangala, Bengaluru"
                       />
                     </div>
@@ -1177,7 +1183,7 @@ export default function RentEdgeLayout({ children, onLogout }: LayoutProps) {
                           type="number"
                           value={newProperty.units}
                           onChange={(e) => setNewProperty({ ...newProperty, units: e.target.value })}
-                          className="w-full bg-white/5 border border-white/10 focus:border-[#7C3AED] rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none transition-colors"
+                          className="w-full bg-white/5 border border-white/10 focus:border-[#01411C] rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none transition-colors"
                           placeholder="e.g. 10"
                         />
                       </div>
@@ -1189,7 +1195,7 @@ export default function RentEdgeLayout({ children, onLogout }: LayoutProps) {
                           type="number"
                           value={newProperty.rent}
                           onChange={(e) => setNewProperty({ ...newProperty, rent: e.target.value })}
-                          className="w-full bg-white/5 border border-white/10 focus:border-[#7C3AED] rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none transition-colors"
+                          className="w-full bg-white/5 border border-white/10 focus:border-[#01411C] rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none transition-colors"
                           placeholder="e.g. 25000"
                         />
                       </div>
@@ -1205,7 +1211,7 @@ export default function RentEdgeLayout({ children, onLogout }: LayoutProps) {
                       </button>
                       <button
                         type="submit"
-                        className="px-5 py-2 bg-[#7C3AED] hover:bg-purple-700 text-white rounded-xl text-xs font-bold transition-colors cursor-pointer"
+                        className="px-5 py-2 bg-[#01411C] hover:bg-brand-primary-hover text-white rounded-xl text-xs font-bold transition-colors cursor-pointer"
                       >
                         Create Property
                       </button>
@@ -1223,7 +1229,7 @@ export default function RentEdgeLayout({ children, onLogout }: LayoutProps) {
                         required
                         value={newUnit.property}
                         onChange={(e) => setNewUnit({ ...newUnit, property: e.target.value })}
-                        className="w-full bg-slate-900 border border-white/10 focus:border-[#7C3AED] rounded-xl px-3 py-2 text-xs text-white focus:outline-none transition-colors"
+                        className="w-full bg-slate-900 border border-white/10 focus:border-[#01411C] rounded-xl px-3 py-2 text-xs text-white focus:outline-none transition-colors"
                       >
                         <option value="" disabled>Choose property...</option>
                         {propertiesList.map((p) => (
@@ -1241,7 +1247,7 @@ export default function RentEdgeLayout({ children, onLogout }: LayoutProps) {
                           required
                           value={newUnit.unitNo}
                           onChange={(e) => setNewUnit({ ...newUnit, unitNo: e.target.value })}
-                          className="w-full bg-white/5 border border-white/10 focus:border-[#7C3AED] rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none transition-colors"
+                          className="w-full bg-white/5 border border-white/10 focus:border-[#01411C] rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none transition-colors"
                           placeholder="e.g. 402-A"
                         />
                       </div>
@@ -1253,7 +1259,7 @@ export default function RentEdgeLayout({ children, onLogout }: LayoutProps) {
                           type="number"
                           value={newUnit.rent}
                           onChange={(e) => setNewUnit({ ...newUnit, rent: e.target.value })}
-                          className="w-full bg-white/5 border border-white/10 focus:border-[#7C3AED] rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none transition-colors"
+                          className="w-full bg-white/5 border border-white/10 focus:border-[#01411C] rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none transition-colors"
                           placeholder="e.g. 28000"
                         />
                       </div>
@@ -1266,7 +1272,7 @@ export default function RentEdgeLayout({ children, onLogout }: LayoutProps) {
                         type="number"
                         value={newUnit.deposit}
                         onChange={(e) => setNewUnit({ ...newUnit, deposit: e.target.value })}
-                        className="w-full bg-white/5 border border-white/10 focus:border-[#7C3AED] rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none transition-colors"
+                        className="w-full bg-white/5 border border-white/10 focus:border-[#01411C] rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none transition-colors"
                         placeholder="e.g. 50000"
                       />
                     </div>
@@ -1281,7 +1287,7 @@ export default function RentEdgeLayout({ children, onLogout }: LayoutProps) {
                       </button>
                       <button
                         type="submit"
-                        className="px-5 py-2 bg-[#7C3AED] hover:bg-purple-700 text-white rounded-xl text-xs font-bold transition-colors cursor-pointer"
+                        className="px-5 py-2 bg-[#01411C] hover:bg-brand-primary-hover text-white rounded-xl text-xs font-bold transition-colors cursor-pointer"
                       >
                         Add Unit
                       </button>
@@ -1300,7 +1306,7 @@ export default function RentEdgeLayout({ children, onLogout }: LayoutProps) {
                         required
                         value={newTenant.name}
                         onChange={(e) => setNewTenant({ ...newTenant, name: e.target.value })}
-                        className="w-full bg-white/5 border border-white/10 focus:border-[#7C3AED] rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none transition-colors"
+                        className="w-full bg-white/5 border border-white/10 focus:border-[#01411C] rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none transition-colors"
                         placeholder="e.g. Ananya Sen"
                       />
                     </div>
@@ -1312,7 +1318,7 @@ export default function RentEdgeLayout({ children, onLogout }: LayoutProps) {
                         required
                         value={newTenant.property}
                         onChange={(e) => setNewTenant({ ...newTenant, property: e.target.value })}
-                        className="w-full bg-slate-900 border border-white/10 focus:border-[#7C3AED] rounded-xl px-3 py-2 text-xs text-white focus:outline-none transition-colors"
+                        className="w-full bg-slate-900 border border-white/10 focus:border-[#01411C] rounded-xl px-3 py-2 text-xs text-white focus:outline-none transition-colors"
                       >
                         <option value="" disabled>Choose property...</option>
                         {propertiesList.map((p) => (
@@ -1330,7 +1336,7 @@ export default function RentEdgeLayout({ children, onLogout }: LayoutProps) {
                           required
                           value={newTenant.rent}
                           onChange={(e) => setNewTenant({ ...newTenant, rent: e.target.value })}
-                          className="w-full bg-white/5 border border-white/10 focus:border-[#7C3AED] rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none transition-colors"
+                          className="w-full bg-white/5 border border-white/10 focus:border-[#01411C] rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none transition-colors"
                           placeholder="e.g. 25000"
                         />
                       </div>
@@ -1343,7 +1349,7 @@ export default function RentEdgeLayout({ children, onLogout }: LayoutProps) {
                           required
                           value={newTenant.phone}
                           onChange={(e) => setNewTenant({ ...newTenant, phone: e.target.value })}
-                          className="w-full bg-white/5 border border-white/10 focus:border-[#7C3AED] rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none transition-colors"
+                          className="w-full bg-white/5 border border-white/10 focus:border-[#01411C] rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none transition-colors"
                           placeholder="e.g. +91 99887 76655"
                         />
                       </div>
@@ -1356,7 +1362,7 @@ export default function RentEdgeLayout({ children, onLogout }: LayoutProps) {
                         type="email"
                         value={newTenant.email}
                         onChange={(e) => setNewTenant({ ...newTenant, email: e.target.value })}
-                        className="w-full bg-white/5 border border-white/10 focus:border-[#7C3AED] rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none transition-colors"
+                        className="w-full bg-white/5 border border-white/10 focus:border-[#01411C] rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none transition-colors"
                         placeholder="e.g. tenant@domain.com"
                       />
                     </div>
@@ -1371,7 +1377,7 @@ export default function RentEdgeLayout({ children, onLogout }: LayoutProps) {
                       </button>
                       <button
                         type="submit"
-                        className="px-5 py-2 bg-[#7C3AED] hover:bg-purple-700 text-white rounded-xl text-xs font-bold transition-colors cursor-pointer"
+                        className="px-5 py-2 bg-[#01411C] hover:bg-brand-primary-hover text-white rounded-xl text-xs font-bold transition-colors cursor-pointer"
                       >
                         Onboard Tenant
                       </button>
@@ -1389,7 +1395,7 @@ export default function RentEdgeLayout({ children, onLogout }: LayoutProps) {
                         required
                         value={newPayment.tenant}
                         onChange={(e) => setNewPayment({ ...newPayment, tenant: e.target.value })}
-                        className="w-full bg-slate-900 border border-white/10 focus:border-[#7C3AED] rounded-xl px-3 py-2 text-xs text-white focus:outline-none transition-colors"
+                        className="w-full bg-slate-900 border border-white/10 focus:border-[#01411C] rounded-xl px-3 py-2 text-xs text-white focus:outline-none transition-colors"
                       >
                         <option value="" disabled>Choose tenant...</option>
                         {tenantsList.map((t) => (
@@ -1407,7 +1413,7 @@ export default function RentEdgeLayout({ children, onLogout }: LayoutProps) {
                           required
                           value={newPayment.amount}
                           onChange={(e) => setNewPayment({ ...newPayment, amount: e.target.value })}
-                          className="w-full bg-white/5 border border-white/10 focus:border-[#7C3AED] rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none transition-colors"
+                          className="w-full bg-white/5 border border-white/10 focus:border-[#01411C] rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none transition-colors"
                           placeholder="e.g. 35000"
                         />
                       </div>
@@ -1418,7 +1424,7 @@ export default function RentEdgeLayout({ children, onLogout }: LayoutProps) {
                         <select
                           value={newPayment.method}
                           onChange={(e) => setNewPayment({ ...newPayment, method: e.target.value })}
-                          className="w-full bg-slate-900 border border-white/10 focus:border-[#7C3AED] rounded-xl px-3 py-2 text-xs text-white focus:outline-none transition-colors"
+                          className="w-full bg-slate-900 border border-white/10 focus:border-[#01411C] rounded-xl px-3 py-2 text-xs text-white focus:outline-none transition-colors"
                         >
                           <option value="UPI">UPI Autopay</option>
                           <option value="UPI Intent">UPI Intent</option>
@@ -1435,7 +1441,7 @@ export default function RentEdgeLayout({ children, onLogout }: LayoutProps) {
                         type="date"
                         value={newPayment.date}
                         onChange={(e) => setNewPayment({ ...newPayment, date: e.target.value })}
-                        className="w-full bg-white/5 border border-white/10 focus:border-[#7C3AED] rounded-xl px-3 py-2 text-xs text-white focus:outline-none transition-colors"
+                        className="w-full bg-white/5 border border-white/10 focus:border-[#01411C] rounded-xl px-3 py-2 text-xs text-white focus:outline-none transition-colors"
                       />
                     </div>
 
@@ -1449,7 +1455,7 @@ export default function RentEdgeLayout({ children, onLogout }: LayoutProps) {
                       </button>
                       <button
                         type="submit"
-                        className="px-5 py-2 bg-[#7C3AED] hover:bg-purple-700 text-white rounded-xl text-xs font-bold transition-colors cursor-pointer"
+                        className="px-5 py-2 bg-[#01411C] hover:bg-brand-primary-hover text-white rounded-xl text-xs font-bold transition-colors cursor-pointer"
                       >
                         Record Payment
                       </button>

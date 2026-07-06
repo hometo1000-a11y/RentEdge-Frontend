@@ -156,7 +156,7 @@ export default function LeadCaptureContactBlock({
           <motion.button
             whileTap={{ scale: 0.97 }}
             onClick={handleOpenModal}
-            className="w-full py-3.5 bg-brand-purple hover:bg-brand-purple/95 text-white text-xs font-black rounded-xl shadow-md shadow-purple-500/10 flex items-center justify-center gap-2 cursor-pointer focus:outline-none"
+            className="w-full py-3.5 bg-brand-purple hover:bg-brand-purple/95 text-white text-xs font-black rounded-xl shadow-md shadow-sm flex items-center justify-center gap-2 cursor-pointer focus:outline-none"
           >
             <span>Unlock Owner Details</span>
             <ArrowRight className="w-3.5 h-3.5" />
@@ -167,9 +167,9 @@ export default function LeadCaptureContactBlock({
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="p-3 bg-emerald-50/70 border border-emerald-100 text-[#10B981] text-[10.5px] rounded-xl font-bold flex items-center gap-2 justify-center"
+            className="p-3 bg-emerald-50/70 border border-emerald-100 text-[#01411C] text-[10.5px] rounded-xl font-bold flex items-center gap-2 justify-center"
           >
-            <CheckCircle2 className="w-4 h-4 text-[#10B981]" />
+            <CheckCircle2 className="w-4 h-4 text-[#01411C]" />
             <span>Landlord notified of your interest.</span>
           </motion.div>
         )}
@@ -240,14 +240,14 @@ export default function LeadCaptureContactBlock({
                     value={phoneNumber}
                     onChange={(e) => setPhoneNumber(e.target.value.replace(/[^0-9]/g, ''))}
                     placeholder="WhatsApp Mobile Number"
-                    className="w-full bg-slate-50 border border-slate-200/80 rounded-xl pl-16 pr-4 py-3.5 text-xs font-bold text-slate-800 focus:outline-none focus:border-brand-purple focus:bg-white focus:ring-1 focus:ring-brand-purple transition-all"
+                    className="w-full bg-slate-50 border border-slate-200/80 rounded-xl pl-16 pr-4 py-3.5 text-xs font-bold text-slate-800 focus:outline-none focus:border-brand-primary focus:bg-white focus:ring-1 focus:ring-brand-purple transition-all"
                   />
                 </div>
 
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full py-3.5 bg-[#10B981] hover:bg-[#10B981]/95 disabled:bg-emerald-300 text-white text-xs font-black rounded-xl shadow-md shadow-emerald-500/10 flex items-center justify-center gap-2 cursor-pointer transition-colors"
+                  className="w-full py-3.5 bg-[#01411C] hover:bg-[#01411C]/95 disabled:bg-emerald-300 text-white text-xs font-black rounded-xl shadow-md shadow-sm flex items-center justify-center gap-2 cursor-pointer transition-colors"
                 >
                   {isSubmitting ? (
                     <>

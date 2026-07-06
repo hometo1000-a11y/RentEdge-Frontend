@@ -288,7 +288,7 @@ export default function AuthModal({ isOpen, onClose, onSuccess }: AuthModalProps
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 25 }}
             transition={{ type: 'spring', duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-            className="relative w-full max-w-lg bg-[#0F172A]/90 backdrop-blur-xl border border-white/10 rounded-3xl p-6 sm:p-8 shadow-[0_0_50px_rgba(124,58,237,0.15)] z-10 text-white overflow-hidden text-left"
+            className="relative w-full max-w-lg bg-[#06130C]/90 backdrop-blur-xl border border-white/10 rounded-3xl p-6 sm:p-8 shadow-[0_0_50px_rgba(1,65,28,0.10)] z-10 text-white overflow-hidden text-left"
           >
             <div className="absolute -top-24 -left-24 w-48 h-48 bg-brand-purple/20 rounded-full blur-[60px] pointer-events-none" />
             <div className="absolute -bottom-24 -right-24 w-48 h-48 bg-brand-mint/10 rounded-full blur-[60px] pointer-events-none" />
@@ -314,12 +314,12 @@ export default function AuthModal({ isOpen, onClose, onSuccess }: AuthModalProps
             <div className="bg-slate-950/60 p-1.5 rounded-2xl flex mb-6 relative border border-white/5">
               <button type="button" onClick={() => switchTab('login')} className="flex-1 py-2.5 text-xs font-black uppercase tracking-wider relative z-10 text-center transition-colors cursor-pointer">
                 <span className={activeTab === 'login' ? 'text-white' : 'text-slate-400 hover:text-slate-200'}>Login</span>
-                {activeTab === 'login' && <motion.div layoutId="authActiveTab" className="absolute inset-0 bg-[#0F172A] border border-white/10 rounded-xl -z-10 shadow-lg" transition={{ type: 'spring', stiffness: 350, damping: 25 }} />}
+                {activeTab === 'login' && <motion.div layoutId="authActiveTab" className="absolute inset-0 bg-[#06130C] border border-white/10 rounded-xl -z-10 shadow-lg" transition={{ type: 'spring', stiffness: 350, damping: 25 }} />}
               </button>
 
               <button type="button" onClick={() => switchTab('signup')} className="flex-1 py-2.5 text-xs font-black uppercase tracking-wider relative z-10 text-center transition-colors cursor-pointer">
                 <span className={activeTab === 'signup' ? 'text-white' : 'text-slate-400 hover:text-slate-200'}>Sign Up</span>
-                {activeTab === 'signup' && <motion.div layoutId="authActiveTab" className="absolute inset-0 bg-[#0F172A] border border-white/10 rounded-xl -z-10 shadow-lg" transition={{ type: 'spring', stiffness: 350, damping: 25 }} />}
+                {activeTab === 'signup' && <motion.div layoutId="authActiveTab" className="absolute inset-0 bg-[#06130C] border border-white/10 rounded-xl -z-10 shadow-lg" transition={{ type: 'spring', stiffness: 350, damping: 25 }} />}
               </button>
             </div>
 
@@ -361,7 +361,7 @@ export default function AuthModal({ isOpen, onClose, onSuccess }: AuthModalProps
                       <label className="block text-[10px] uppercase font-bold tracking-wider text-slate-400 mb-1.5">Full Name</label>
                       <div className="relative">
                         <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400"><User className="w-4 h-4" /></div>
-                        <input type="text" required placeholder="Enter your full name" value={fullName} onChange={(e) => setFullName(e.target.value)} className="w-full bg-slate-900 border border-white/10 focus:border-brand-purple rounded-xl py-3 pl-10 pr-4 text-xs font-medium text-white placeholder-slate-500 focus:outline-none transition-colors" />
+                        <input type="text" required placeholder="Enter your full name" value={fullName} onChange={(e) => setFullName(e.target.value)} className="w-full bg-slate-900 border border-white/10 focus:border-brand-primary rounded-xl py-3 pl-10 pr-4 text-xs font-medium text-white placeholder-slate-500 focus:outline-none transition-colors" />
                       </div>
                     </div>
 
@@ -369,7 +369,7 @@ export default function AuthModal({ isOpen, onClose, onSuccess }: AuthModalProps
                       <label className="block text-[10px] uppercase font-bold tracking-wider text-slate-400 mb-1.5">Email Address</label>
                       <div className="relative">
                         <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400"><Mail className="w-4 h-4" /></div>
-                        <input type="email" required placeholder="name@example.com" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full bg-slate-900 border border-white/10 focus:border-brand-purple rounded-xl py-3 pl-10 pr-4 text-xs font-medium text-white placeholder-slate-500 focus:outline-none transition-colors" />
+                        <input type="email" required placeholder="name@example.com" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full bg-slate-900 border border-white/10 focus:border-brand-primary rounded-xl py-3 pl-10 pr-4 text-xs font-medium text-white placeholder-slate-500 focus:outline-none transition-colors" />
                       </div>
                     </div>
 
@@ -377,7 +377,7 @@ export default function AuthModal({ isOpen, onClose, onSuccess }: AuthModalProps
                       <label className="block text-[10px] uppercase font-bold tracking-wider text-slate-400 mb-1.5">Phone Number</label>
                       <div className="relative">
                         <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400"><Phone className="w-4 h-4" /></div>
-                        <input type="tel" required pattern="[0-9]{10}" placeholder="10 digit mobile number" value={phone} onChange={(e) => setPhone(e.target.value)} className="w-full bg-slate-900 border border-white/10 focus:border-brand-purple rounded-xl py-3 pl-10 pr-4 text-xs font-medium text-white placeholder-slate-500 focus:outline-none transition-colors" />
+                        <input type="tel" required pattern="[0-9]{10}" placeholder="10 digit mobile number" value={phone} onChange={(e) => setPhone(e.target.value)} className="w-full bg-slate-900 border border-white/10 focus:border-brand-primary rounded-xl py-3 pl-10 pr-4 text-xs font-medium text-white placeholder-slate-500 focus:outline-none transition-colors" />
                       </div>
                     </div>
 
@@ -385,7 +385,7 @@ export default function AuthModal({ isOpen, onClose, onSuccess }: AuthModalProps
                       <label className="block text-[10px] uppercase font-bold tracking-wider text-slate-400 mb-1.5">Password</label>
                       <div className="relative">
                         <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400"><Lock className="w-4 h-4" /></div>
-                        <input type={showPassword ? 'text' : 'password'} required minLength={6} placeholder="Enter security key" value={password} onChange={(e) => setPassword(e.target.value)} className="w-full bg-slate-900 border border-white/10 focus:border-brand-purple rounded-xl py-3 pl-10 pr-10 text-xs font-medium text-white placeholder-slate-500 focus:outline-none transition-colors" />
+                        <input type={showPassword ? 'text' : 'password'} required minLength={6} placeholder="Enter security key" value={password} onChange={(e) => setPassword(e.target.value)} className="w-full bg-slate-900 border border-white/10 focus:border-brand-primary rounded-xl py-3 pl-10 pr-10 text-xs font-medium text-white placeholder-slate-500 focus:outline-none transition-colors" />
                         <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-white cursor-pointer focus:outline-none">
                           {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                         </button>
@@ -396,7 +396,7 @@ export default function AuthModal({ isOpen, onClose, onSuccess }: AuthModalProps
                       <label className="block text-[10px] uppercase font-bold tracking-wider text-slate-400 mb-1.5">Confirm Password</label>
                       <div className="relative">
                         <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400"><Lock className="w-4 h-4" /></div>
-                        <input type={showConfirmPassword ? 'text' : 'password'} required minLength={6} placeholder="Confirm security key" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} className="w-full bg-slate-900 border border-white/10 focus:border-brand-purple rounded-xl py-3 pl-10 pr-10 text-xs font-medium text-white placeholder-slate-500 focus:outline-none transition-colors" />
+                        <input type={showConfirmPassword ? 'text' : 'password'} required minLength={6} placeholder="Confirm security key" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} className="w-full bg-slate-900 border border-white/10 focus:border-brand-primary rounded-xl py-3 pl-10 pr-10 text-xs font-medium text-white placeholder-slate-500 focus:outline-none transition-colors" />
                         <button type="button" onClick={() => setShowConfirmPassword(!showConfirmPassword)} className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-white cursor-pointer focus:outline-none">
                           {showConfirmPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                         </button>
@@ -429,7 +429,7 @@ export default function AuthModal({ isOpen, onClose, onSuccess }: AuthModalProps
                     <label className="block text-[10px] uppercase font-bold tracking-wider text-slate-400 mb-1.5">Email Address</label>
                     <div className="relative">
                       <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400"><Mail className="w-4 h-4" /></div>
-                      <input type="email" required placeholder="name@example.com" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full bg-slate-900 border border-white/10 focus:border-brand-purple rounded-xl py-3 pl-10 pr-4 text-xs font-medium text-white placeholder-slate-500 focus:outline-none transition-colors" />
+                      <input type="email" required placeholder="name@example.com" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full bg-slate-900 border border-white/10 focus:border-brand-primary rounded-xl py-3 pl-10 pr-4 text-xs font-medium text-white placeholder-slate-500 focus:outline-none transition-colors" />
                     </div>
                   </div>
 
@@ -440,7 +440,7 @@ export default function AuthModal({ isOpen, onClose, onSuccess }: AuthModalProps
                     </div>
                     <div className="relative">
                       <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400"><Lock className="w-4 h-4" /></div>
-                      <input type={showPassword ? 'text' : 'password'} required minLength={6} placeholder="Enter your password" value={password} onChange={(e) => setPassword(e.target.value)} className="w-full bg-slate-900 border border-white/10 focus:border-brand-purple rounded-xl py-3 pl-10 pr-10 text-xs font-medium text-white placeholder-slate-500 focus:outline-none transition-colors" />
+                      <input type={showPassword ? 'text' : 'password'} required minLength={6} placeholder="Enter your password" value={password} onChange={(e) => setPassword(e.target.value)} className="w-full bg-slate-900 border border-white/10 focus:border-brand-primary rounded-xl py-3 pl-10 pr-10 text-xs font-medium text-white placeholder-slate-500 focus:outline-none transition-colors" />
                       <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-white cursor-pointer focus:outline-none">
                         {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                       </button>
@@ -450,7 +450,7 @@ export default function AuthModal({ isOpen, onClose, onSuccess }: AuthModalProps
               )}
 
               <motion.div variants={formItemVariants} className="pt-2">
-                <button type="submit" disabled={isLoading} className="w-full py-3.5 bg-brand-purple text-white text-xs font-bold rounded-xl shadow-lg hover:bg-purple-600 active:scale-98 transition-all flex items-center justify-center gap-2 disabled:bg-purple-800 cursor-pointer">
+                <button type="submit" disabled={isLoading} className="w-full py-3.5 bg-brand-purple text-white text-xs font-bold rounded-xl shadow-lg hover:bg-[#003B1F] active:scale-98 transition-all flex items-center justify-center gap-2 disabled:bg-purple-800 cursor-pointer">
                   {isLoading ? (
                     <>
                       <Loader2 className="animate-spin w-4 h-4" />

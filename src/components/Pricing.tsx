@@ -52,8 +52,8 @@ const tenantPlans = [
     yearlyPrice: '₹4,999',
     badge: 'Most Popular',
     highlight: true,
-    accentColor: 'from-violet-950 to-purple-950',
-    borderColor: 'border-violet-500/40',
+    accentColor: 'from-[#06130C] to-[#0B1F14]',
+    borderColor: 'border-[#01411C]/40',
     buttonStyle: 'solid-purple',
     buttonLabel: 'Upgrade & Build Credit',
     buttonIcon: <TrendingUp className="w-4 h-4" />,
@@ -150,8 +150,8 @@ const comparisonRows = [
 function GlowBadge({ label, color }: { label: string; color: 'purple' | 'mint' }) {
   const styles =
     color === 'purple'
-      ? 'bg-violet-500/20 text-violet-300 border-violet-500/40 shadow-violet-500/20'
-      : 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40 shadow-emerald-500/20';
+      ? 'bg-violet-500/20 text-violet-300 border-[#01411C]/40 shadow-sm'
+      : 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40 shadow-sm';
   return (
     <span
       className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-widest border shadow-lg ${styles}`}
@@ -193,7 +193,7 @@ function PlanCard({ plan, tab, billingCycle, index }: PlanCardProps) {
   const hoverGlow =
     plan.highlight
       ? tab === 'tenant'
-        ? '0 0 40px rgba(124,58,237,0.25)'
+        ? '0 0 40px rgba(1,65,28,0.15)'
         : '0 0 40px rgba(16,185,129,0.25)'
       : '0 8px 30px rgba(0,0,0,0.4)';
 
@@ -258,12 +258,12 @@ function PlanCard({ plan, tab, billingCycle, index }: PlanCardProps) {
           {plan.buttonIcon}
         </button>
       ) : plan.buttonStyle === 'solid-purple' ? (
-        <button className="w-full py-3.5 rounded-2xl bg-violet-600 hover:bg-violet-500 text-white text-sm font-bold flex items-center justify-center gap-2 shadow-lg shadow-violet-700/40 transition-all duration-200">
+        <button className="w-full py-3.5 rounded-2xl bg-[#01411C] hover:bg-[#003B1F] text-white text-sm font-bold flex items-center justify-center gap-2 shadow-lg shadow-sm transition-all duration-200">
           {plan.buttonLabel}
           {plan.buttonIcon}
         </button>
       ) : (
-        <button className="w-full py-3.5 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-slate-900 text-sm font-bold flex items-center justify-center gap-2 shadow-lg shadow-emerald-600/30 transition-all duration-200">
+        <button className="w-full py-3.5 rounded-2xl bg-[#D4AF37] hover:bg-[#F0C94A] text-[#06130C] text-sm font-bold flex items-center justify-center gap-2 shadow-lg shadow-sm transition-all duration-200">
           {plan.buttonLabel}
           {plan.buttonIcon}
         </button>
@@ -288,7 +288,7 @@ export default function Pricing() {
     <section
       id="pricing"
       ref={sectionRef}
-      className="w-full bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 py-24 px-4 overflow-hidden"
+      className="w-full bg-[#06130C] py-24 px-4 overflow-hidden"
     >
       <div className="max-w-5xl mx-auto">
 
@@ -304,7 +304,7 @@ export default function Pricing() {
           </span>
           <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight leading-tight">
             Simple pricing.<br className="hidden sm:block" />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-emerald-400">
+            <span className="text-[#D4AF37]">
               Radical value.
             </span>
           </h2>

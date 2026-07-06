@@ -94,7 +94,7 @@ export default function OwnerLifecycleController({ onLogout, onSwitchToTenant }:
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#F8FAFC] dark:bg-[#0B0F19]">
+      <div className="min-h-screen flex items-center justify-center bg-[#F8F5EE] dark:bg-[#06130C]">
         <div className="w-10 h-10 border-4 border-brand-purple border-t-transparent rounded-full animate-spin"></div>
       </div>
     );
@@ -105,7 +105,7 @@ export default function OwnerLifecycleController({ onLogout, onSwitchToTenant }:
   }
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] dark:bg-[#0B0F19] text-[#0F172A] dark:text-slate-100 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-[#F8F5EE] dark:bg-[#06130C] text-[#06130C] dark:text-slate-100 flex items-center justify-center p-4">
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -138,7 +138,7 @@ export default function OwnerLifecycleController({ onLogout, onSwitchToTenant }:
               placeholder="As per bank records"
               value={setupForm.accountHolderName}
               onChange={e => setSetupForm({...setupForm, accountHolderName: e.target.value})}
-              className="w-full p-3.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm font-semibold focus:outline-none focus:border-brand-purple"
+              className="w-full p-3.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm font-semibold focus:outline-none focus:border-brand-primary"
             />
           </div>
 
@@ -151,7 +151,7 @@ export default function OwnerLifecycleController({ onLogout, onSwitchToTenant }:
                 placeholder="000012345678"
                 value={setupForm.bankAccountNumber}
                 onChange={e => setSetupForm({...setupForm, bankAccountNumber: e.target.value.replace(/\D/g, '')})}
-                className="w-full p-3.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm font-mono focus:outline-none focus:border-brand-purple"
+                className="w-full p-3.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm font-mono focus:outline-none focus:border-brand-primary"
               />
             </div>
             <div className="space-y-1">
@@ -162,7 +162,7 @@ export default function OwnerLifecycleController({ onLogout, onSwitchToTenant }:
                 placeholder="000012345678"
                 value={setupForm.confirmAccountNumber}
                 onChange={e => setSetupForm({...setupForm, confirmAccountNumber: e.target.value.replace(/\D/g, '')})}
-                className="w-full p-3.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm font-mono focus:outline-none focus:border-brand-purple"
+                className="w-full p-3.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm font-mono focus:outline-none focus:border-brand-primary"
               />
             </div>
           </div>
@@ -176,7 +176,7 @@ export default function OwnerLifecycleController({ onLogout, onSwitchToTenant }:
                 placeholder="HDFC0001234"
                 value={setupForm.ifscCode}
                 onChange={e => setSetupForm({...setupForm, ifscCode: e.target.value.toUpperCase()})}
-                className="w-full p-3.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm font-mono focus:outline-none focus:border-brand-purple"
+                className="w-full p-3.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm font-mono focus:outline-none focus:border-brand-primary"
               />
             </div>
             <div className="space-y-1">
@@ -186,7 +186,7 @@ export default function OwnerLifecycleController({ onLogout, onSwitchToTenant }:
                 placeholder="name@okhdfc"
                 value={setupForm.upiId}
                 onChange={e => setSetupForm({...setupForm, upiId: e.target.value})}
-                className="w-full p-3.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm focus:outline-none focus:border-brand-purple"
+                className="w-full p-3.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm focus:outline-none focus:border-brand-primary"
               />
             </div>
           </div>

@@ -76,7 +76,7 @@ export default function TenantLifecycleController({ onLogout, onSwitchToOwner }:
   };
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] dark:bg-[#0B0F19] dark:text-slate-100">
+    <div className="min-h-screen bg-[#F8F5EE] dark:bg-[#06130C] dark:text-slate-100">
 
       <AnimatePresence mode="wait">
         {/* ================= STATE 1: BROWSING — TenantShell ================= */}

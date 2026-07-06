@@ -169,7 +169,7 @@ export default function TenantManagement() {
           placeholder="Filter by tenant name, email, or property..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full pl-10 pr-4 py-2.5 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100/50 dark:hover:bg-slate-800/80 focus:bg-white dark:focus:bg-slate-900 border border-slate-200 dark:border-slate-700 focus:border-brand-purple rounded-xl text-xs font-bold outline-none transition-colors"
+          className="w-full pl-10 pr-4 py-2.5 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100/50 dark:hover:bg-slate-800/80 focus:bg-white dark:focus:bg-slate-900 border border-slate-200 dark:border-slate-700 focus:border-brand-primary rounded-xl text-xs font-bold outline-none transition-colors"
         />
       </div>
 
@@ -191,7 +191,7 @@ export default function TenantManagement() {
               {/* Top Row: Identity + Status Badge */}
               <div className="flex items-start justify-between gap-4 flex-wrap">
                 <div className="flex items-start gap-3.5">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-brand-purple to-[#10B981] p-[1.5px] shrink-0">
+                  <div className="w-10 h-10 rounded-full bg-brand-primary p-[1.5px] shrink-0">
                     <div className="w-full h-full bg-white dark:bg-slate-900 rounded-full flex items-center justify-center font-black text-slate-800 dark:text-white text-xs">
                       {tenant.avatar}
                     </div>

@@ -126,7 +126,7 @@ export default function RentScoreSimulator() {
           </div>
 
           {/* Outputs: Right Panel (5 cols) */}
-          <div className="lg:col-span-5 bg-gradient-to-b from-brand-primary to-slate-950 rounded-3xl p-6 sm:p-8 border border-white/10 flex flex-col justify-between shadow-2xl relative overflow-hidden">
+          <div className="lg:col-span-5 bg-[#06130C] rounded-3xl p-6 sm:p-8 border border-white/10 flex flex-col justify-between shadow-2xl relative overflow-hidden">
             {/* Background highlights */}
             <div className="absolute top-0 right-0 w-32 h-32 bg-brand-purple/20 rounded-full blur-[60px]" />
             
@@ -152,7 +152,7 @@ export default function RentScoreSimulator() {
               {/* Progress visual line */}
               <div className="w-full bg-slate-800 h-1.5 rounded-full mt-4 overflow-hidden">
                 <motion.div 
-                  className="bg-gradient-to-r from-brand-purple to-brand-mint h-full"
+                  className="bg-brand-primary h-full"
                   initial={{ width: '0%' }}
                   animate={{ width: `${((projectedScore - 300) / 550) * 100}%` }}
                   transition={{ duration: 0.8 }}

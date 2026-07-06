@@ -74,9 +74,9 @@ export default function MagneticButton({
 
   // Pre-compiled design tokens mapping
   const variantClasses = {
-    primary: 'bg-[#7C3AED] text-white border border-purple-500/20',
+    primary: 'bg-[#01411C] text-white border border-[#003B1F]/20',
     secondary: 'bg-slate-900 text-white border border-white/5',
-    mint: 'bg-[#10B981] text-white border border-emerald-500/10',
+    mint: 'bg-[#01411C] text-white border border-[#003B1F]/10',
     outline: 'bg-white/40 backdrop-blur-md text-slate-800 border border-slate-200/80 hover:bg-white hover:border-slate-350',
     ghost: 'bg-transparent text-slate-650 hover:bg-slate-100/60 hover:text-slate-850'
   };
@@ -89,17 +89,17 @@ export default function MagneticButton({
   };
 
   const hoverShadows = {
-    primary: '0 20px 30px -10px rgba(124, 58, 237, 0.55), 0 0 20px 5px rgba(124, 58, 237, 0.3)',
+    primary: '0 20px 30px -10px rgba(1, 65, 28, 0.35), 0 0 15px 3px rgba(1, 65, 28, 0.12)',
     secondary: '0 20px 30px -10px rgba(15, 23, 42, 0.45), 0 0 20px 5px rgba(15, 23, 42, 0.25)',
-    mint: '0 20px 30px -10px rgba(16, 185, 129, 0.45), 0 0 20px 5px rgba(16, 185, 129, 0.25)',
+    mint: '0 20px 30px -10px rgba(1, 65, 28, 0.35), 0 0 15px 3px rgba(1, 65, 28, 0.12)',
     outline: '0 15px 25px -10px rgba(0, 0, 0, 0.12), 0 0 15px 3px rgba(0, 0, 0, 0.04)',
     ghost: 'none'
   };
 
   const initialShadows = {
-    primary: '0 10px 15px -3px rgba(124, 58, 237, 0.25), 0 4px 6px -4px rgba(124, 58, 237, 0.25)',
+    primary: '0 10px 15px -3px rgba(1, 65, 28, 0.15), 0 4px 6px -4px rgba(1, 65, 28, 0.15)',
     secondary: '0 10px 15px -3px rgba(15, 23, 42, 0.2), 0 4px 6px -4px rgba(15, 23, 42, 0.2)',
-    mint: '0 10px 15px -3px rgba(16, 185, 129, 0.2), 0 4px 6px -4px rgba(16, 185, 129, 0.2)',
+    mint: '0 10px 15px -3px rgba(1, 65, 28, 0.15), 0 4px 6px -4px rgba(1, 65, 28, 0.15)',
     outline: '0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05)',
     ghost: 'none'
   };
@@ -116,10 +116,10 @@ export default function MagneticButton({
         {isHovered && variant === 'primary' && (
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 0.6, scale: 1.25 }}
+            animate={{ opacity: 0.4, scale: 1.25 }}
             exit={{ opacity: 0, scale: 0.8 }}
             transition={{ duration: 0.45, ease: 'easeOut' }}
-            className="absolute inset-0 bg-brand-purple/30 rounded-2xl filter blur-[16px] -z-10 pointer-events-none"
+            className="absolute inset-0 bg-brand-primary/20 rounded-2xl filter blur-[16px] -z-10 pointer-events-none"
           />
         )}
       </AnimatePresence>

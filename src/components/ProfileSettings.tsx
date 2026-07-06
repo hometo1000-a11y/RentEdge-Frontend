@@ -301,7 +301,7 @@ export default function ProfileSettings() {
                     type="text"
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
-                    className="flex-1 px-4 py-2.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 focus:border-brand-purple rounded-xl text-xs font-bold text-slate-900 dark:text-slate-100 outline-none transition-colors"
+                    className="flex-1 px-4 py-2.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 focus:border-brand-primary rounded-xl text-xs font-bold text-slate-900 dark:text-slate-100 outline-none transition-colors"
                   />
                   <button
                     onClick={handleUpdateName}
@@ -342,7 +342,7 @@ export default function ProfileSettings() {
                         value={newEmail}
                         placeholder="Enter new email"
                         onChange={(e) => setNewEmail(e.target.value)}
-                        className="w-full pl-12 pr-4 py-2.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 focus:border-brand-purple rounded-xl text-xs font-bold text-slate-900 dark:text-slate-100 outline-none transition-colors"
+                        className="w-full pl-12 pr-4 py-2.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 focus:border-brand-primary rounded-xl text-xs font-bold text-slate-900 dark:text-slate-100 outline-none transition-colors"
                       />
                     </div>
                     <button
@@ -395,7 +395,7 @@ export default function ProfileSettings() {
                         value={newPhone}
                         placeholder="e.g. 9876543210"
                         onChange={(e) => setNewPhone(e.target.value)}
-                        className="w-full pl-12 pr-4 py-2.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 focus:border-brand-purple rounded-xl text-xs font-bold text-slate-900 dark:text-slate-100 outline-none transition-colors"
+                        className="w-full pl-12 pr-4 py-2.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 focus:border-brand-primary rounded-xl text-xs font-bold text-slate-900 dark:text-slate-100 outline-none transition-colors"
                       />
                     </div>
                     <button
@@ -519,7 +519,7 @@ export default function ProfileSettings() {
                   placeholder="Enter 6-digit OTP"
                   value={otpCode}
                   onChange={(e) => setOtpCode(e.target.value)}
-                  className="w-full text-center tracking-widest text-lg font-mono p-4 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:outline-none focus:border-brand-purple"
+                  className="w-full text-center tracking-widest text-lg font-mono p-4 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:outline-none focus:border-brand-primary"
                 />
                 
                 <button

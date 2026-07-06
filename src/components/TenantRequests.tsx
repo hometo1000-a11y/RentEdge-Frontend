@@ -97,7 +97,7 @@ export default function TenantRequests() {
           placeholder="Filter by tenant name, email, or property..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full pl-10 pr-4 py-2.5 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100/50 dark:hover:bg-slate-800/80 focus:bg-white dark:focus:bg-slate-900 border border-slate-200 dark:border-slate-700 focus:border-brand-purple rounded-xl text-xs font-bold outline-none transition-colors"
+          className="w-full pl-10 pr-4 py-2.5 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100/50 dark:hover:bg-slate-800/80 focus:bg-white dark:focus:bg-slate-900 border border-slate-200 dark:border-slate-700 focus:border-brand-primary rounded-xl text-xs font-bold outline-none transition-colors"
         />
       </div>
 
@@ -118,7 +118,7 @@ export default function TenantRequests() {
             >
               {/* Identity & Contact */}
               <div className="flex items-start gap-4 xl:w-1/3">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-brand-purple to-brand-mint p-[1.5px] shrink-0">
+                <div className="w-10 h-10 rounded-full bg-brand-primary p-[1.5px] shrink-0">
                   <div className="w-full h-full bg-white dark:bg-slate-900 rounded-full flex items-center justify-center font-black text-slate-800 dark:text-white text-xs">
                     {req.users.full_name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2)}
                   </div>
@@ -210,7 +210,7 @@ export default function TenantRequests() {
                         <button
                           onClick={() => handleUpdateStatus(req.id, 'approved')}
                           disabled={updatingId === req.id}
-                          className="flex-1 px-3 py-1.5 bg-emerald-500 hover:bg-emerald-400 text-white text-[10px] font-black rounded-lg transition-all cursor-pointer disabled:opacity-50"
+                          className="flex-1 px-3 py-1.5 bg-[#01411C] hover:bg-[#003B1F] text-white text-[10px] font-black rounded-lg transition-all cursor-pointer disabled:opacity-50"
                         >
                           Confirm Approval
                         </button>
@@ -227,7 +227,7 @@ export default function TenantRequests() {
                       <button
                         onClick={() => { setApprovingId(req.id); setLeaseStartDate(new Date().toISOString().split('T')[0]); }}
                         disabled={updatingId === req.id}
-                        className="flex-1 xl:flex-none px-4 py-2 bg-emerald-500 hover:bg-emerald-400 text-white text-xs font-black rounded-xl transition-all shadow-md shadow-emerald-500/20 cursor-pointer disabled:opacity-50"
+                        className="flex-1 xl:flex-none px-4 py-2 bg-[#01411C] hover:bg-[#003B1F] text-white text-xs font-black rounded-xl transition-all shadow-md shadow-sm cursor-pointer disabled:opacity-50"
                       >
                         Approve
                       </button>

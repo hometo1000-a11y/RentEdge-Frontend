@@ -289,7 +289,7 @@ export default function TenantShell({ activeView, onViewChange, onLogout, onSwit
   };
 
   return (
-    <div className="flex min-h-screen bg-[#F4F5F7] dark:bg-[#0B0F19] text-slate-800 dark:text-slate-100 font-sans transition-colors duration-300">
+    <div className="flex min-h-screen bg-[#F8F5EE] dark:bg-[#06130C] text-slate-800 dark:text-slate-100 font-sans transition-colors duration-300">
 
       {/* ─── Desktop Sidebar ──────────────────────────────── */}
       <aside className="hidden lg:flex w-60 bg-white dark:bg-slate-900 border-r border-slate-100 dark:border-slate-800/80 flex-col justify-between shrink-0 fixed top-0 left-0 h-full z-40">
@@ -316,7 +316,7 @@ export default function TenantShell({ activeView, onViewChange, onLogout, onSwit
                   onClick={() => onViewChange(item.id)}
                   className={`w-full flex items-start text-left gap-3 px-3.5 py-2.5 rounded-xl text-sm font-semibold transition-all cursor-pointer relative border border-transparent ${
                     isActive
-                      ? 'bg-brand-purple text-white shadow-md shadow-purple-500/20 dark:bg-brand-purple/20 dark:text-white dark:border-brand-purple/35 dark:shadow-[0_0_20px_rgba(124,58,237,0.15)]'
+                      ? 'bg-brand-purple text-white shadow-md shadow-sm dark:bg-brand-purple/20 dark:text-white dark:border-brand-purple/35 dark:shadow-[0_0_20px_rgba(1,65,28,0.10)]'
                       : 'text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-850/40 hover:text-slate-850 dark:hover:text-white'
                   }`}
                 >
@@ -401,7 +401,7 @@ export default function TenantShell({ activeView, onViewChange, onLogout, onSwit
       </div>
 
       {/* ─── Mobile Bottom Nav ──────────────────────────── */}
-      <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 dark:bg-[#101420]/95 backdrop-blur-xl border-t border-slate-200/80 dark:border-white/5 pt-2.5 pb-safe px-6 flex items-center justify-around shadow-[0_-8px_30px_rgba(0,0,0,0.08)]">
+      <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 dark:bg-[#0B1F14]/95 backdrop-blur-xl border-t border-slate-200/80 dark:border-white/5 pt-2.5 pb-safe px-6 flex items-center justify-around shadow-[0_-8px_30px_rgba(0,0,0,0.08)]">
         {/* Listings */}
         <button
           onClick={() => onViewChange('listings')}

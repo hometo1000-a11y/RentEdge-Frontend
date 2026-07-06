@@ -100,7 +100,7 @@ export default function PublicGrid({
         {isLoading ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
             {[1, 2, 3].map((n) => (
-              <div key={n} className="bg-white dark:bg-[#101420] rounded-[24px] overflow-hidden border border-slate-100 dark:border-white/5 p-5 space-y-4 shadow-sm flex flex-col">
+              <div key={n} className="bg-white dark:bg-[#0B1F14] rounded-[24px] overflow-hidden border border-slate-100 dark:border-white/5 p-5 space-y-4 shadow-sm flex flex-col">
                 <div className="aspect-[16/10] bg-slate-100 dark:bg-slate-900 rounded-2xl animate-pulse relative overflow-hidden">
                   {/* Shimmer line */}
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-slate-200/25 dark:via-white/5 to-transparent -translate-x-full animate-[shimmer_1.5s_infinite]" />
@@ -142,7 +142,7 @@ export default function PublicGrid({
           <motion.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="w-full bg-white dark:bg-[#101420] rounded-[24px] border border-slate-200/60 dark:border-white/5 shadow-sm p-12 text-center flex flex-col items-center justify-center mt-8"
+            className="w-full bg-white dark:bg-[#0B1F14] rounded-[24px] border border-slate-200/60 dark:border-white/5 shadow-sm p-12 text-center flex flex-col items-center justify-center mt-8"
           >
             <AlertCircle className="w-12 h-12 text-slate-400 mb-4" />
             <h3 className="text-lg font-bold text-slate-800 dark:text-white">No properties found</h3>

@@ -139,7 +139,7 @@ export default function Hero({ onSearch }: HeroProps) {
           className="text-4xl sm:text-6xl font-extrabold tracking-tight text-brand-primary leading-[1.1] font-sans"
         >
           The Smart Way to Rent.<br />
-          <span className="bg-gradient-to-r from-brand-purple to-indigo-600 bg-clip-text text-transparent">
+          <span className="text-brand-accent">
             Zero Brokers. Full Transparency.
           </span>
         </motion.h1>
@@ -203,7 +203,7 @@ export default function Hero({ onSearch }: HeroProps) {
                           setCustomArea(e.target.value);
                           setSelectedLocation(e.target.value || 'Bengaluru');
                         }}
-                        className="w-full bg-slate-50 border border-slate-200 text-slate-800 placeholder-slate-400 dark:bg-slate-900 dark:border-white/10 dark:text-white dark:placeholder-slate-500 focus:border-brand-purple rounded-xl px-3 py-2 text-xs focus:outline-none transition-colors"
+                        className="w-full bg-slate-50 border border-slate-200 text-slate-800 placeholder-slate-400 dark:bg-slate-900 dark:border-white/10 dark:text-white dark:placeholder-slate-500 focus:border-brand-primary rounded-xl px-3 py-2 text-xs focus:outline-none transition-colors"
                       />
                     </div>
 
@@ -359,7 +359,7 @@ export default function Hero({ onSearch }: HeroProps) {
                               const maxVal = customMax ? `₹${Number(customMax).toLocaleString('en-IN')}` : 'Any';
                               setSelectedBudget(`${minVal} - ${maxVal}`);
                             }}
-                            className="w-full bg-slate-50 border border-slate-200 text-slate-800 placeholder-slate-400 dark:bg-slate-900 dark:border-white/10 dark:text-white dark:placeholder-slate-500 focus:border-brand-purple rounded-xl py-2 pl-6 pr-2.5 text-xs focus:outline-none transition-colors"
+                            className="w-full bg-slate-50 border border-slate-200 text-slate-800 placeholder-slate-400 dark:bg-slate-900 dark:border-white/10 dark:text-white dark:placeholder-slate-500 focus:border-brand-primary rounded-xl py-2 pl-6 pr-2.5 text-xs focus:outline-none transition-colors"
                           />
                         </div>
                         <span className="text-slate-400 text-xs">-</span>
@@ -375,7 +375,7 @@ export default function Hero({ onSearch }: HeroProps) {
                               const maxVal = e.target.value ? `₹${Number(e.target.value).toLocaleString('en-IN')}` : 'Any';
                               setSelectedBudget(`${minVal} - ${maxVal}`);
                             }}
-                            className="w-full bg-slate-50 border border-slate-200 text-slate-800 placeholder-slate-400 dark:bg-slate-900 dark:border-white/10 dark:text-white dark:placeholder-slate-500 focus:border-brand-purple rounded-xl py-2 pl-6 pr-2.5 text-xs focus:outline-none transition-colors"
+                            className="w-full bg-slate-50 border border-slate-200 text-slate-800 placeholder-slate-400 dark:bg-slate-900 dark:border-white/10 dark:text-white dark:placeholder-slate-500 focus:border-brand-primary rounded-xl py-2 pl-6 pr-2.5 text-xs focus:outline-none transition-colors"
                           />
                         </div>
                       </div>
@@ -449,7 +449,7 @@ export default function Hero({ onSearch }: HeroProps) {
               whileTap={{ scale: 0.98 }}
               onClick={handleSearchSubmit}
               disabled={isSearching}
-              className="w-full sm:w-auto px-6 py-3 bg-brand-primary dark:bg-brand-purple text-white text-sm font-semibold rounded-xl flex items-center justify-center gap-2 shadow-md hover:bg-slate-800 dark:hover:bg-purple-600 transition-colors disabled:bg-slate-400 cursor-pointer"
+              className="w-full sm:w-auto px-6 py-3 bg-brand-primary dark:bg-brand-purple text-white text-sm font-semibold rounded-xl flex items-center justify-center gap-2 shadow-md hover:bg-slate-800 dark:hover:bg-[#003B1F] transition-colors disabled:bg-slate-400 cursor-pointer"
             >
               {isSearching ? (
                 <>

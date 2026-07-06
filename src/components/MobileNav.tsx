@@ -47,7 +47,7 @@ export default function MobileNav() {
   };
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden px-4 pb-4 bg-gradient-to-t from-[#F8F9FA] via-[#F8F9FA]/80 to-transparent pointer-events-none">
+    <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden px-4 pb-4 bg-gradient-to-t from-[#F8F5EE] via-[#F8F5EE]/80 to-transparent pointer-events-none">
       <div className="mx-auto max-w-md w-full h-16 rounded-2xl bg-white/90 backdrop-blur-md border border-slate-200/50 shadow-xl flex items-center justify-around px-4 pointer-events-auto">
         {tabs.map((tab) => {
           const Icon = tab.icon;

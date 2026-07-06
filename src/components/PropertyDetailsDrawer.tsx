@@ -124,7 +124,7 @@ export default function PropertyDetailsDrawer({ property, isOpen, onClose }: Pro
               exit={{ opacity: 0, y: 40, scale: 0.96 }}
               transition={{ type: 'spring', damping: 26, stiffness: 220 }}
               onClick={(e) => e.stopPropagation()}
-              className="relative w-full max-w-6xl h-[90vh] lg:h-[85vh] bg-white dark:bg-[#101420] border dark:border-white/5 rounded-3xl shadow-2xl overflow-y-auto lg:overflow-hidden z-10 flex flex-col lg:flex-row"
+              className="relative w-full max-w-6xl h-[90vh] lg:h-[85vh] bg-white dark:bg-[#0B1F14] border dark:border-white/5 rounded-3xl shadow-2xl overflow-y-auto lg:overflow-hidden z-10 flex flex-col lg:flex-row"
               role="dialog"
               aria-modal="true"
               aria-label={`${property.title} details`}
@@ -189,7 +189,7 @@ export default function PropertyDetailsDrawer({ property, isOpen, onClose }: Pro
                   {/* Badges */}
                   <div className="absolute top-4 left-4 flex flex-col gap-1.5 pointer-events-none">
                     {property.is_city_pioneer && (
-                      <span className="inline-flex items-center gap-1 text-[10px] font-black uppercase px-2.5 py-0.5 rounded-full bg-gradient-to-r from-amber-200 to-yellow-400 text-yellow-900 shadow-md border border-yellow-300 w-max">
+                      <span className="inline-flex items-center gap-1 text-[10px] font-black uppercase px-2.5 py-0.5 rounded-full bg-[#D4AF37] text-yellow-900 shadow-md border border-yellow-300 w-max">
                         👑 City Pioneer
                       </span>
                     )}
@@ -240,7 +240,7 @@ export default function PropertyDetailsDrawer({ property, isOpen, onClose }: Pro
                           {smartTags.map((tag) => (
                             <span
                               key={tag}
-                              className="text-xs font-bold px-3 py-1.5 bg-brand-purple/5 dark:bg-brand-purple/10 text-brand-purple dark:text-[#A78BFA] rounded-lg border border-brand-purple/20 transition-all duration-300"
+                              className="text-xs font-bold px-3 py-1.5 bg-brand-purple/5 dark:bg-brand-purple/10 text-brand-purple dark:text-[#D4AF37] rounded-lg border border-brand-purple/20 transition-all duration-300"
                             >
                               {tag}
                             </span>
@@ -318,7 +318,7 @@ export default function PropertyDetailsDrawer({ property, isOpen, onClose }: Pro
                   {property.property_code && (
                     <div className="bg-brand-purple/10 dark:bg-brand-purple/20 border border-brand-purple/20 dark:border-brand-purple/30 rounded-2xl p-4 flex items-center justify-between">
                       <div>
-                        <p className="text-[9px] uppercase font-black tracking-widest text-brand-purple dark:text-[#A78BFA] mb-0.5">Secret Property Code</p>
+                        <p className="text-[9px] uppercase font-black tracking-widest text-brand-purple dark:text-[#D4AF37] mb-0.5">Secret Property Code</p>
                         <p className="text-sm font-black text-slate-800 dark:text-white font-mono tracking-wide">{property.property_code}</p>
                       </div>
                       <button 
@@ -326,7 +326,7 @@ export default function PropertyDetailsDrawer({ property, isOpen, onClose }: Pro
                           navigator.clipboard.writeText(property.property_code!);
                           alert('Property code copied to clipboard!');
                         }}
-                        className="px-3 py-1.5 bg-white dark:bg-slate-800 text-brand-purple dark:text-[#A78BFA] border border-brand-purple/20 rounded-lg text-xs font-bold hover:bg-brand-purple hover:text-white transition-colors cursor-pointer flex items-center gap-1.5 shadow-sm"
+                        className="px-3 py-1.5 bg-white dark:bg-slate-800 text-brand-purple dark:text-[#D4AF37] border border-brand-purple/20 rounded-lg text-xs font-bold hover:bg-brand-purple hover:text-white transition-colors cursor-pointer flex items-center gap-1.5 shadow-sm"
                       >
                         <Copy className="w-3.5 h-3.5" /> Copy
                       </button>
@@ -356,7 +356,7 @@ export default function PropertyDetailsDrawer({ property, isOpen, onClose }: Pro
                       ) : (
                         <button
                           onClick={() => setShowContactModal(true)}
-                          className="w-full py-3 bg-brand-purple hover:bg-purple-600 text-white text-xs font-black rounded-xl shadow-lg shadow-purple-500/20 flex items-center justify-center gap-2 transition-colors cursor-pointer"
+                          className="w-full py-3 bg-brand-purple hover:bg-[#003B1F] text-white text-xs font-black rounded-xl shadow-lg shadow-sm flex items-center justify-center gap-2 transition-colors cursor-pointer"
                         >
                           <Lock className="w-4 h-4" />
                           Contact Owner
@@ -405,7 +405,7 @@ export default function PropertyDetailsDrawer({ property, isOpen, onClose }: Pro
               <div className="flex items-start justify-between mb-2">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-2xl bg-brand-purple/10 flex items-center justify-center shrink-0">
-                    <Lock className="w-5 h-5 text-brand-purple dark:text-[#A78BFA]" />
+                    <Lock className="w-5 h-5 text-brand-purple dark:text-[#D4AF37]" />
                   </div>
                   <div>
                     <h3 className="text-sm font-black text-slate-900 dark:text-white">Unlock Landlord Details</h3>
@@ -427,7 +427,7 @@ export default function PropertyDetailsDrawer({ property, isOpen, onClose }: Pro
               </p>
 
               <form onSubmit={handleContactSubmit} className="space-y-3">
-                <div className="flex items-center bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden focus-within:border-brand-purple focus-within:ring-1 focus-within:ring-brand-purple transition-all">
+                <div className="flex items-center bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden focus-within:border-brand-primary focus-within:ring-1 focus-within:ring-brand-purple transition-all">
                   <span className="px-3.5 text-xs font-black text-slate-500 dark:text-slate-400 border-r border-slate-200 dark:border-slate-800 py-3.5 shrink-0 bg-slate-100 dark:bg-slate-900">+91</span>
                   <input
                     ref={phoneInputRef}
@@ -448,7 +448,7 @@ export default function PropertyDetailsDrawer({ property, isOpen, onClose }: Pro
                 <button
                   type="submit"
                   disabled={contactPhone.length < 10 || isSubmitting}
-                  className="w-full py-3.5 bg-emerald-500 disabled:bg-slate-200 dark:disabled:bg-slate-800 disabled:text-slate-400 dark:disabled:text-slate-600 disabled:cursor-not-allowed text-white text-xs font-black rounded-xl flex items-center justify-center gap-2 transition-all shadow-md shadow-emerald-500/10"
+                  className="w-full py-3.5 bg-emerald-500 disabled:bg-slate-200 dark:disabled:bg-slate-800 disabled:text-slate-400 dark:disabled:text-slate-600 disabled:cursor-not-allowed text-white text-xs font-black rounded-xl flex items-center justify-center gap-2 transition-all shadow-md shadow-sm"
                 >
                   {isSubmitting ? (
                     <>

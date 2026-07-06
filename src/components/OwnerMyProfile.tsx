@@ -461,7 +461,7 @@ export default function OwnerMyProfile({ onViewChange }: { onViewChange?: (view:
                     type="text"
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
-                    className="flex-1 px-4 py-2.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 focus:border-brand-purple rounded-xl text-xs font-bold text-slate-900 dark:text-slate-100 outline-none transition-colors"
+                    className="flex-1 px-4 py-2.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 focus:border-brand-primary rounded-xl text-xs font-bold text-slate-900 dark:text-slate-100 outline-none transition-colors"
                   />
                   <button
                     onClick={handleUpdateName}
@@ -502,7 +502,7 @@ export default function OwnerMyProfile({ onViewChange }: { onViewChange?: (view:
                         value={newEmail}
                         placeholder="Enter new email"
                         onChange={(e) => setNewEmail(e.target.value)}
-                        className="w-full pl-12 pr-4 py-2.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 focus:border-brand-purple rounded-xl text-xs font-bold text-slate-900 dark:text-slate-100 outline-none transition-colors"
+                        className="w-full pl-12 pr-4 py-2.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 focus:border-brand-primary rounded-xl text-xs font-bold text-slate-900 dark:text-slate-100 outline-none transition-colors"
                       />
                     </div>
                     <button
@@ -555,7 +555,7 @@ export default function OwnerMyProfile({ onViewChange }: { onViewChange?: (view:
                         value={newPhone}
                         placeholder="e.g. 9876543210"
                         onChange={(e) => setNewPhone(e.target.value)}
-                        className="w-full pl-12 pr-4 py-2.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 focus:border-brand-purple rounded-xl text-xs font-bold text-slate-900 dark:text-slate-100 outline-none transition-colors"
+                        className="w-full pl-12 pr-4 py-2.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 focus:border-brand-primary rounded-xl text-xs font-bold text-slate-900 dark:text-slate-100 outline-none transition-colors"
                       />
                     </div>
                     <button
@@ -721,7 +721,7 @@ export default function OwnerMyProfile({ onViewChange }: { onViewChange?: (view:
                     <button
                       onClick={handleSavePayment}
                       disabled={savingPayment || !paymentForm.accountHolderName || !paymentForm.bankAccountNumber || !paymentForm.ifscCode}
-                      className="w-full px-4 py-3 bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 text-white text-xs font-black rounded-xl transition-all shadow-md shadow-emerald-500/20"
+                      className="w-full px-4 py-3 bg-[#01411C] hover:bg-[#003B1F] disabled:opacity-50 text-white text-xs font-black rounded-xl transition-all shadow-md shadow-sm"
                     >
                       {savingPayment ? 'Saving Routing Details...' : 'Save Payment Routing'}
                     </button>
@@ -768,7 +768,7 @@ export default function OwnerMyProfile({ onViewChange }: { onViewChange?: (view:
                   placeholder="Enter 6-digit OTP"
                   value={otpCode}
                   onChange={(e) => setOtpCode(e.target.value)}
-                  className="w-full text-center tracking-widest text-lg font-mono p-4 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:outline-none focus:border-brand-purple"
+                  className="w-full text-center tracking-widest text-lg font-mono p-4 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:outline-none focus:border-brand-primary"
                 />
                 
                 <button

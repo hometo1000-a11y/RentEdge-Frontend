@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Menu, X, User, LogOut, Sun, Moon } from 'lucide-react';
+import Image from 'next/image';
 import MagneticButton from './MagneticButton';
 
 interface NavbarProps {
@@ -96,15 +97,16 @@ export default function Navbar({ isAuthenticated, onAuthRequired, onSignOut }: N
           onClick={handleLogoClick}
           className="flex items-center gap-2 bg-transparent md:bg-white/80 md:dark:bg-slate-900/80 md:backdrop-blur-md md:border md:border-slate-200/50 md:dark:border-white/10 md:px-4 md:py-2.5 rounded-2xl md:shadow-sm hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 cursor-pointer"
         >
-          <div className="relative flex items-center justify-center w-8 h-8 rounded-lg bg-brand-primary text-white font-bold dark:bg-brand-purple">
-            <span className="text-sm font-extrabold tracking-tighter">RE</span>
-            <span className="absolute -top-1 -right-1 flex h-2.5 w-2.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-mint opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-brand-mint"></span>
-            </span>
-          </div>
-          <span className="hidden md:block text-xl font-bold tracking-tight text-brand-primary dark:text-white font-sans">
-            Rent<span className="text-brand-purple">Edge</span>
+          <Image
+            src={isDarkMode ? "/logo-dark.svg" : "/logo-light.svg"}
+            alt="RentEdge Logo"
+            width={32}
+            height={32}
+            className="w-8 h-8 rounded-lg"
+            priority
+          />
+          <span className="hidden md:block text-xl font-bold tracking-tight text-brand-primary dark:text-[#F8F5EE] font-sans">
+            RentEdge
           </span>
         </a>
 
@@ -131,8 +133,8 @@ export default function Navbar({ isAuthenticated, onAuthRequired, onSignOut }: N
             onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }} 
             className={`transition-colors duration-200 ${
               activeSection === 'discover' 
-                ? 'text-brand-purple dark:text-violet-400 font-bold scale-[1.02]' 
-                : 'hover:text-brand-purple'
+                ? 'text-brand-primary dark:text-[#D4AF37] font-bold scale-[1.02]' 
+                : 'hover:text-brand-primary'
             }`}
           >
             Discover Homes
@@ -141,8 +143,8 @@ export default function Navbar({ isAuthenticated, onAuthRequired, onSignOut }: N
             href="#features" 
             className={`transition-colors duration-200 ${
               activeSection === 'features' 
-                ? 'text-brand-purple dark:text-violet-400 font-bold scale-[1.02]' 
-                : 'hover:text-brand-purple'
+                ? 'text-brand-primary dark:text-[#D4AF37] font-bold scale-[1.02]' 
+                : 'hover:text-brand-primary'
             }`}
           >
             The Fintech Edge
@@ -151,8 +153,8 @@ export default function Navbar({ isAuthenticated, onAuthRequired, onSignOut }: N
             href="#pricing" 
             className={`transition-colors duration-200 ${
               activeSection === 'pricing' 
-                ? 'text-brand-purple dark:text-violet-400 font-bold scale-[1.02]' 
-                : 'hover:text-brand-purple'
+                ? 'text-brand-primary dark:text-[#D4AF37] font-bold scale-[1.02]' 
+                : 'hover:text-brand-primary'
             }`}
           >
             Pricings
@@ -161,8 +163,8 @@ export default function Navbar({ isAuthenticated, onAuthRequired, onSignOut }: N
             href="#about" 
             className={`transition-colors duration-200 ${
               activeSection === 'about' 
-                ? 'text-brand-purple dark:text-violet-400 font-bold scale-[1.02]' 
-                : 'hover:text-brand-purple'
+                ? 'text-brand-primary dark:text-[#D4AF37] font-bold scale-[1.02]' 
+                : 'hover:text-brand-primary'
             }`}
           >
             About Us
@@ -183,9 +185,9 @@ export default function Navbar({ isAuthenticated, onAuthRequired, onSignOut }: N
 
         {isAuthenticated ? (
           <div className="flex items-center gap-3.5 pl-2 border-l border-slate-200 dark:border-slate-700">
-            <div className="flex items-center gap-2 bg-brand-purple/10 px-3 py-1.5 rounded-xl border border-brand-purple/20">
-              <User className="w-3.5 h-3.5 text-brand-purple" />
-              <span className="text-xs font-bold text-brand-purple">Active Tenant</span>
+            <div className="flex items-center gap-2 bg-brand-primary/10 px-3 py-1.5 rounded-xl border border-brand-primary/20">
+              <User className="w-3.5 h-3.5 text-brand-primary" />
+              <span className="text-xs font-bold text-brand-primary">Active Tenant</span>
             </div>
             <button
               onClick={onSignOut}
@@ -203,7 +205,7 @@ export default function Navbar({ isAuthenticated, onAuthRequired, onSignOut }: N
             className="!font-semibold"
           >
             Get Started
-            <ArrowRight className="w-4 h-4 text-brand-mint" />
+            <ArrowRight className="w-4 h-4 text-white" />
           </MagneticButton>
         )}
       </div>
@@ -221,10 +223,10 @@ export default function Navbar({ isAuthenticated, onAuthRequired, onSignOut }: N
         ) : (
           <button 
             onClick={onAuthRequired}
-            className="px-3 py-1.5 bg-brand-primary dark:bg-brand-purple text-white text-[11px] font-bold rounded-lg flex items-center gap-1.5 shadow-sm"
+            className="px-3 py-1.5 bg-brand-primary dark:bg-brand-accent text-white dark:text-[#06130C] text-[11px] font-bold rounded-lg flex items-center gap-1.5 shadow-sm"
           >
             Get Started
-            <ArrowRight className="w-3 h-3 text-brand-mint" />
+            <ArrowRight className="w-3 h-3" />
           </button>
         )}
       </div>

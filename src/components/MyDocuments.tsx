@@ -115,7 +115,7 @@ export default function MyDocuments() {
             placeholder="Search documents…"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full h-11 pl-10 pr-10 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-sm font-medium text-slate-800 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:border-brand-purple focus:ring-2 focus:ring-brand-purple/10"
+            className="w-full h-11 pl-10 pr-10 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-sm font-medium text-slate-800 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:border-brand-primary focus:ring-2 focus:ring-brand-purple/10"
           />
           {searchQuery && (
             <button
@@ -148,7 +148,7 @@ export default function MyDocuments() {
                   text-xs font-bold whitespace-nowrap shrink-0 cursor-pointer
                   transition-all select-none
                   ${isActive
-                    ? 'bg-brand-purple text-white shadow-md shadow-purple-200 dark:shadow-none'
+                    ? 'bg-brand-purple text-white shadow-md shadow-sm dark:shadow-none'
                     : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-350 border border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800'
                   }
                 `}

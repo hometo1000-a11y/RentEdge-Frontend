@@ -103,7 +103,7 @@ export default function PropertyDetail({
   };
 
   return (
-    <div className="w-full bg-[#F8F9FA] rounded-3xl overflow-hidden shadow-xl text-left relative flex flex-col gap-6">
+    <div className="w-full bg-[#F8F5EE] rounded-3xl overflow-hidden shadow-xl text-left relative flex flex-col gap-6">
       
       {/* Top Fixed Floating Errors & Success Toasts */}
       <div className="fixed top-4 right-4 z-50 flex flex-col gap-2.5 pointer-events-none">
@@ -196,7 +196,7 @@ export default function PropertyDetail({
           {/* Details columns */}
           <div className="md:col-span-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div className="space-y-1.5">
-              <span className="text-[9px] bg-indigo-50 border border-indigo-100 text-[#7C3AED] font-black px-2 py-0.5 rounded uppercase tracking-wider">
+              <span className="text-[9px] bg-indigo-50 border border-indigo-100 text-[#01411C] font-black px-2 py-0.5 rounded uppercase tracking-wider">
                 2 BHK config
               </span>
               <h2 className="text-base font-black text-slate-900 tracking-tight leading-tight">
@@ -252,7 +252,7 @@ export default function PropertyDetail({
                       
                       {/* Name Profile */}
                       <td className="p-3.5 flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-[#7C3AED] to-[#10B981] p-[1.5px] shrink-0">
+                        <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-[#01411C] to-[#01411C] p-[1.5px] shrink-0">
                           <div className="w-full h-full bg-white rounded-full flex items-center justify-center font-black text-slate-800 text-[10px]">
                             {ten.avatar}
                           </div>
@@ -286,7 +286,7 @@ export default function PropertyDetail({
                           {ten.leaseEnd === 'Pending Signature' ? (
                             <div className="w-full h-full bg-indigo-500 animate-pulse" />
                           ) : (
-                            <div className="w-[95%] h-full bg-gradient-to-r from-emerald-500 to-amber-500" />
+                            <div className="w-[95%] h-full bg-brand-primary" />
                           )}
                         </div>
                       </td>
@@ -412,7 +412,7 @@ export default function PropertyDetail({
                   <button
                     type="submit"
                     disabled={isSendingRenewal}
-                    className="px-4 py-2 bg-[#7C3AED] hover:bg-[#6D28D9] text-white text-xs font-black rounded-xl cursor-pointer inline-flex items-center gap-1 transition-colors"
+                    className="px-4 py-2 bg-[#01411C] hover:bg-[#003B1F] text-white text-xs font-black rounded-xl cursor-pointer inline-flex items-center gap-1 transition-colors"
                   >
                     {isSendingRenewal ? (
                       <>

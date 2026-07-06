@@ -88,7 +88,7 @@ export default function ListingWizard({ onCompleteListing, onCancel }: ListingWi
       {/* Wizard Header */}
       <div className="border-b border-slate-100 pb-4 mb-6">
         <h3 className="text-sm font-black text-slate-900 uppercase tracking-wider flex items-center gap-2">
-          <Building2 className="w-4 h-4 text-[#7C3AED]" />
+          <Building2 className="w-4 h-4 text-[#01411C]" />
           Asset Listing Wizard
         </h3>
         <p className="text-[10px] text-slate-450 font-bold mt-1">
@@ -111,7 +111,7 @@ export default function ListingWizard({ onCompleteListing, onCancel }: ListingWi
                 onClick={() => setPropertyCategory(cat)}
                 className={`py-3 px-4 border rounded-2xl text-xs font-black text-center transition-all cursor-pointer ${
                   propertyCategory === cat
-                    ? 'border-[#7C3AED] bg-indigo-50/50 text-[#7C3AED] shadow-2xs'
+                    ? 'border-[#01411C] bg-indigo-50/50 text-[#01411C] shadow-2xs'
                     : 'border-slate-200 hover:bg-slate-50 text-slate-600'
                 }`}
               >
@@ -175,7 +175,7 @@ export default function ListingWizard({ onCompleteListing, onCancel }: ListingWi
                       key={opt.id}
                       className={`p-3 border rounded-xl flex items-center justify-between cursor-pointer transition-all ${
                         pgSharing === opt.id
-                          ? 'border-[#7C3AED] bg-white text-[#7C3AED] shadow-2xs'
+                          ? 'border-[#01411C] bg-white text-[#01411C] shadow-2xs'
                           : 'border-slate-200 bg-white hover:bg-slate-50/50 text-slate-600'
                       }`}
                     >
@@ -188,7 +188,7 @@ export default function ListingWizard({ onCompleteListing, onCancel }: ListingWi
                         name="pgSharingOption"
                         checked={pgSharing === opt.id}
                         onChange={() => setPgSharing(opt.id)}
-                        className="w-3.5 h-3.5 accent-[#7C3AED] cursor-pointer"
+                        className="w-3.5 h-3.5 accent-[#01411C] cursor-pointer"
                       />
                     </label>
                   ))}
@@ -218,12 +218,12 @@ export default function ListingWizard({ onCompleteListing, onCancel }: ListingWi
             onDrop={(e) => { e.preventDefault(); setDragOver(false); simulateAddImage(); }}
             className={`border-2 border-dashed rounded-3xl p-8 flex flex-col items-center justify-center gap-3 transition-all cursor-pointer text-center select-none ${
               dragOver 
-                ? 'border-[#7C3AED] bg-indigo-50/20' 
+                ? 'border-[#01411C] bg-indigo-50/20' 
                 : 'border-slate-200 hover:border-slate-350 bg-slate-50/30 hover:bg-slate-50/60'
             }`}
           >
             <div className="w-12 h-12 rounded-2xl bg-white border border-slate-200/80 shadow-2xs flex items-center justify-center text-slate-400 group-hover:scale-105 transition-transform duration-200">
-              <ImageIcon className="w-5 h-5 text-[#7C3AED]" />
+              <ImageIcon className="w-5 h-5 text-[#01411C]" />
             </div>
             
             <div className="space-y-1">
@@ -332,9 +332,9 @@ export default function ListingWizard({ onCompleteListing, onCancel }: ListingWi
                 initial={{ opacity: 0, y: 5 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 5 }}
-                className="flex items-center gap-2 text-[10.5px] font-extrabold text-[#7C3AED] bg-indigo-50 border border-indigo-100/50 p-3 rounded-2xl"
+                className="flex items-center gap-2 text-[10.5px] font-extrabold text-[#01411C] bg-indigo-50 border border-indigo-100/50 p-3 rounded-2xl"
               >
-                <AlertTriangle className="w-4 h-4 shrink-0 text-[#7C3AED]" />
+                <AlertTriangle className="w-4 h-4 shrink-0 text-[#01411C]" />
                 <span>📸 At least one property image is required to publish this listing.</span>
               </motion.div>
             )}
@@ -356,7 +356,7 @@ export default function ListingWizard({ onCompleteListing, onCancel }: ListingWi
               disabled={uploadedImages.length === 0}
               className={`px-5 py-2.5 text-white text-xs font-black rounded-xl shadow-md transition-all flex items-center gap-1.5 ${
                 uploadedImages.length > 0
-                  ? 'bg-emerald-600 hover:bg-emerald-700 cursor-pointer shadow-emerald-500/10'
+                  ? 'bg-[#01411C] hover:bg-[#003B1F] cursor-pointer shadow-sm'
                   : 'bg-slate-200 text-slate-400 cursor-not-allowed shadow-none'
               }`}
             >

@@ -837,7 +837,7 @@ export default function PropertyManagement() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div className="col-span-full">
                         <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">Property Name</label>
-                        <input type="text" value={formData.property_name} onChange={e => setFormData({...formData, property_name: e.target.value})} className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium focus:ring-2 focus:ring-brand-purple/20 focus:border-brand-purple outline-none" placeholder="e.g. Sunrise Apartments" />
+                        <input type="text" value={formData.property_name} onChange={e => setFormData({...formData, property_name: e.target.value})} className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium focus:ring-2 focus:ring-brand-purple/20 focus:border-brand-primary outline-none" placeholder="e.g. Sunrise Apartments" />
                       </div>
                       <div>
                         <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">Property Type</label>
@@ -848,13 +848,13 @@ export default function PropertyManagement() {
                           else if (newType === 'PG' && !['Male Only', 'Female Only', 'Co-ed'].includes(newOccupancy)) newOccupancy = 'Co-ed';
                           else if (newType === 'Commercial') newOccupancy = 'Any';
                           setFormData({...formData, property_type: newType, occupancy_type: newOccupancy});
-                        }} className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium focus:ring-2 focus:ring-brand-purple/20 focus:border-brand-purple outline-none">
+                        }} className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium focus:ring-2 focus:ring-brand-purple/20 focus:border-brand-primary outline-none">
                           <option>Apartment</option><option>House</option><option>Villa</option><option>PG</option><option>Commercial</option>
                         </select>
                       </div>
                       <div>
                         <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">Occupancy Type</label>
-                        <select value={formData.occupancy_type} onChange={e => setFormData({...formData, occupancy_type: e.target.value})} className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium focus:ring-2 focus:ring-brand-purple/20 focus:border-brand-purple outline-none">
+                        <select value={formData.occupancy_type} onChange={e => setFormData({...formData, occupancy_type: e.target.value})} className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium focus:ring-2 focus:ring-brand-purple/20 focus:border-brand-primary outline-none">
                           {['Apartment', 'House', 'Villa'].includes(formData.property_type) && (
                             <><option>Any</option><option>Family Only</option><option>Bachelors Only</option></>
                           )}
@@ -1094,11 +1094,11 @@ export default function PropertyManagement() {
                   <div className="space-y-6 animate-fade-in">
                     <div className="mb-6">
     <h5 className="text-[10px] uppercase font-bold text-slate-400 mb-2">Short Description (Cards)</h5>
-    <input type="text" maxLength={200} value={formData.short_description} onChange={e => setFormData({...formData, short_description: e.target.value})} className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium focus:ring-2 focus:ring-brand-purple/20 focus:border-brand-purple outline-none" placeholder="Brief summary (max 200 chars)" />
+    <input type="text" maxLength={200} value={formData.short_description} onChange={e => setFormData({...formData, short_description: e.target.value})} className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium focus:ring-2 focus:ring-brand-purple/20 focus:border-brand-primary outline-none" placeholder="Brief summary (max 200 chars)" />
   </div>
   <div className="mb-6">
     <h5 className="text-[10px] uppercase font-bold text-slate-400 mb-2">Full Description</h5>
-    <textarea maxLength={5000} value={formData.full_description} onChange={e => setFormData({...formData, full_description: e.target.value})} className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium focus:ring-2 focus:ring-brand-purple/20 focus:border-brand-purple outline-none h-24" placeholder="Detailed property description..." />
+    <textarea maxLength={5000} value={formData.full_description} onChange={e => setFormData({...formData, full_description: e.target.value})} className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium focus:ring-2 focus:ring-brand-purple/20 focus:border-brand-primary outline-none h-24" placeholder="Detailed property description..." />
   </div>
   <div className="flex items-center justify-between mb-2">
                       <h4 className="text-sm font-black text-slate-800 flex items-center gap-2">
@@ -1434,7 +1434,7 @@ export default function PropertyManagement() {
                     Next <ChevronRight className="w-4 h-4" />
                   </button>
                 ) : (
-                  <button onClick={handleSubmit} disabled={submitting} className="px-6 py-2 text-xs font-bold text-white bg-brand-purple rounded-xl hover:bg-purple-700 shadow-md shadow-brand-purple/20 flex items-center gap-2">
+                  <button onClick={handleSubmit} disabled={submitting} className="px-6 py-2 text-xs font-bold text-white bg-brand-purple rounded-xl hover:bg-[#003B1F] shadow-md shadow-brand-purple/20 flex items-center gap-2">
                     {submitting ? <Loader2 className="w-4 h-4 animate-spin" /> : <CheckCircle2 className="w-4 h-4" />}
                     Complete Listing
                   </button>
