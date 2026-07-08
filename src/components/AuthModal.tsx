@@ -80,8 +80,10 @@ export default function AuthModal({ isOpen, onClose, onSuccess }: AuthModalProps
     setIsLoading(true);
     setStatusMessage(null);
     try {
+      console.info('[auth][signup] running pre-check', { email });
       const checkRes = await api.preCheck({ email, phone });
       if (checkRes.status === 'exists') {
+        console.info('[auth][signup] pre-check found existing account', { email, reason: checkRes.message });
         showStatus('This account already exists. Please log in.', 'error');
         return;
       }
@@ -124,6 +126,12 @@ export default function AuthModal({ isOpen, onClose, onSuccess }: AuthModalProps
       showStatus('Account created. Please verify your email to continue.', 'success');
     } catch (err: any) {
       console.error(err);
+      const message = String(err?.message || '');
+      if (/already registered|already exists|user already exists|duplicate/i.test(message)) {
+        console.warn('[auth][signup] Supabase auth account already exists', { email, message });
+        showStatus('An authentication account already exists for this email. Please log in instead.', 'error');
+        return;
+      }
       showStatus(err.message || 'Failed to initiate signup.');
     } finally {
       setIsLoading(false);
@@ -134,6 +142,7 @@ export default function AuthModal({ isOpen, onClose, onSuccess }: AuthModalProps
     setIsLoading(true);
     setStatusMessage(null);
     try {
+      console.info('[auth][login] attempting sign-in', { email });
       const { data, error } = await supabase.auth.signInWithPassword({
         email,
         password,

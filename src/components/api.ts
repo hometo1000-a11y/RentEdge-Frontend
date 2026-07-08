@@ -61,7 +61,11 @@ export const api = {
   }) {
     const data = await apiFetch('/auth/complete-signup', {
       method: 'POST',
-      body: JSON.stringify(payload),
+      body: JSON.stringify({
+        fullName: payload.fullName,
+        role: payload.role,
+        supabaseAccessToken: payload.supabaseAccessToken,
+      }),
     });
     if (data.token) {
       storeSession(data);
@@ -73,7 +77,9 @@ export const api = {
   async login(payload: { supabaseAccessToken: string }) {
     const data = await apiFetch('/auth/login', {
       method: 'POST',
-      body: JSON.stringify(payload),
+      body: JSON.stringify({
+        supabaseAccessToken: payload.supabaseAccessToken,
+      }),
     });
     if (data.token) {
       storeSession(data);

@@ -697,7 +697,7 @@ export default function OwnerDashboard({ onLogout, onSwitchToTenant, hasComplete
   const tourSteps: OnboardingStep[] = [
     {
       id: 'dashboard',
-      title: 'Welcome to RentEdge!',
+      title: 'Welcome to Homtu!',
       description: 'This is your owner dashboard where you can manage your rentals, track activity, and get started without any blocking setup.',
       target: '[data-tour="owner-dashboard"]'
     },

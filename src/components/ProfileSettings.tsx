@@ -429,7 +429,7 @@ export default function ProfileSettings() {
                   <div>
                     <h4 className="text-xs font-black text-slate-900 dark:text-slate-100">Password Management</h4>
                     <p className="text-[10px] text-slate-500 font-medium mt-0.5">
-                      Request a secure link to reset your account password via Firebase Auth.
+                      Request a secure link to reset your account password via Supabase Auth.
                     </p>
                   </div>
                 </div>
@@ -451,7 +451,7 @@ export default function ProfileSettings() {
                   <div>
                     <h4 className="text-xs font-black text-slate-900 dark:text-slate-100">Database Synchronization</h4>
                     <p className="text-[10px] text-slate-500 font-medium mt-0.5">
-                      Your identity verification states mirrored from Firebase Auth.
+                      Your identity verification states mirrored from Supabase Auth.
                     </p>
                   </div>
                 </div>
