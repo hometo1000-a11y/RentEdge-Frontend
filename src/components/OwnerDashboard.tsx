@@ -543,7 +543,6 @@ export default function OwnerDashboard({ onLogout, onSwitchToTenant, hasComplete
   const [tourDismissed, setTourDismissed] = useState(false);
   const [showPublishPrompt, setShowPublishPrompt] = useState(false);
   const [draftPropertyReady, setDraftPropertyReady] = useState(false);
-  const [paymentGateOpen, setPaymentGateOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
   
   const [approvingRequestId, setApprovingRequestId] = useState<string | null>(null);

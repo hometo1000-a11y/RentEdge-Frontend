@@ -136,6 +136,7 @@ export default function PropertyManagement() {
   const [isWizardOpen, setIsWizardOpen] = useState(false);
   const [wizardStep, setWizardStep] = useState(1);
   const [submitting, setSubmitting] = useState(false);
+  const [paymentGateOpen, setPaymentGateOpen] = useState(false);
   const [viewingProperty, setViewingProperty] = useState<any>(null);
   const [sessionId, setSessionId] = useState(() => `property_wizard_${Math.random().toString(36).substr(2, 9)}`);
   const [validationError, setValidationError] = useState<string | null>(null);
