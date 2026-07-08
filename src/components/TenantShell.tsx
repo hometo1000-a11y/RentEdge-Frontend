@@ -1,7 +1,7 @@
 'use client';
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, Home, LogOut, User, ChevronDown, FilePlus2, ArrowLeftRight, FileText, Sun, Moon } from 'lucide-react';
+import { Search, Home, LogOut, User, ChevronDown, FilePlus2, ArrowLeftRight, FileText, Sun, Moon, Plus } from 'lucide-react';
 import { api } from './api';
 export type TenantView = 'listings' | 'my-properties' | 'my-documents' | 'profile';
 
@@ -297,7 +297,7 @@ export default function TenantShell({ activeView, onViewChange, onLogout, onSwit
         <div className="p-6 space-y-8">
           <div className="flex flex-col gap-2">
             <span className="text-xl font-black tracking-tight text-slate-900 dark:text-white">
-              Rent<span className="text-brand-purple">Edge</span>
+              Hom<span className="text-brand-purple">tu</span>
             </span>
             <span className="inline-flex items-center w-fit gap-1.5 px-2.5 py-1 rounded-full bg-purple-50 dark:bg-brand-purple/10 border border-purple-100 dark:border-brand-purple/20 text-[10px] font-bold uppercase tracking-wider text-brand-purple">
               <span className="w-1.5 h-1.5 rounded-full bg-brand-purple animate-pulse" />
@@ -358,7 +358,7 @@ export default function TenantShell({ activeView, onViewChange, onLogout, onSwit
           {/* Brand + Tenant Portal badge */}
           <div className="flex items-center gap-2">
             <div className="lg:hidden relative flex items-center justify-center w-8 h-8 rounded-lg bg-brand-purple text-white font-bold shrink-0">
-              <span className="text-xs font-extrabold tracking-tighter">RE</span>
+              <span className="text-xs font-extrabold tracking-tighter">H</span>
               <span className="absolute -top-0.5 -right-0.5 flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
@@ -372,6 +372,14 @@ export default function TenantShell({ activeView, onViewChange, onLogout, onSwit
 
           {/* Controls: Theme Switcher + Whole Accounts Button */}
           <div className="flex items-center gap-2">
+            <button
+              onClick={() => onViewChange('my-properties')}
+              className="hidden sm:inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-brand-purple text-white text-xs font-black shadow-sm hover:shadow-md transition-all cursor-pointer"
+            >
+              <Plus className="w-3.5 h-3.5" />
+              Join Property
+            </button>
+
             {/* Theme switcher */}
             <button
               onClick={toggleTheme}

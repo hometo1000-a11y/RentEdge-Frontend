@@ -142,6 +142,7 @@ export default function PropertyManagement() {
   const [validationError, setValidationError] = useState<string | null>(null);
   const [editingPropertyId, setEditingPropertyId] = useState<string | null>(null);
   const [copiedCode, setCopiedCode] = useState<string | null>(null);
+  const [createdProperty, setCreatedProperty] = useState<any>(null);
 
   const copyPropertyCode = (code: string) => {
     navigator.clipboard.writeText(code).then(() => {
@@ -542,6 +543,7 @@ export default function PropertyManagement() {
 
   const handleSubmit = async () => {
     setSubmitting(true);
+    setCreatedProperty(null);
     const paymentInfo = await api.getPaymentInfo().catch(() => ({ exists: false }));
     if (!paymentInfo.exists) {
       setPaymentGateOpen(true);
@@ -609,12 +611,13 @@ export default function PropertyManagement() {
           session_id: sessionId
         });
       } else {
-        await api.createProperty({
+        const created = await api.createProperty({
           ...formData,
           rent_amount: finalRentAmount,
           details: buildTypedDetails(),
           session_id: sessionId
         });
+        setCreatedProperty(created);
       }
       
       await loadProperties();
@@ -624,6 +627,9 @@ export default function PropertyManagement() {
       setFormData(INITIAL_FORM_DATA);
       localStorage.removeItem('Homtu_property_draft');
       setSessionId(`property_wizard_${Math.random().toString(36).substr(2, 9)}`);
+      if (!editingPropertyId && createdProperty?.property_code) {
+        window.dispatchEvent(new CustomEvent('owner:property-created', { detail: createdProperty }));
+      }
     } catch (err) {
       console.error("Failed to save property", err);
     } finally {
@@ -656,6 +662,7 @@ export default function PropertyManagement() {
     setEditingPropertyId(null);
     setWizardStep(1);
     setFormData(INITIAL_FORM_DATA);
+    setCreatedProperty(null);
     localStorage.removeItem('Homtu_property_draft');
     setSessionId(`property_wizard_${Math.random().toString(36).substr(2, 9)}`);
   };
@@ -1675,6 +1682,54 @@ export default function PropertyManagement() {
                 >
                   Add Payment Details
                 </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {createdProperty && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/60 backdrop-blur-sm p-4"
+            onClick={() => setCreatedProperty(null)}
+          >
+            <motion.div
+              initial={{ y: 16, scale: 0.98 }}
+              animate={{ y: 0, scale: 1 }}
+              exit={{ y: 16, scale: 0.98 }}
+              onClick={(e) => e.stopPropagation()}
+              className="w-full max-w-md rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-2xl p-6"
+            >
+              <p className="text-[10px] uppercase tracking-[0.24em] font-black text-brand-purple">Property Created</p>
+              <h3 className="mt-2 text-xl font-black text-slate-900 dark:text-white">Your property is ready</h3>
+              <p className="mt-2 text-sm text-slate-500">
+                Share this property code with tenants so they can join after you publish it.
+              </p>
+              <div className="mt-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950/50 p-4">
+                <p className="text-[10px] font-black uppercase tracking-wider text-slate-500 mb-1">Property Code</p>
+                <p className="text-lg font-black font-mono tracking-[0.25em] text-slate-900 dark:text-white">
+                  {createdProperty.property_code || 'Available after publish'}
+                </p>
+              </div>
+              <div className="mt-6 flex gap-3">
+                <button
+                  onClick={() => setCreatedProperty(null)}
+                  className="flex-1 rounded-xl border border-slate-200 dark:border-slate-700 px-4 py-3 text-sm font-bold text-slate-700 dark:text-slate-200"
+                >
+                  Close
+                </button>
+                {createdProperty.property_code && (
+                  <button
+                    onClick={() => copyPropertyCode(createdProperty.property_code)}
+                    className="flex-1 rounded-xl bg-brand-purple px-4 py-3 text-sm font-black text-white"
+                  >
+                    Copy Code
+                  </button>
+                )}
               </div>
             </motion.div>
           </motion.div>

@@ -68,21 +68,36 @@ type OnboardingStep = {
 };
 
 function OnboardingChecklist({ items }: { items: { label: string; done: boolean }[] }) {
+  const completed = items.filter((item) => item.done).length;
+  const progress = items.length > 0 ? (completed / items.length) * 100 : 0;
+
   return (
-    <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
-      {items.map((item) => (
-        <div key={item.label} className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 flex items-center gap-3 shadow-xs">
-          {item.done ? (
-            <CheckSquare2 className="w-5 h-5 text-brand-mint shrink-0" />
-          ) : (
-            <Square className="w-5 h-5 text-slate-300 shrink-0" />
-          )}
-          <div>
-            <p className={`text-sm font-black ${item.done ? 'text-slate-400 line-through' : 'text-slate-900 dark:text-slate-100'}`}>{item.label}</p>
-            <p className="text-[10px] text-slate-500 font-semibold">{item.done ? 'Completed' : 'Pending'}</p>
-          </div>
+    <div className="rounded-3xl border border-slate-200/80 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 p-5 shadow-sm space-y-4">
+      <div className="flex items-end justify-between gap-3">
+        <div>
+          <p className="text-[10px] uppercase tracking-[0.24em] font-black text-brand-purple">Getting Started</p>
+          <h3 className="text-lg font-black text-slate-900 dark:text-white">Your onboarding checklist</h3>
         </div>
-      ))}
+        <p className="text-xs font-bold text-slate-500">{completed}/{items.length} done</p>
+      </div>
+      <div className="h-2 rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden">
+        <div className="h-full rounded-full bg-brand-purple transition-all duration-300" style={{ width: `${progress}%` }} />
+      </div>
+      <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+        {items.map((item) => (
+          <div key={item.label} className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 flex items-center gap-3 shadow-xs">
+            {item.done ? (
+              <CheckSquare2 className="w-5 h-5 text-brand-mint shrink-0" />
+            ) : (
+              <Square className="w-5 h-5 text-slate-300 shrink-0" />
+            )}
+            <div>
+              <p className={`text-sm font-black ${item.done ? 'text-slate-400 line-through' : 'text-slate-900 dark:text-slate-100'}`}>{item.label}</p>
+              <p className="text-[10px] text-slate-500 font-semibold">{item.done ? 'Completed' : 'Pending'}</p>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
@@ -90,6 +105,8 @@ function OnboardingChecklist({ items }: { items: { label: string; done: boolean 
 function OwnerTourOverlay({
   open,
   step,
+  stepIndex,
+  totalSteps,
   onClose,
   onNext,
   onPrev,
@@ -97,6 +114,8 @@ function OwnerTourOverlay({
 }: {
   open: boolean;
   step: OnboardingStep | null;
+  stepIndex: number;
+  totalSteps: number;
   onClose: () => void;
   onNext: () => void;
   onPrev: () => void;
@@ -114,17 +133,17 @@ function OwnerTourOverlay({
 
   return (
     <div className="fixed inset-0 z-[90]">
-      <div className="absolute inset-0 bg-slate-950/65 backdrop-blur-[2px]" onClick={onClose} />
+      <div className="absolute inset-0 bg-slate-950/75 backdrop-blur-sm" onClick={onClose} />
       {highlightStyle && (
         <div
-          className="absolute rounded-3xl border-2 border-brand-mint shadow-[0_0_0_9999px_rgba(2,6,23,0.35)] pointer-events-none transition-all duration-300"
+          className="absolute rounded-3xl border-2 border-brand-mint shadow-[0_0_0_9999px_rgba(2,6,23,0.55)] pointer-events-none transition-all duration-300"
           style={highlightStyle as any}
         />
       )}
       <motion.div
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
-        className="absolute z-[91] w-[min(92vw,360px)] rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-2xl p-5"
+        className="absolute z-[91] w-[min(92vw,380px)] rounded-[28px] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-[0_24px_80px_rgba(15,23,42,0.28)] p-5"
         style={{
           top: rect ? Math.min(rect.bottom + 18, window.innerHeight - 220) : '50%',
           left: rect ? Math.min(rect.left, window.innerWidth - 380) : '50%',
@@ -135,12 +154,16 @@ function OwnerTourOverlay({
           <div>
             <p className="text-[10px] uppercase tracking-[0.24em] font-black text-brand-purple">Owner Tour</p>
             <h3 className="text-lg font-black text-slate-900 dark:text-white mt-1">{step.title}</h3>
+            <p className="text-[11px] font-bold text-slate-500 mt-1">Step {stepIndex + 1} of {totalSteps}</p>
           </div>
           <button onClick={onClose} className="text-slate-400 hover:text-slate-700 dark:hover:text-slate-200">
             <HelpCircle className="w-5 h-5" />
           </button>
         </div>
-        <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">{step.description}</p>
+        <div className="h-1.5 rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden">
+          <div className="h-full rounded-full bg-brand-purple transition-all duration-300" style={{ width: `${((stepIndex + 1) / totalSteps) * 100}%` }} />
+        </div>
+        <p className="mt-4 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">{step.description}</p>
         <div className="mt-5 flex items-center justify-between gap-3">
           <button onClick={onPrev} className="px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-700 text-sm font-bold text-slate-700 dark:text-slate-200">Back</button>
           <div className="flex items-center gap-2">
@@ -698,7 +721,7 @@ export default function OwnerDashboard({ onLogout, onSwitchToTenant, hasComplete
     {
       id: 'dashboard',
       title: 'Welcome to Homtu!',
-      description: 'This is your owner dashboard where you can manage your rentals, track activity, and get started without any blocking setup.',
+      description: 'This is your owner dashboard where you can manage your rentals, track activity, and explore the platform at your own pace.',
       target: '[data-tour="owner-dashboard"]'
     },
     {
@@ -733,8 +756,8 @@ export default function OwnerDashboard({ onLogout, onSwitchToTenant, hasComplete
     },
     {
       id: 'final',
-      title: "Congratulations!",
-      description: "You're ready to list your first property.",
+      title: "You’re ready to go",
+      description: "Everything is set. Start listing your first property whenever you’re ready.",
       target: '[data-tour="owner-dashboard"]'
     }
   ];
@@ -743,7 +766,9 @@ export default function OwnerDashboard({ onLogout, onSwitchToTenant, hasComplete
     { label: 'Complete Profile', done: Boolean(localStorage.getItem('Homtu_user_fullname')) },
     { label: 'List First Property', done: myProperties.length > 0 },
     { label: 'Add Payment Details', done: localStorage.getItem('Homtu_payment_details_completed') === 'true' },
-    { label: 'Publish Property', done: myProperties.some((p: any) => p.status === 'published') }
+    { label: 'Publish Property', done: myProperties.some((p: any) => p.status === 'published') },
+    { label: 'Share Property Code', done: myProperties.some((p: any) => Boolean(p.property_code)) },
+    { label: 'Receive First Tenant', done: myProperties.some((p: any) => (p.tenants || []).length > 0) }
   ];
 
   const currentTourStep = tourSteps[Math.min(tourIndex, tourSteps.length - 1)] || null;
@@ -832,8 +857,8 @@ export default function OwnerDashboard({ onLogout, onSwitchToTenant, hasComplete
       <aside className="hidden lg:flex w-64 bg-white dark:bg-slate-900 border-r border-slate-200/60 dark:border-slate-800 flex-col justify-between shrink-0 fixed top-0 left-0 h-full z-40 p-5 shadow-sm">
           <div>
             <div className="flex flex-col gap-2 pb-6 mb-6 border-b border-slate-100 dark:border-slate-800">
-              <span className="text-xl font-black tracking-tight text-slate-900 dark:text-white">
-                Rent<span className="text-brand-purple">Edge</span>
+            <span className="text-xl font-black tracking-tight text-slate-900 dark:text-white">
+                Hom<span className="text-brand-purple">tu</span>
               </span>
               <span className="inline-flex items-center w-fit gap-1.5 px-2.5 py-1 rounded-full bg-purple-50 dark:bg-brand-purple/10 border border-purple-100 dark:border-brand-purple/20 text-[10px] font-bold uppercase tracking-wider text-brand-purple">
                 <span className="w-1.5 h-1.5 rounded-full bg-brand-purple animate-pulse" />
@@ -882,7 +907,7 @@ export default function OwnerDashboard({ onLogout, onSwitchToTenant, hasComplete
         <header className="sticky top-0 z-30 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-100 dark:border-slate-800/50 px-4 sm:px-6 py-3 flex items-center justify-between gap-4">
           <div className="flex items-center gap-2">
             <div className="lg:hidden relative flex items-center justify-center w-8 h-8 rounded-lg bg-brand-purple text-white font-bold shrink-0">
-              <span className="text-xs font-extrabold tracking-tighter">RE</span>
+              <span className="text-xs font-extrabold tracking-tighter">H</span>
               <span className="absolute -top-0.5 -right-0.5 flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
@@ -1308,6 +1333,8 @@ export default function OwnerDashboard({ onLogout, onSwitchToTenant, hasComplete
       <OwnerTourOverlay
         open={tourOpen}
         step={currentTourStep}
+        stepIndex={tourIndex}
+        totalSteps={tourSteps.length}
         onClose={() => {
           setTourOpen(false);
           setTourDismissed(true);

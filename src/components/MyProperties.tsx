@@ -826,7 +826,7 @@ export default function MyProperties({ onPropertySelect }: MyPropertiesProps) {
                         ) : (
                           <>
                             <ShieldCheck className="w-3.5 h-3.5" />
-                            Submit Request
+                            Join Property
                           </>
                         )}
                       </button>
