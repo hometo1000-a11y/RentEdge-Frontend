@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { CreditCard, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { CreditCard, CheckCircle2 } from 'lucide-react';
 import OwnerDashboard from './OwnerDashboard';
 import { api } from './api';
 
@@ -13,7 +13,10 @@ interface OwnerLifecycleControllerProps {
 
 export default function OwnerLifecycleController({ onLogout, onSwitchToTenant }: OwnerLifecycleControllerProps) {
   const [loading, setLoading] = useState(true);
-  const [paymentSetupComplete, setPaymentSetupComplete] = useState(false);
+  const [ownerState, setOwnerState] = useState({
+    hasCompletedOnboarding: false,
+    paymentDetailsCompleted: false
+  });
   const [setupForm, setSetupForm] = useState({
     accountHolderName: '',
     bankAccountNumber: '',
@@ -25,29 +28,20 @@ export default function OwnerLifecycleController({ onLogout, onSwitchToTenant }:
   const [setupLoading, setSetupLoading] = useState(false);
 
   useEffect(() => {
-    checkPaymentInfo();
+    hydrateOwnerState();
   }, []);
 
-  const checkPaymentInfo = async () => {
+  const hydrateOwnerState = async () => {
     try {
-      const token = localStorage.getItem('Homtu_token');
-      if (!token) {
-        setLoading(false);
-        return;
-      }
-      
-      const res = await fetch('https://api.homtu.in/api/users/payment-info', {
-        headers: { 'Authorization': `Bearer ${token}` }
+      const user = await api.getMe();
+      localStorage.setItem('Homtu_onboarding_completed', String(Boolean(user.has_completed_onboarding)));
+      localStorage.setItem('Homtu_payment_details_completed', String(Boolean(user.payment_details_completed)));
+      setOwnerState({
+        hasCompletedOnboarding: Boolean(user.has_completed_onboarding),
+        paymentDetailsCompleted: Boolean(user.payment_details_completed)
       });
-      
-      if (res.ok) {
-        const data = await res.json();
-        if (data.exists) {
-          setPaymentSetupComplete(true);
-        }
-      }
     } catch (err) {
-      console.error('Failed to fetch payment info:', err);
+      console.error('Failed to fetch owner onboarding state:', err);
     } finally {
       setLoading(false);
     }
@@ -80,7 +74,8 @@ export default function OwnerLifecycleController({ onLogout, onSwitchToTenant }:
       });
 
       if (res.ok) {
-        setPaymentSetupComplete(true);
+        localStorage.setItem('Homtu_payment_details_completed', 'true');
+        setOwnerState(prev => ({ ...prev, paymentDetailsCompleted: true }));
       } else {
         const data = await res.json();
         setSetupError(data.message || 'Failed to save payment details.');
@@ -100,115 +95,22 @@ export default function OwnerLifecycleController({ onLogout, onSwitchToTenant }:
     );
   }
 
-  if (paymentSetupComplete) {
-    return <OwnerDashboard onLogout={onLogout} onSwitchToTenant={onSwitchToTenant} />;
-  }
-
   return (
-    <div className="min-h-screen bg-[#F8F5EE] dark:bg-[#06130C] text-[#06130C] dark:text-slate-100 flex items-center justify-center p-4">
-      <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="w-full max-w-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 md:p-8 shadow-xl"
-      >
-        <div className="mb-8">
-          <div className="w-12 h-12 bg-brand-purple/10 text-brand-purple rounded-xl flex items-center justify-center mb-4">
-            <CreditCard className="w-6 h-6" />
-          </div>
-          <h1 className="text-2xl font-black tracking-tight text-slate-900 dark:text-white">
-            Set Up Payment Routing
-          </h1>
-          <p className="text-sm text-slate-500 mt-2">
-            Add your bank details so we can automatically route rent collections and deposits to you.
-          </p>
-        </div>
-
-        {setupError && (
-          <div className="mb-6 p-3 bg-red-50 border border-red-100 text-red-600 text-sm font-semibold rounded-xl">
-            {setupError}
-          </div>
-        )}
-
-        <form onSubmit={handleSetupSubmit} className="space-y-4">
-          <div className="space-y-1">
-            <label className="text-xs uppercase font-bold text-slate-400">Account Holder Name</label>
-            <input 
-              type="text" 
-              required
-              placeholder="As per bank records"
-              value={setupForm.accountHolderName}
-              onChange={e => setSetupForm({...setupForm, accountHolderName: e.target.value})}
-              className="w-full p-3.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm font-semibold focus:outline-none focus:border-brand-primary"
-            />
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="space-y-1">
-              <label className="text-xs uppercase font-bold text-slate-400">Account Number</label>
-              <input 
-                type="text" 
-                required
-                placeholder="000012345678"
-                value={setupForm.bankAccountNumber}
-                onChange={e => setSetupForm({...setupForm, bankAccountNumber: e.target.value.replace(/\D/g, '')})}
-                className="w-full p-3.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm font-mono focus:outline-none focus:border-brand-primary"
-              />
-            </div>
-            <div className="space-y-1">
-              <label className="text-xs uppercase font-bold text-slate-400">Confirm Account Number</label>
-              <input 
-                type="password" 
-                required
-                placeholder="000012345678"
-                value={setupForm.confirmAccountNumber}
-                onChange={e => setSetupForm({...setupForm, confirmAccountNumber: e.target.value.replace(/\D/g, '')})}
-                className="w-full p-3.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm font-mono focus:outline-none focus:border-brand-primary"
-              />
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="space-y-1">
-              <label className="text-xs uppercase font-bold text-slate-400">IFSC Code</label>
-              <input 
-                type="text" 
-                required
-                placeholder="HDFC0001234"
-                value={setupForm.ifscCode}
-                onChange={e => setSetupForm({...setupForm, ifscCode: e.target.value.toUpperCase()})}
-                className="w-full p-3.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm font-mono focus:outline-none focus:border-brand-primary"
-              />
-            </div>
-            <div className="space-y-1">
-              <label className="text-xs uppercase font-bold text-slate-400">UPI ID (Optional)</label>
-              <input 
-                type="text" 
-                placeholder="name@okhdfc"
-                value={setupForm.upiId}
-                onChange={e => setSetupForm({...setupForm, upiId: e.target.value})}
-                className="w-full p-3.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm focus:outline-none focus:border-brand-primary"
-              />
-            </div>
-          </div>
-
-          <div className="pt-4">
-            <button
-              type="submit"
-              disabled={setupLoading}
-              className="w-full py-4 bg-brand-purple hover:bg-brand-purple/90 text-white font-black text-sm rounded-xl transition-all flex items-center justify-center gap-2 disabled:opacity-70"
-            >
-              {setupLoading ? (
-                <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-              ) : (
-                <>
-                  <CheckCircle2 className="w-5 h-5" />
-                  Save Payment Routing
-                </>
-              )}
-            </button>
-          </div>
-        </form>
-      </motion.div>
-    </div>
+    <OwnerDashboard
+      onLogout={onLogout}
+      onSwitchToTenant={onSwitchToTenant}
+      hasCompletedOnboarding={ownerState.hasCompletedOnboarding}
+      onMarkOnboardingComplete={async () => {
+        setOwnerState(prev => ({ ...prev, hasCompletedOnboarding: true }));
+        await fetch('https://api.homtu.in/api/users/me', {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('Homtu_token') || ''}`
+          },
+          body: JSON.stringify({ hasCompletedOnboarding: true })
+        }).catch(() => {});
+      }}
+    />
   );
 }

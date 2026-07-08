@@ -541,6 +541,12 @@ export default function PropertyManagement() {
 
   const handleSubmit = async () => {
     setSubmitting(true);
+    const paymentInfo = await api.getPaymentInfo().catch(() => ({ exists: false }));
+    if (!paymentInfo.exists) {
+      setPaymentGateOpen(true);
+      setSubmitting(false);
+      return;
+    }
     // Build a type-specific details payload — no dead fields.
     const buildTypedDetails = () => {
       const ca = formData.classificationAnswers;
@@ -1632,6 +1638,47 @@ export default function PropertyManagement() {
         )}
       </AnimatePresence>
 
+      <AnimatePresence>
+        {paymentGateOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/60 backdrop-blur-sm p-4"
+            onClick={() => setPaymentGateOpen(false)}
+          >
+            <motion.div
+              initial={{ y: 20, scale: 0.98 }}
+              animate={{ y: 0, scale: 1 }}
+              exit={{ y: 20, scale: 0.98 }}
+              onClick={(e) => e.stopPropagation()}
+              className="w-full max-w-md rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-2xl p-6"
+            >
+              <h3 className="text-xl font-black text-slate-900 dark:text-white">Add Payment Details</h3>
+              <p className="mt-2 text-sm text-slate-500">
+                Before publishing your property, please add your bank account so you can receive rent payments.
+              </p>
+              <div className="mt-6 flex gap-3">
+                <button
+                  onClick={() => setPaymentGateOpen(false)}
+                  className="flex-1 rounded-xl border border-slate-200 dark:border-slate-700 px-4 py-3 text-sm font-bold text-slate-700 dark:text-slate-200"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={() => {
+                    setPaymentGateOpen(false);
+                    window.dispatchEvent(new CustomEvent('owner:open-payment-details'));
+                  }}
+                  className="flex-1 rounded-xl bg-brand-purple px-4 py-3 text-sm font-black text-white"
+                >
+                  Add Payment Details
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <PropertyDetailsDrawer 
         property={viewingProperty} 

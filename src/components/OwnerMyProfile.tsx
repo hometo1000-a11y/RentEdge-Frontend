@@ -72,6 +72,12 @@ export default function OwnerMyProfile({ onViewChange }: { onViewChange?: (view:
     fetchProfile();
   }, []);
 
+  useEffect(() => {
+    const openPaymentDetails = () => setActiveTab('payment');
+    window.addEventListener('owner:open-payment-details', openPaymentDetails as EventListener);
+    return () => window.removeEventListener('owner:open-payment-details', openPaymentDetails as EventListener);
+  }, []);
+
   const fetchProfile = async () => {
     try {
       const token = localStorage.getItem('Homtu_token');
@@ -119,6 +125,7 @@ export default function OwnerMyProfile({ onViewChange }: { onViewChange?: (view:
     setSavingPayment(true);
     try {
       await api.savePaymentInfo(paymentForm);
+      localStorage.setItem('Homtu_payment_details_completed', 'true');
       showMessage('success', 'Payment info saved successfully!');
       await fetchProfile();
     } catch (err: any) {

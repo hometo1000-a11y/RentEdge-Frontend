@@ -28,7 +28,11 @@ import {
   ArrowLeftRight,
   Sun,
   Moon,
-  Search
+  Search,
+  HelpCircle,
+  RotateCcw,
+  CheckSquare2,
+  Square
 } from 'lucide-react';
 
 import { Property } from './propertiesData';
@@ -42,6 +46,8 @@ import RentManagement from './RentManagement';
 interface OwnerDashboardProps {
   onLogout: () => void;
   onSwitchToTenant?: () => void;
+  hasCompletedOnboarding?: boolean;
+  onMarkOnboardingComplete?: () => void | Promise<void>;
 }
 
 interface AccessCodeEntry {
@@ -52,6 +58,104 @@ interface AccessCodeEntry {
   code: string;
   status: string;
   created: string;
+}
+
+type OnboardingStep = {
+  id: string;
+  title: string;
+  description: string;
+  target: string;
+};
+
+function OnboardingChecklist({ items }: { items: { label: string; done: boolean }[] }) {
+  return (
+    <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+      {items.map((item) => (
+        <div key={item.label} className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 flex items-center gap-3 shadow-xs">
+          {item.done ? (
+            <CheckSquare2 className="w-5 h-5 text-brand-mint shrink-0" />
+          ) : (
+            <Square className="w-5 h-5 text-slate-300 shrink-0" />
+          )}
+          <div>
+            <p className={`text-sm font-black ${item.done ? 'text-slate-400 line-through' : 'text-slate-900 dark:text-slate-100'}`}>{item.label}</p>
+            <p className="text-[10px] text-slate-500 font-semibold">{item.done ? 'Completed' : 'Pending'}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function OwnerTourOverlay({
+  open,
+  step,
+  onClose,
+  onNext,
+  onPrev,
+  onFinish
+}: {
+  open: boolean;
+  step: OnboardingStep | null;
+  onClose: () => void;
+  onNext: () => void;
+  onPrev: () => void;
+  onFinish: () => void;
+}) {
+  if (!open || !step) return null;
+  const target = typeof document !== 'undefined' ? document.querySelector(step.target) as HTMLElement | null : null;
+  const rect = target?.getBoundingClientRect();
+  const highlightStyle = rect ? {
+    top: Math.max(rect.top - 10, 16),
+    left: Math.max(rect.left - 10, 16),
+    width: Math.min(rect.width + 20, window.innerWidth - 32),
+    height: rect.height + 20,
+  } : undefined;
+
+  return (
+    <div className="fixed inset-0 z-[90]">
+      <div className="absolute inset-0 bg-slate-950/65 backdrop-blur-[2px]" onClick={onClose} />
+      {highlightStyle && (
+        <div
+          className="absolute rounded-3xl border-2 border-brand-mint shadow-[0_0_0_9999px_rgba(2,6,23,0.35)] pointer-events-none transition-all duration-300"
+          style={highlightStyle as any}
+        />
+      )}
+      <motion.div
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="absolute z-[91] w-[min(92vw,360px)] rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-2xl p-5"
+        style={{
+          top: rect ? Math.min(rect.bottom + 18, window.innerHeight - 220) : '50%',
+          left: rect ? Math.min(rect.left, window.innerWidth - 380) : '50%',
+          transform: rect ? 'none' : 'translate(-50%, -50%)'
+        }}
+      >
+        <div className="flex items-start justify-between gap-3 mb-3">
+          <div>
+            <p className="text-[10px] uppercase tracking-[0.24em] font-black text-brand-purple">Owner Tour</p>
+            <h3 className="text-lg font-black text-slate-900 dark:text-white mt-1">{step.title}</h3>
+          </div>
+          <button onClick={onClose} className="text-slate-400 hover:text-slate-700 dark:hover:text-slate-200">
+            <HelpCircle className="w-5 h-5" />
+          </button>
+        </div>
+        <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">{step.description}</p>
+        <div className="mt-5 flex items-center justify-between gap-3">
+          <button onClick={onPrev} className="px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-700 text-sm font-bold text-slate-700 dark:text-slate-200">Back</button>
+          <div className="flex items-center gap-2">
+            <button onClick={onClose} className="px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-sm font-bold text-slate-700 dark:text-slate-200">Skip</button>
+            <button onClick={onNext} className="px-4 py-2 rounded-xl bg-brand-purple text-white text-sm font-black">{step.id === 'final' ? 'Start Listing' : 'Next'}</button>
+          </div>
+        </div>
+        {step.id === 'final' && (
+          <button onClick={onFinish} className="mt-3 w-full py-2.5 rounded-xl border border-brand-mint/30 bg-brand-mint/10 text-brand-mint text-sm font-black">
+            Start Listing
+          </button>
+        )}
+      </motion.div>
+    </div>
+  );
 }
 
 function OwnerUserDropdown({ 
@@ -427,13 +531,19 @@ function OwnerNotificationBell({
   );
 }
 
-export default function OwnerDashboard({ onLogout, onSwitchToTenant }: OwnerDashboardProps) {
+export default function OwnerDashboard({ onLogout, onSwitchToTenant, hasCompletedOnboarding = false, onMarkOnboardingComplete }: OwnerDashboardProps) {
   const [activeTab, setActiveTab] = useState('dashboard');
   const [isSendingReminder, setIsSendingReminder] = useState(false);
   const [reminderTarget, setReminderTarget] = useState<string | null>(null);
   const [reminderSentMessage, setReminderSentMessage] = useState(false);
   const [isGeneratingAgreement, setIsGeneratingAgreement] = useState(false);
   const [agreementStep, setAgreementStep] = useState<'form' | 'success'>('form');
+  const [tourOpen, setTourOpen] = useState(false);
+  const [tourIndex, setTourIndex] = useState(0);
+  const [tourDismissed, setTourDismissed] = useState(false);
+  const [showPublishPrompt, setShowPublishPrompt] = useState(false);
+  const [draftPropertyReady, setDraftPropertyReady] = useState(false);
+  const [paymentGateOpen, setPaymentGateOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
   
   const [approvingRequestId, setApprovingRequestId] = useState<string | null>(null);
@@ -496,6 +606,21 @@ export default function OwnerDashboard({ onLogout, onSwitchToTenant }: OwnerDash
     }
     loadData();
   }, []);
+
+  useEffect(() => {
+    const seen = localStorage.getItem('Homtu_owner_onboarding_dismissed') === 'true';
+    setTourDismissed(seen || hasCompletedOnboarding);
+    if (!seen && !hasCompletedOnboarding) {
+      const timer = window.setTimeout(() => setTourOpen(true), 800);
+      return () => window.clearTimeout(timer);
+    }
+  }, [hasCompletedOnboarding]);
+
+  useEffect(() => {
+    if (hasCompletedOnboarding) {
+      localStorage.setItem('Homtu_owner_onboarding_dismissed', 'true');
+    }
+  }, [hasCompletedOnboarding]);
 
   const showToast = (msg: string) => {
     setToastMessage(msg);
@@ -570,6 +695,60 @@ export default function OwnerDashboard({ onLogout, onSwitchToTenant }: OwnerDash
     { id: 'disputes', label: 'Agreement Portal', icon: FileCheck }
   ];
 
+  const tourSteps: OnboardingStep[] = [
+    {
+      id: 'dashboard',
+      title: 'Welcome to RentEdge!',
+      description: 'This is your owner dashboard where you can manage your rentals, track activity, and get started without any blocking setup.',
+      target: '[data-tour="owner-dashboard"]'
+    },
+    {
+      id: 'properties',
+      title: 'List Property',
+      description: 'Click here to add your first rental property.',
+      target: '[data-tour="nav-properties"]'
+    },
+    {
+      id: 'properties-page',
+      title: 'Properties',
+      description: 'All your listed properties will appear here.',
+      target: '[data-tour="properties-tab"]'
+    },
+    {
+      id: 'tenants',
+      title: 'Tenants',
+      description: 'Manage tenants, agreements, and occupancy from here.',
+      target: '[data-tour="nav-tenants"]'
+    },
+    {
+      id: 'payments',
+      title: 'Payments',
+      description: 'Track rent payments and earnings.',
+      target: '[data-tour="nav-payments"]'
+    },
+    {
+      id: 'profile',
+      title: 'Profile',
+      description: 'Update your account settings whenever needed.',
+      target: '[data-tour="profile-menu"]'
+    },
+    {
+      id: 'final',
+      title: "Congratulations!",
+      description: "You're ready to list your first property.",
+      target: '[data-tour="owner-dashboard"]'
+    }
+  ];
+
+  const onboardingChecklist = [
+    { label: 'Complete Profile', done: Boolean(localStorage.getItem('Homtu_user_fullname')) },
+    { label: 'List First Property', done: myProperties.length > 0 },
+    { label: 'Add Payment Details', done: localStorage.getItem('Homtu_payment_details_completed') === 'true' },
+    { label: 'Publish Property', done: myProperties.some((p: any) => p.status === 'published') }
+  ];
+
+  const currentTourStep = tourSteps[Math.min(tourIndex, tourSteps.length - 1)] || null;
+
   const handleSendReminder = (tenantName: string) => {
     setIsSendingReminder(true);
     setReminderTarget(tenantName);
@@ -590,6 +769,20 @@ export default function OwnerDashboard({ onLogout, onSwitchToTenant }: OwnerDash
     setTimeout(() => {
       setAgreementStep('success');
     }, 2000);
+  };
+
+  const restartTour = () => {
+    setTourIndex(0);
+    setTourOpen(true);
+    setTourDismissed(false);
+    localStorage.removeItem('Homtu_owner_onboarding_dismissed');
+  };
+
+  const finishTour = async () => {
+    setTourOpen(false);
+    setTourDismissed(true);
+    localStorage.setItem('Homtu_owner_onboarding_dismissed', 'true');
+    await onMarkOnboardingComplete?.();
   };
 
   const containerVariants = {
@@ -658,6 +851,7 @@ export default function OwnerDashboard({ onLogout, onSwitchToTenant }: OwnerDash
                   <button
                     key={item.id}
                     onClick={() => setActiveTab(item.id)}
+                    data-tour={item.id === 'properties' ? 'nav-properties' : item.id === 'tenants' ? 'nav-tenants' : item.id === 'rent-management' ? 'nav-payments' : undefined}
                     className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all duration-200 cursor-pointer ${
                       isActive 
                         ? 'bg-slate-900 text-white dark:bg-white dark:text-slate-900 shadow-xs' 
@@ -717,6 +911,14 @@ export default function OwnerDashboard({ onLogout, onSwitchToTenant }: OwnerDash
               {isDarkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4 text-slate-600" />}
             </button>
 
+            <button
+              onClick={restartTour}
+              className="p-2 rounded-xl text-slate-655 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer shrink-0"
+              title="Restart onboarding tour"
+            >
+              <RotateCcw className="w-4 h-4" />
+            </button>
+
             {/* Whole Accounts Button (Mobile Only) */}
             <div className="lg:hidden shrink-0">
               <OwnerUserDropdown
@@ -731,6 +933,11 @@ export default function OwnerDashboard({ onLogout, onSwitchToTenant }: OwnerDash
         </header>
 
         <main className="flex-1 overflow-y-auto p-4 md:p-8 pb-24 lg:pb-8">
+          {!tourDismissed && (
+            <div className="mb-6">
+              <OnboardingChecklist items={onboardingChecklist} />
+            </div>
+          )}
           <AnimatePresence mode="wait">
             {activeTab === 'dashboard' && (
               <motion.div 
@@ -738,6 +945,7 @@ export default function OwnerDashboard({ onLogout, onSwitchToTenant }: OwnerDash
                 initial="hidden"
                 animate="show"
                 className="space-y-6"
+                data-tour="owner-dashboard"
               >
                 
                 {/* 1. Property Selector Carousel */}
@@ -1038,7 +1246,9 @@ export default function OwnerDashboard({ onLogout, onSwitchToTenant }: OwnerDash
 
             {/* Properties Tab */}
             {activeTab === 'properties' && (
-              <PropertyManagement />
+              <div data-tour="properties-tab">
+                <PropertyManagement />
+              </div>
             )}
 
             {/* Settings Tab */}
@@ -1095,6 +1305,25 @@ export default function OwnerDashboard({ onLogout, onSwitchToTenant }: OwnerDash
         </AnimatePresence>
         </main>
       </div>
+
+      <OwnerTourOverlay
+        open={tourOpen}
+        step={currentTourStep}
+        onClose={() => {
+          setTourOpen(false);
+          setTourDismissed(true);
+          localStorage.setItem('Homtu_owner_onboarding_dismissed', 'true');
+        }}
+        onPrev={() => setTourIndex((i) => Math.max(i - 1, 0))}
+        onNext={() => {
+          if (tourIndex >= tourSteps.length - 1) {
+            void finishTour();
+            return;
+          }
+          setTourIndex((i) => Math.min(i + 1, tourSteps.length - 1));
+        }}
+        onFinish={() => void finishTour()}
+      />
 
       {/* Generate Agreement Simulated Modal */}
       <AnimatePresence>
